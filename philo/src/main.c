@@ -1,35 +1,58 @@
 #include "philo.h"
 
+int	counter;
 
 void	*print_msg(void *ptr)
 {
-	puts((char *)ptr);
+	t_tdat	*tdat;
+
+	tdat = (t_tdat *)ptr;
+
+	pthread_mutex_lock(tdat->mutex_ptr);
+
+	printf("Thread %ld Num %d counter %d Mutex <%p>\n", pthread_self(),\
+						tdat->num, tdat->counter, tdat->mutex_ptr);
+
+	tdat->counter++;
+	pthread_mutex_unlock(tdat->mutex_ptr);
 	return (ptr);
 }
 
 int main(int argc, char *argv[])
 {
-	pthread_t	thread1;
-	pthread_t	thread2;
+	int		i;
+	t_pdat	p;
+	t_tdat	tdat;
 
-	char		*msg1 = "Hello from thread 1\n";
-	char		*msg2 = "Helllo from thread 2\n";
+	(void)argc;
+	(void)argv;
 
-	int			ret1 = 0;
-	int			ret2 = 0;
+	pthread_mutex_init(&(p.mutex), NULL);
+	i = 0;
+	tdat.counter = 0;
+	while (i < THREADS_MAX)
+	{
+		tdat = (t_tdat){i, &(p.mutex), tdat.counter};
+		p.returns[i] = pthread_create(&(p.threads[i]), NULL,
+										print_msg, (void *)&tdat);
+		i++;
+	}
+	i = 0;
+	while (i < THREADS_MAX)
+	{
+		pthread_join(p.threads[i], NULL);
+		i++;
+	}
 
-	if (argc != 3)
-		return (0);
+	printf("counter %d\n", tdat.counter);
 
-	msg1 = argv[1];
-	msg2 = argv[2];
-
-	ret1 = pthread_create(&thread1, NULL, print_msg, (void *)msg1);
-	ret1 = pthread_create(&thread2, NULL, print_msg, (void *)msg2);
-
-	pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
+	i = 0;
+	printf("=== return values ===\n");
+	while (i < THREADS_MAX)
+	{
+		printf("[i %d %d] ", i, p.returns[i]);
+		i++;
+	}
 
 
-	printf("ret1 %d ret2 %d\n", ret1, ret2);
 }
