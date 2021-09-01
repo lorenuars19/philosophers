@@ -41,8 +41,12 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
+	./src/philo.c \
+	./src/spawn_manager.c \
+	./src/utils/time_.c \
 	./src/utils/str_to_nbr.c \
-	./src/main.c \
+	./src/utils/msleep.c \
+	./src/spawn_philos.c \
 
 HEADERS = \
 	./includes/philo.h\
