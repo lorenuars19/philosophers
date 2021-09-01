@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/01 23:03:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/01 23:22:06 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(int argc, char *argv[])
 			return (1);
 		if ((time - old) % 1000 == 0)
 		{
-			printf("One second passed %llu\n", time - old);
+			printf("One second passed | %llu ms since launch\n", time - old);
 			msleep(1000 - 100);
 		}
 		msleep(1);
