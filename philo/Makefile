@@ -41,6 +41,7 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
+	./src/utils/str_to_nbr.c \
 	./src/main.c \
 
 HEADERS = \
