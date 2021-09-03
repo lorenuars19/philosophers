@@ -6,7 +6,7 @@
 #    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/08/23 17:46:50 by lorenuar         ###   ########.fr        #
+#    Updated: 2021/09/03 11:45:31 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,11 @@ CFLAGS	= -Wall -Werror -Wextra
 
 # Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
+CFLAGS	+= -g3
+endif
+ifeq ($(DEBUG),2)
 CFLAGS	+= -g3 -fsanitize=address -fsanitize=leak
 endif
-
 # Folder name
 SRCDIR	= src/
 INCDIR	= includes/
@@ -41,8 +43,8 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
+	./src/manage_threads.c \
 	./src/philo.c \
-	./src/spawn_manager.c \
 	./src/utils/time_.c \
 	./src/utils/str_to_nbr.c \
 	./src/utils/msleep.c \
@@ -50,6 +52,7 @@ SRCS = \
 
 HEADERS = \
 	./includes/philo.h\
+	./includes/debug_utils.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
 
@@ -75,8 +78,8 @@ all : $(NAME)
 # Compiling
 $(OBJDIR)%.o : %.c $(HEADERS)
 	@mkdir -p $(OBJDIR)
-	@printf "$(GR)+$(RC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "$(GR)+$(RC)"
 
 # Linking
 $(NAME)	: $(SRCS)  $(OBJS)

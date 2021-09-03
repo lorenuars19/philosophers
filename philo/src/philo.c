@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/01 23:22:06 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/03 11:36:05 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	{
 		dat->threads[i] = 0;
 		dat->time_until_death[i] = 0;
-		dat->forks[i] = STATE_AVAILABLE;
+		dat->time_last_meal[i] = 0;
+		dat->forks[i] = FORK_AVAILABLE;
+		dat->state[i] = STATE_THINKING;
 		i++;
 	}
 	if (pthread_mutex_init(&(dat->mutex_fork), NULL))
@@ -48,12 +50,13 @@ static int	join_and_destroy(t_data *dat)
 	int	i;
 
 	i = 0;
-	while (i < dat->n_philo)
+	while (i <= dat->n_philo)
 	{
 		if (pthread_join(dat->threads[i], NULL))
 		{
 			return (1);
 		}
+		dat->threads[i] = (pthread_t) NULL;
 		i++;
 	}
 	if (pthread_mutex_destroy(&(dat->mutex_fork)))
@@ -85,9 +88,9 @@ void	print_data(t_data *dat)
 	while (i < dat->n_philo)
 	{
 		printf(
-			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | fork %-16d"
+			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %d"
 			"\n",
-			i, dat->threads[i], dat->time_until_death[i], dat->forks[i]);
+			i, dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], dat->state[i]);
 		i++;
 	}
 }
@@ -106,28 +109,7 @@ int	main(int argc, char *argv[])
 			argv[0]);
 		return (1);
 	}
-	t_time old;
-
-	time_get_now(&old);
-
-	while (1)
-	{
-		t_time	time;
-		if (time_get_now(&time))
-			return (1);
-		if ((time - old) % 1000 == 0)
-		{
-			printf("One second passed | %llu ms since launch\n", time - old);
-			msleep(1000 - 100);
-		}
-		msleep(1);
-		// printf("time %llu | %lld \r", time, time - old);
-	}
 	if (init_data(&dat, argc, argv))
-	{
-		return (1);
-	}
-	if (spawn_manager(&dat))
 	{
 		return (1);
 	}
@@ -136,6 +118,10 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 print_data(&dat); // TODO remove debug
+	if (manage_threads(&dat))
+	{
+		return (1);
+	}
 	if (join_and_destroy(&dat))
 	{
 		return (1);
