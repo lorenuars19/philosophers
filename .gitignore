@@ -1,4 +1,4 @@
 **/bin
 **/**.o
 **/.*
-**/philo
+philo/philo
