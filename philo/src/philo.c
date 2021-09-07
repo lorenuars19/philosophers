@@ -6,11 +6,32 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/03 11:36:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/07 14:50:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	init_mutexes(t_data *dat)
+{
+	if (pthread_mutex_init(&(dat->mutex_fork[0]), NULL))
+	{
+		return (1);
+	}
+	if (pthread_mutex_init(&(dat->mutex_fork[1]), NULL))
+	{
+		return (1);
+	}
+	if (pthread_mutex_init(&(dat->mutex_print), NULL))
+	{
+		return (1);
+	}
+	if (pthread_mutex_init(&(dat->mutex_data), NULL))
+	{
+		return (1);
+	}
+	return (0);
+}
 
 int	init_data(t_data *dat, int argc, char *argv[])
 {
@@ -38,10 +59,11 @@ int	init_data(t_data *dat, int argc, char *argv[])
 		dat->state[i] = STATE_THINKING;
 		i++;
 	}
-	if (pthread_mutex_init(&(dat->mutex_fork), NULL))
+	if (init_mutexes(t_data *dat)
 	{
 		return (1);
 	}
+
 	return (0);
 }
 
