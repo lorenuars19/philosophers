@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/03 11:45:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/29 09:09:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ DM(AVAILABLE_FORK, i);
 	return (0);
 }
 
-int	give_fork(t_data *dat)
+int	select_philo(t_data *dat)
 {
 	int			i;
 	t_sel_time	sel;
@@ -59,10 +59,55 @@ int	give_fork(t_data *dat)
 
 int	manage_threads(t_data *dat)
 {
-	give_fork(dat);
-	while (1)
+	int	everyone_alive;
+	int	i;
+
+	everyone_alive = 1;
+
+	i = 0;
+	while (everyone_alive)
 	{
+		if (i == 250)
+		{
+			pthread_mutex_lock(&(dat->mutex_data));
+			pthread_mutex_lock(&(dat->mutex_print));
+			printf("\nEAT, MY CHILD\n");
+			pthread_mutex_unlock(&(dat->mutex_print));
+
+			t_time	now;
+			int		x;
+
+			if (time_get_now(&now))
+			{
+				return (1);
+			}
+
+			/// check death
+			x = 0;
+			while (x < dat->n_philo)
+			{
+
+				printf("x %d last_meal %lld die %lld death %lld now %lld\n",
+				x, dat->time_last_meal[x], dat->time_die, (dat->time_last_meal[x] + dat->time_die), now);
+
+				if (now == (dat->time_last_meal[x] + dat->time_die))
+				{
+					dat->state[x] = STATE_DEAD;
+					everyone_alive = 0;
+				}
+				x++;
+			}
+
+
+			dat->state[0] = STATE_EATING;
+
+			print_data(dat);
+
+			pthread_mutex_unlock(&(dat->mutex_data));
+		}
+
 		msleep(CPU_SAVER);
+		i++;
 	}
 	return (0);
 }

@@ -44,10 +44,10 @@ LDFLAGS = -lpthread
 
 SRCS = \
 	./src/manage_threads.c \
-	./src/philo.c \
 	./src/utils/time_.c \
 	./src/utils/str_to_nbr.c \
 	./src/utils/msleep.c \
+	./src/main.c \
 	./src/spawn_philos.c \
 
 HEADERS = \

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/07 14:49:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/29 08:59:50 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef enum e_philo_state
 	STATE_EATING,
 	STATE_SLEEPING,
 	STATE_DEAD,
-}	t_philo;
+	STATE_N
+}	t_pstate;
 
 typedef unsigned long long	t_time;
 
@@ -65,9 +66,9 @@ typedef struct s_data
 	t_time			time_last_meal[THREADS_MAX];
 
 	t_fork			forks[THREADS_MAX];
-	t_philo			state[THREADS_MAX];
+	t_pstate		state[THREADS_MAX];
 
-	pthread_mutex_t	mutex_fork[2];
+	pthread_mutex_t	mutex_fork[THREADS_MAX];
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_data;
 

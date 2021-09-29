@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/07 14:50:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/29 08:54:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	init_data(t_data *dat, int argc, char *argv[])
 		dat->state[i] = STATE_THINKING;
 		i++;
 	}
-	if (init_mutexes(t_data *dat)
+	if (init_mutexes(dat))
 	{
 		return (1);
 	}
@@ -81,9 +81,14 @@ static int	join_and_destroy(t_data *dat)
 		dat->threads[i] = (pthread_t) NULL;
 		i++;
 	}
-	if (pthread_mutex_destroy(&(dat->mutex_fork)))
+	i = 0;
+	while (i < dat->n_philo)
 	{
-		return (1);
+		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
+		{
+			return (1);
+		}
+		i++;
 	}
 	return (0);
 }
@@ -91,7 +96,9 @@ static int	join_and_destroy(t_data *dat)
 // TODO remove debug
 void	print_data(t_data *dat)
 {
+	static char *state_strings[STATE_N] = {"THINKING", "EATING", "SLEEPING", "DEAD"};
 	int	i;
+
 
 	printf("=== dat <%p>\n"
 		"n_philo    %-6ld" "\n"
@@ -110,9 +117,18 @@ void	print_data(t_data *dat)
 	while (i < dat->n_philo)
 	{
 		printf(
-			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %d"
-			"\n",
-			i, dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], dat->state[i]);
+			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d ",
+			i, dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i]);
+
+			if (dat->state[i] < STATE_N && dat->state[i] >= 0)
+			{
+				printf ("| state %s", state_strings[dat->state[i]]);
+			}
+			else
+			{
+				printf ("| state %d", dat->state[i]);
+			}
+			puts("");
 		i++;
 	}
 }
