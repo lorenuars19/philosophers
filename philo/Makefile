@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
+#    By: lorenuar <lorenuar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/09/03 11:45:31 by lorenuar         ###   ########.fr        #
+#    Updated: 2021/09/17 15:02:59 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,15 +17,21 @@ NAME	= philo
 
 # Compiler and compiling flags
 CC	= gcc
+ifneq ($(SOFT),1)
 CFLAGS	= -Wall -Werror -Wextra
+endif
 
 # Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
 CFLAGS	+= -g3
 endif
 ifeq ($(DEBUG),2)
+CFLAGS	+= -g3 -fsanitize=address
+endif
+ifeq ($(DEBUG),3)
 CFLAGS	+= -g3 -fsanitize=address -fsanitize=leak
 endif
+
 # Folder name
 SRCDIR	= src/
 INCDIR	= includes/

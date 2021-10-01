@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/29 08:59:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 11:55:15 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define THREADS_MAX 1024
 
-# define CPU_SAVER 2
+# define CPU_SAVER 4
 
 typedef enum e_fork_state
 {
@@ -97,6 +97,5 @@ void	msleep(t_time time_ms);
 
 int		spawn_philos(t_data *dat);
 int		manage_threads(t_data *dat);
-
 
 #endif

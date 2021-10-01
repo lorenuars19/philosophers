@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/29 08:54:26 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 11:55:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ static int	join_and_destroy(t_data *dat)
 		dat->threads[i] = (pthread_t) NULL;
 		i++;
 	}
-	i = 0;
-	while (i < dat->n_philo)
+	if (pthread_mutex_destroy(&(dat->mutex_fork[0])))
 	{
 		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
 		{
@@ -90,6 +89,11 @@ static int	join_and_destroy(t_data *dat)
 		}
 		i++;
 	}
+	if (pthread_mutex_destroy(&(dat->mutex_fork[1])))
+	{
+		return (1);
+	}
+
 	return (0);
 }
 
@@ -117,18 +121,9 @@ void	print_data(t_data *dat)
 	while (i < dat->n_philo)
 	{
 		printf(
-			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d ",
-			i, dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i]);
-
-			if (dat->state[i] < STATE_N && dat->state[i] >= 0)
-			{
-				printf ("| state %s", state_strings[dat->state[i]]);
-			}
-			else
-			{
-				printf ("| state %d", dat->state[i]);
-			}
-			puts("");
+			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %d"
+			"\n",
+			i, (unsigned long)dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], dat->state[i]);
 		i++;
 	}
 }

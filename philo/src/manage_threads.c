@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/29 09:09:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 11:55:46 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_available_fork(t_data *dat)
 	int	i;
 
 	i = 0;
-	while (i < dat->n_philo && dat->forks)
+	while (i < dat->n_philo)
 	{
 		if (dat->forks[i] == FORK_DEADLOCKED)
 		{
@@ -41,7 +41,7 @@ int	select_philo(t_data *dat)
 
 	sel = (t_sel_time){0, 0, -1};
 	i = 0;
-	while (i < dat->n_philo && dat->time_last_meal)
+	while (i < dat->n_philo)
 	{
 		sel.tmp = dat->time_last_meal[i];
 		if (sel.sel < sel.tmp)

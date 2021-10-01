@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   str_to_nbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
+/*   By: lorenuar <lorenuar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 18:00:31 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/01 18:27:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/09/17 15:10:42 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define NODEBUG 1
 #include "philo.h"
 #include <limits.h>
+
 
 static int	is_wsp(char c)
 {
