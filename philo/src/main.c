@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:53:32 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 14:55:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	print_data(t_data *dat)
 		dat->max_meals
 		);
 	i = 0;
+	printf("- - - - - - - - -\n");
 	while (i < dat->n_philo)
 	{
 		printf(
