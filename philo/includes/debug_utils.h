@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:21:34 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/06/11 22:03:27 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 14:40:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # endif
 
 # ifndef _MSG_WIDTH
-#  define _MSG_WIDTH 2
+#  define _MSG_WIDTH 1
 # endif
 
 # ifndef _BREAK_PAUSE
@@ -66,7 +66,7 @@
 # define _print(fmt, ... ) dprintf( _FD, fmt, ##__VA_ARGS__ );
 
 # define _BR(NEWLINE) _print("%s< %s:%d in %s() >" _CL_RST "%s",((NEWLINE) ? (_CL_BR) : (_CL_BR_FADE)), __FILE__, __LINE__, __FUNCTION__, (NEWLINE == 1) ? ("\n") : (" "));
-# define _BR_MSG(msg) _print( _CL_MSG "{%*s} " _CL_RST , _MSG_WIDTH,  #msg);
+# define _BR_MSG(msg) _print( _CL_MSG "{ %*s } " _CL_RST , _MSG_WIDTH,  #msg);
 
 # if _BREAK_PAUSE == 1
 #  define BR _BR(1); getchar();

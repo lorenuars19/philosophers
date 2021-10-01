@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 11:55:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 14:53:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,8 @@ static int	join_and_destroy(t_data *dat)
 // TODO remove debug
 void	print_data(t_data *dat)
 {
-	static char *state_strings[STATE_N] = {"THINKING", "EATING", "SLEEPING", "DEAD"};
-	int	i;
-
+	static char	*state_strings[STATE_N] = {"THINKING", "EATING", "SLEEPING", "DEAD"};
+	int			i;
 
 	printf("=== dat <%p>\n"
 		"n_philo    %-6ld" "\n"
@@ -121,9 +120,9 @@ void	print_data(t_data *dat)
 	while (i < dat->n_philo)
 	{
 		printf(
-			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %d"
+			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %s"
 			"\n",
-			i, (unsigned long)dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], dat->state[i]);
+			i, (unsigned long)dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], state_strings[dat->state[i]]);
 		i++;
 	}
 }
@@ -150,7 +149,7 @@ int	main(int argc, char *argv[])
 	{
 		return (1);
 	}
-print_data(&dat); // TODO remove debug
+PDAT(main, &dat); // TODO remove debug
 	if (manage_threads(&dat))
 	{
 		return (1);

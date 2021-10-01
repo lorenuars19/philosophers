@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 11:56:43 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 14:38:30 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	*thread_philo(void *data)
 {
-	int			wait_for_action;
 	t_phil_dat	*pdat;
 	t_data		*dat;
 
@@ -24,7 +23,14 @@ void	*thread_philo(void *data)
 	dat = pdat->data;
 
 	pthread_mutex_lock(&(dat->mutex_data));
-	dat->state[pdat->id] = STATE_THINKING;
+
+	while (pdat->wait_for_action)
+	{
+		if (dat->state[pdat->id] != STATE_DEAD)
+		{
+			return (0);
+		}
+	}
 	pthread_mutex_unlock(&(dat->mutex_data));
 
 	pthread_mutex_lock(&(dat->mutex_fork[0]));
@@ -47,7 +53,7 @@ int	spawn_philos(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		philos[i] = (t_phil_dat){dat, i};
+		philos[i] = (t_phil_dat){dat, i, 1};
 		if (pthread_create(&(dat->threads[i]), NULL, thread_philo, (void *)&(philos[i])))
 			return (1);
 		if (time_get_now(&(dat->time_last_meal[i])))
