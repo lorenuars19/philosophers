@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:38:30 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 16:59:50 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,14 @@ void	*thread_philo(void *data)
 	pdat = ((t_phil_dat *)data);
 	dat = pdat->data;
 
-	pthread_mutex_lock(&(dat->mutex_data));
-
 	while (pdat->wait_for_action)
 	{
 		if (dat->state[pdat->id] != STATE_DEAD)
 		{
-			return (0);
+			return ((void *)0);
 		}
 	}
-	pthread_mutex_unlock(&(dat->mutex_data));
 
-	pthread_mutex_lock(&(dat->mutex_fork[0]));
-	pthread_mutex_lock(&(dat->mutex_fork[1]));
-
-
-	pthread_mutex_unlock(&(dat->mutex_fork[0]));
-	pthread_mutex_unlock(&(dat->mutex_fork[1]));
 
 	return ((void *)0);
 }

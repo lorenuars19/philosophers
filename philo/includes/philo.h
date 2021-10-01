@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 15:22:57 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 16:50:19 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "debug_utils.h"
 
-# define THREADS_MAX 1024
+# define THREADS_MAX 8
 # define CPU_SAVER 4
 
 # define NOBODY_DEAD -1
@@ -97,15 +97,13 @@ void	print_data(t_data *dat);
 #endif /* NODEBUG */
 #define PDAT(MSG, X) BM(MSG); print_data(X);
 
-#ifdef NODEBUG
-# define WBM(x) ;
-#else
-# define WBM(x) BM(CAT(__FUNCTION__, CAT(" ", __LINE__)))
-#endif /* NODEBUG */
-
 int		str_to_uns(const char *s, t_ul *num);
 int		time_get_now(t_time *ptr_time);
 void	msleep(t_time time_ms);
+int		mutex_lock(pthread_mutex_t *mutex);
+int		mutex_unlock(pthread_mutex_t *mutex);
+
+
 
 int		spawn_philos(t_data *dat);
 int		manage_threads(t_data *dat);

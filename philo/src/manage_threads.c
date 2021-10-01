@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 15:05:38 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:03:08 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int check_available_fork(t_data *dat)
 	{
 		if (dat->forks[i] == FORK_DEADLOCKED)
 		{
-			BM(FORK_DEADLOCKED);
+BM(FORK_DEADLOCKED);
 			DE(i);
 			return (1);
 		}
@@ -29,8 +29,7 @@ int check_available_fork(t_data *dat)
 			break;
 		i++;
 	}
-	DM(AVAILABLE_FORK, i);
-
+DM(AVAILABLE_FORK, i);
 	return (0);
 }
 
@@ -69,12 +68,8 @@ int check_philo_death(t_data *dat)
 	}
 	while (x < dat->n_philo)
 	{
-
-WBM(check_philo_death)
-
 		printf("x %d last_meal %lld die %lld death %lld now %lld\n",
 			x, dat->time_last_meal[x], dat->time_die, (dat->time_last_meal[x] + dat->time_die), now);
-
 		if (now >= (dat->time_last_meal[x] + dat->time_die))
 		{
 			dat->state[x] = STATE_DEAD;
@@ -82,6 +77,9 @@ WBM(check_philo_death)
 		}
 		x++;
 	}
+
+DE(dat->everyone_alive);
+
 	return (0);
 }
 
@@ -89,52 +87,34 @@ int manage_threads(t_data *dat)
 {
 	int	i;
 
-	if (pthread_mutex_lock(&(dat->mutex_data)))
-	{
-		return (1);
-	}
-
 	dat->everyone_alive = NOBODY_DEAD;
 	i = 0;
 	while (dat->everyone_alive == NOBODY_DEAD)
 	{
-
-WBM(manage_threads)
-
 		if (i == 250)
 		{
-
 			if (check_philo_death(dat))
 			{
 				return (1);
 			}
 			if (dat->everyone_alive != NOBODY_DEAD)
 			{
-				return (1);
+				break ;
 			}
 
 			dat->state[0] = STATE_EATING;
 
 PDAT(manage_threads, dat);
-			if (pthread_mutex_unlock(&(dat->mutex_data)))
-			{
-				return (1);
-			}
+
 		}
 		msleep(CPU_SAVER);
 		i++;
 	}
-	if (pthread_mutex_lock(&(dat->mutex_data)))
-	{
-		return (1);
-	}
+
 	if (dat->everyone_alive)
 	{
 		printf("Philo N %d died\n", dat->everyone_alive - 1);
 	}
-	if (pthread_mutex_unlock(&(dat->mutex_data)))
-	{
-		return (1);
-	}
+PDAT(manage_threads END, dat);
 	return (0);
 }

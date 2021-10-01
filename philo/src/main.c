@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 15:28:01 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 16:05:21 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,38 @@ int	init_mutexes(t_data *dat)
 
 int	init_data(t_data *dat, int argc, char *argv[])
 {
+	t_ul	tmp;
 	int	i;
 
-	if (str_to_uns(argv[1], ((t_ul *)(dat->n_philo))))
+	memset(dat, 0, sizeof(*dat));
+	if (str_to_uns(argv[1], &tmp))
 	{
 		return (1);
 	}
-	if (str_to_uns(argv[2], &(dat->time_die)))
+	dat->n_philo = tmp;
+	if (str_to_uns(argv[2], &tmp))
 	{
 		return (1);
 	}
-	if (str_to_uns(argv[3], &(dat->time_eat)))
+	dat->time_die = tmp;
+	if (str_to_uns(argv[3], &tmp))
 	{
 		return (1);
 	}
-	if (str_to_uns(argv[4], &(dat->time_sleep)))
+	dat->time_eat = tmp;
+	if (str_to_uns(argv[4], &tmp))
 	{
 		return (1);
 	}
+	dat->time_sleep = tmp;
 	dat->max_meals = 0;
 	if (argc == 6)
 	{
-		if (str_to_uns(argv[5], ((t_ul *)(dat->max_meals))))
+		if (str_to_uns(argv[5], &tmp))
 		{
 			return (1);
 		}
+		dat->max_meals = tmp;
 	}
 	i = 0;
 	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX || dat->time_die <= 0
