@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:45:55 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:22:57 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef	struct s_philo
 	int		wait_for_action;
 }			t_phil_dat;
 
+typedef unsigned long long t_ul;
 
 // TODO remove debug
 void	print_data(t_data *dat);
@@ -96,8 +97,13 @@ void	print_data(t_data *dat);
 #endif /* NODEBUG */
 #define PDAT(MSG, X) BM(MSG); print_data(X);
 
+#ifdef NODEBUG
+# define WBM(x) ;
+#else
+# define WBM(x) BM(CAT(__FUNCTION__, CAT(" ", __LINE__)))
+#endif /* NODEBUG */
 
-ssize_t	str_to_uns(const char *s);
+int		str_to_uns(const char *s, t_ul *num);
 int		time_get_now(t_time *ptr_time);
 void	msleep(t_time time_ms);
 

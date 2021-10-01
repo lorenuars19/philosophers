@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:43:54 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:05:38 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ int check_philo_death(t_data *dat)
 	}
 	while (x < dat->n_philo)
 	{
+
+WBM(check_philo_death)
+
 		printf("x %d last_meal %lld die %lld death %lld now %lld\n",
 			x, dat->time_last_meal[x], dat->time_die, (dat->time_last_meal[x] + dat->time_die), now);
 
@@ -86,14 +89,20 @@ int manage_threads(t_data *dat)
 {
 	int	i;
 
+	if (pthread_mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+
 	dat->everyone_alive = NOBODY_DEAD;
 	i = 0;
 	while (dat->everyone_alive == NOBODY_DEAD)
 	{
 
+WBM(manage_threads)
+
 		if (i == 250)
 		{
-			pthread_mutex_lock(&(dat->mutex_data));
 
 			if (check_philo_death(dat))
 			{
@@ -101,22 +110,31 @@ int manage_threads(t_data *dat)
 			}
 			if (dat->everyone_alive != NOBODY_DEAD)
 			{
-				return (0);
+				return (1);
 			}
 
 			dat->state[0] = STATE_EATING;
 
 PDAT(manage_threads, dat);
-			pthread_mutex_unlock(&(dat->mutex_data));
+			if (pthread_mutex_unlock(&(dat->mutex_data)))
+			{
+				return (1);
+			}
 		}
 		msleep(CPU_SAVER);
 		i++;
 	}
-	pthread_mutex_lock(&(dat->mutex_data));
+	if (pthread_mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
 	if (dat->everyone_alive)
 	{
 		printf("Philo N %d died\n", dat->everyone_alive - 1);
 	}
-	pthread_mutex_unlock(&(dat->mutex_data));
+	if (pthread_mutex_unlock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
 	return (0);
 }

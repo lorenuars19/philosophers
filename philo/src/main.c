@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:55:18 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:28:01 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,33 @@ int	init_data(t_data *dat, int argc, char *argv[])
 {
 	int	i;
 
-	dat->n_philo = str_to_uns(argv[1]);
-	dat->time_die = str_to_uns(argv[2]);
-	dat->time_eat = str_to_uns(argv[3]);
-	dat->time_sleep = str_to_uns(argv[4]);
+	if (str_to_uns(argv[1], ((t_ul *)(dat->n_philo))))
+	{
+		return (1);
+	}
+	if (str_to_uns(argv[2], &(dat->time_die)))
+	{
+		return (1);
+	}
+	if (str_to_uns(argv[3], &(dat->time_eat)))
+	{
+		return (1);
+	}
+	if (str_to_uns(argv[4], &(dat->time_sleep)))
+	{
+		return (1);
+	}
 	dat->max_meals = 0;
 	if (argc == 6)
-		dat->max_meals = str_to_uns(argv[5]);
+	{
+		if (str_to_uns(argv[5], ((t_ul *)(dat->max_meals))))
+		{
+			return (1);
+		}
+	}
 	i = 0;
 	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX || dat->time_die <= 0
-		|| dat->time_eat <= 0 || dat->time_sleep <= 0)
+			|| dat->time_eat <= 0 || dat->time_sleep <= 0)
 	{
 		return (1);
 	}
@@ -128,22 +145,29 @@ void	print_data(t_data *dat)
 	}
 }
 
+static int	print_usage(char *prog)
+{
+	printf("=== Usage ===\n"
+			" %s [number_of_philo] [time_to_die(ms)]"
+			" [time_to_eat(ms)] [time_to_sleep(ms)]"
+			" [maximum_number_of_meals (optional)] \n=============\n",
+			prog);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	dat;
 
-	printf("=============\n=== PHILO ===\n=============\n");
+	printf("=== PHILO ===\n");
 	if (!(argc == 5 || argc == 6))
 	{
-		printf("=== Usage ===\n"
-			" %s [number_of_philo] [time_to_die(ms)]"
-			" [time_to_eat(ms)] [time_to_sleep(ms)]"
-			" [maximum_number_of_meals (optional)] \n=============\n",
-			argv[0]);
+		print_usage(argv[0]);
 		return (1);
 	}
 	if (init_data(&dat, argc, argv))
 	{
+		print_usage(argv[0]);
 		return (1);
 	}
 	if (spawn_philos(&dat))
