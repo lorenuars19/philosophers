@@ -54,6 +54,7 @@ SRCS = \
 	./src/spawn_philos.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
+	./src/utils/print_.c \
 	./src/utils/str_to_uns.c \
 	./src/utils/time_.c \
 

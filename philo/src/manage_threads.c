@@ -6,15 +6,15 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 17:03:08 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:49:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int check_available_fork(t_data *dat)
+int	check_available_fork(t_data *dat)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < dat->n_philo)
@@ -33,10 +33,10 @@ DM(AVAILABLE_FORK, i);
 	return (0);
 }
 
-int select_philo(t_data *dat)
+int	select_philo(t_data *dat)
 {
-	int i;
-	t_sel_time sel;
+	t_sel_time	sel;
+	int			i;
 
 	sel = (t_sel_time){0, 0, -1};
 	i = 0;
@@ -56,30 +56,27 @@ int select_philo(t_data *dat)
 	return (0);
 }
 
-int check_philo_death(t_data *dat)
+int	check_philo_death(t_data *dat)
 {
-	t_time	now;
-	int		x;
+	int	x;
 
 	x = 0;
-	if (time_get_now(&now))
-	{
-		return (1);
-	}
+
 	while (x < dat->n_philo)
 	{
-		printf("x %d last_meal %lld die %lld death %lld now %lld\n",
-			x, dat->time_last_meal[x], dat->time_die, (dat->time_last_meal[x] + dat->time_die), now);
-		if (now >= (dat->time_last_meal[x] + dat->time_die))
+		if (time_check_death(dat, dat->time_last_meal[x], &(dat->state[x])))
 		{
-			dat->state[x] = STATE_DEAD;
-			dat->everyone_alive = 1 + x;
+			return (1);
+		}
+		if (dat->state[x] == STATE_DEAD)
+		{
+			if (dat->philo_death == NOBODY_DEAD)
+			{
+				dat->philo_death = x;
+			}
 		}
 		x++;
 	}
-
-DE(dat->everyone_alive);
-
 	return (0);
 }
 
@@ -87,33 +84,29 @@ int manage_threads(t_data *dat)
 {
 	int	i;
 
-	dat->everyone_alive = NOBODY_DEAD;
+	dat->philo_death = NOBODY_DEAD;
 	i = 0;
-	while (dat->everyone_alive == NOBODY_DEAD)
+	while (dat->philo_death == NOBODY_DEAD)
 	{
-		if (i == 250)
+		if (check_philo_death(dat))
 		{
-			if (check_philo_death(dat))
-			{
-				return (1);
-			}
-			if (dat->everyone_alive != NOBODY_DEAD)
-			{
+			return (1);
+		}
+		if (dat->philo_death != NOBODY_DEAD)
+		{
 				break ;
-			}
-
-			dat->state[0] = STATE_EATING;
-
-PDAT(manage_threads, dat);
-
 		}
 		msleep(CPU_SAVER);
 		i++;
 	}
 
-	if (dat->everyone_alive)
+PDAT(manage_threads, dat);
+	if (dat->philo_death != NOBODY_DEAD)
 	{
-		printf("Philo N %d died\n", dat->everyone_alive - 1);
+		if (print_timed_msg(dat, dat->philo_death, "died"))
+		{
+			return (1);
+		}
 	}
 PDAT(manage_threads END, dat);
 	return (0);

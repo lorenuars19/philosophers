@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_.c                                            :+:      :+:    :+:   */
+/*   print_.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 22:28:18 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/05 12:52:42 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
+/*   Updated: 2021/10/05 12:49:47 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # define NODEBUG 1
 #include "philo.h"
 
-int	time_get_now(t_time *ptr_time)
-{
-	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL))
-	{
-		return (1);
-	}
-	if (ptr_time)
-		*ptr_time = (tv.tv_sec) * 1000LL + (tv.tv_usec) / 1000;
-	return (0);
-}
-
-int	time_check_death(t_data *dat, t_time philo_time, t_pstate *state)
+int	print_timed_msg(t_data *dat, int x, char *msg)
 {
 	t_time	now;
 
@@ -34,9 +22,14 @@ int	time_check_death(t_data *dat, t_time philo_time, t_pstate *state)
 	{
 		return (1);
 	}
-	if ((now >= (philo_time + dat->time_die)) && state)
+	if (mutex_lock(&(dat->mutex_print)))
 	{
-		*state = STATE_DEAD;
+		return (1);
+	}
+	printf("%lld %d %s\n", now, x, msg);
+	if (mutex_unlock(&(dat->mutex_print)))
+	{
+		return (1);
 	}
 	return (0);
 }

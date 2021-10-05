@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 16:50:19 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:48:01 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_data
 	t_time			time_sleep;
 	long			max_meals;
 
-	int				everyone_alive;
+	int				philo_death;
 
 	pthread_t		threads[THREADS_MAX];
 
@@ -99,11 +99,12 @@ void	print_data(t_data *dat);
 
 int		str_to_uns(const char *s, t_ul *num);
 int		time_get_now(t_time *ptr_time);
+int		time_check_death(t_data *dat, t_time philo_time, t_pstate *state);
+int		print_timed_msg(t_data *dat, int x, char *msg);
+
 void	msleep(t_time time_ms);
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);
-
-
 
 int		spawn_philos(t_data *dat);
 int		manage_threads(t_data *dat);

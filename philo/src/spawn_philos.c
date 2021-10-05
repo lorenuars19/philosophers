@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 16:59:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:33:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ void	*thread_philo(void *data)
 	{
 		if (dat->state[pdat->id] != STATE_DEAD)
 		{
-			return ((void *)0);
+			break ;
 		}
 	}
-
-
-	return ((void *)0);
+	return (NULL);
 }
 
 #undef NODEBUG
