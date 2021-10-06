@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 16:05:21 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:11:25 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,35 +91,7 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	return (0);
 }
 
-static int	join_and_destroy(t_data *dat)
-{
-	int	i;
 
-	i = 0;
-	while (i <= dat->n_philo)
-	{
-		if (pthread_join(dat->threads[i], NULL))
-		{
-			return (1);
-		}
-		dat->threads[i] = (pthread_t) NULL;
-		i++;
-	}
-	if (pthread_mutex_destroy(&(dat->mutex_fork[0])))
-	{
-		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
-		{
-			return (1);
-		}
-		i++;
-	}
-	if (pthread_mutex_destroy(&(dat->mutex_fork[1])))
-	{
-		return (1);
-	}
-
-	return (0);
-}
 
 // TODO remove debug
 void	print_data(t_data *dat)

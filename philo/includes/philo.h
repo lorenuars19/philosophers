@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/05 12:48:01 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 12:11:41 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "debug_utils.h"
 
-# define THREADS_MAX 8
+#  define THREADS_MAX 8 // TODO set to 1024 for correction
 # define CPU_SAVER 4
 
 # define NOBODY_DEAD -1
@@ -40,8 +40,8 @@ typedef enum e_philo_state
 	STATE_EATING,
 	STATE_SLEEPING,
 	STATE_DEAD,
-	STATE_N
-}	t_pstate;
+	STATE_FINISHED,
+}	t_phil_state;
 
 typedef unsigned long long	t_time;
 
@@ -69,7 +69,7 @@ typedef struct s_data
 	t_time			time_last_meal[THREADS_MAX];
 
 	t_fork			forks[THREADS_MAX];
-	t_pstate		state[THREADS_MAX];
+	t_phil_state	state[THREADS_MAX];
 
 	pthread_mutex_t	mutex_fork[THREADS_MAX];
 	pthread_mutex_t	mutex_print;
@@ -97,16 +97,27 @@ void	print_data(t_data *dat);
 #endif /* NODEBUG */
 #define PDAT(MSG, X) BM(MSG); print_data(X);
 
+/*
+** Utils
+*/
+
 int		str_to_uns(const char *s, t_ul *num);
 int		time_get_now(t_time *ptr_time);
-int		time_check_death(t_data *dat, t_time philo_time, t_pstate *state);
+int		time_check_death(t_data *dat, t_time philo_time, t_phil_state *state);
+
 int		print_timed_msg(t_data *dat, int x, char *msg);
 
-void	msleep(t_time time_ms);
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);
 
+void	msleep(t_time time_ms);
+
+int		dat_set_thread(t_data *dat, long philo_id, pthread_t value)
+int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
+
 int		spawn_philos(t_data *dat);
+void	*philo_thread(void *data);
 int		manage_threads(t_data *dat);
+int		join_and_destroy(t_data *dat);
 
 #endif

@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_.c                                            :+:      :+:    :+:   */
+/*   join_and_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 22:28:18 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 11:39:28 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
+/*   Updated: 2021/10/06 12:11:33 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define NODEBUG 1
 #include "philo.h"
 
-int	time_get_now(t_time *ptr_time)
+int	join_and_destroy(t_data *dat)
 {
-	struct timeval	tv;
+	int	i;
 
-	if (gettimeofday(&tv, NULL))
+	i = 0;
+	while (i <= dat->n_philo)
+	{
+		if (dat->threads[i] && pthread_join(dat->threads[i], NULL))
+		{
+			return (1);
+		}
+		dat->threads[i] = (pthread_t) NULL;
+		i++;
+	}
+	if (pthread_mutex_destroy(&(dat->mutex_fork[0])))
+	{
+		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
+		{
+			return (1);
+		}
+		i++;
+	}
+	if (pthread_mutex_destroy(&(dat->mutex_fork[1])))
 	{
 		return (1);
 	}
-	if (ptr_time)
-		*ptr_time = (tv.tv_sec) * 1000LL + (tv.tv_usec) / 1000;
-	return (0);
-}
 
-int	time_check_death(t_data *dat, t_time philo_time, t_phil_state *state)
-{
-	t_time	now;
-
-	if (time_get_now(&now))
-	{
-		return (1);
-	}
-	if ((now >= (philo_time + dat->time_die)) && state)
-	{
-		*state = STATE_DEAD;
-	}
 	return (0);
 }

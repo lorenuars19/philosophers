@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time_.c                                            :+:      :+:    :+:   */
+/*   dat_set_.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/01 22:28:18 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 11:39:28 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
+/*   Updated: 2021/10/06 12:06:11 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define NODEBUG 1
 #include "philo.h"
 
-int	time_get_now(t_time *ptr_time)
+int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 {
-	struct timeval	tv;
-
-	if (gettimeofday(&tv, NULL))
+	if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
-	if (ptr_time)
-		*ptr_time = (tv.tv_sec) * 1000LL + (tv.tv_usec) / 1000;
-	return (0);
-}
-
-int	time_check_death(t_data *dat, t_time philo_time, t_phil_state *state)
-{
-	t_time	now;
-
-	if (time_get_now(&now))
+	if (philo_id >= 0 && philo_id < THREADS_MAX)
+	{
+		dat->threads[philo_id] = value;
+	}
+	if (mutex_unlock(&(dat->mutex_data)))
 	{
 		return (1);
-	}
-	if ((now >= (philo_time + dat->time_die)) && state)
-	{
-		*state = STATE_DEAD;
 	}
 	return (0);
 }
