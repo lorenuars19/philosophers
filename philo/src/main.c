@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 12:11:25 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:11:21 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_mutexes(t_data *dat)
 int	init_data(t_data *dat, int argc, char *argv[])
 {
 	t_ul	tmp;
-	int	i;
+	int		i;
 
 	memset(dat, 0, sizeof(*dat));
 	if (str_to_uns(argv[1], &tmp))
@@ -77,7 +77,6 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	while (i < dat->n_philo)
 	{
 		dat->threads[i] = 0;
-		dat->time_until_death[i] = 0;
 		dat->time_last_meal[i] = 0;
 		dat->forks[i] = FORK_AVAILABLE;
 		dat->state[i] = STATE_THINKING;
@@ -96,7 +95,7 @@ int	init_data(t_data *dat, int argc, char *argv[])
 // TODO remove debug
 void	print_data(t_data *dat)
 {
-	static char	*state_strings[STATE_N] = {"THINKING", "EATING", "SLEEPING", "DEAD"};
+	static char	*state_strings[STATE_MAX] = {"THINKING", "EATING", "SLEEPING", "DEAD", "FINISHED"};
 	int			i;
 
 	printf("=== dat <%p>\n"
@@ -117,9 +116,9 @@ void	print_data(t_data *dat)
 	while (i < dat->n_philo)
 	{
 		printf(
-			"[i %3d] thread_id %#-16lx | time_until_death %-16llu | time_last_meal %-16llu | fork %-16d | state %s"
+			"[i %3d] thread_id %#-16lx | time_last_meal %-16llu | fork %-16d | state %s"
 			"\n",
-			i, (unsigned long)dat->threads[i], dat->time_until_death[i], dat->time_last_meal[i], dat->forks[i], state_strings[dat->state[i]]);
+			i, (unsigned long)dat->threads[i], dat->time_last_meal[i], dat->forks[i], state_strings[dat->state[i]]);
 		i++;
 	}
 }
@@ -153,14 +152,16 @@ int	main(int argc, char *argv[])
 	{
 		return (1);
 	}
-PDAT(main, &dat); // TODO remove debug
-	if (manage_threads(&dat))
+PDAT(main before manage_threads, &dat); // TODO remove debug
+	if (0 && manage_threads(&dat))
 	{
 		return (1);
 	}
+PDAT(main before join_and_destroy, &dat); // TODO remove debug
 	if (join_and_destroy(&dat))
 	{
 		return (1);
 	}
+PDAT(main END, &dat); // TODO remove debug
 	return (0);
 }

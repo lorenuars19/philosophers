@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lorenuar <lorenuar@student.42.fr>          +#+  +:+       +#+         #
+#    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/09/17 15:02:59 by lorenuar         ###   ########.fr        #
+#    Updated: 2021/10/06 18:10:50 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ ifeq ($(DEBUG),1)
 CFLAGS	+= -g3
 endif
 ifeq ($(DEBUG),2)
-CFLAGS	+= -g3 -fsanitize=address
+CFLAGS	+= -g3 -fsanitize=thread
 endif
 ifeq ($(DEBUG),3)
 CFLAGS	+= -g3 -fsanitize=address -fsanitize=leak
@@ -49,8 +49,9 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
-	./src/philo.c \
+	./src/join_and_destroy.c \
 	./src/manage_threads.c \
+	./src/philo_thread.c \
 	./src/utils/mutex_.c \
 	./src/utils/dat_/dat_set_.c \
 	./src/utils/dat_/dat_get_.c \

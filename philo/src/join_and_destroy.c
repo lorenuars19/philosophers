@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 12:11:33 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:14:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ int	join_and_destroy(t_data *dat)
 	int	i;
 
 	i = 0;
+
+	if (mutex_lock((&(dat->mutex_data))))
+	{
+		return (1);
+	}
+
 	while (i <= dat->n_philo)
 	{
 		if (dat->threads[i] && pthread_join(dat->threads[i], NULL))

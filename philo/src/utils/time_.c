@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:28:18 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 11:39:28 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:39:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,15 @@ int	time_check_death(t_data *dat, t_time philo_time, t_phil_state *state)
 	}
 	if ((now >= (philo_time + dat->time_die)) && state)
 	{
+		if (mutex_lock(&(dat->mutex_data)))
+		{
+			return (1);
+		}
 		*state = STATE_DEAD;
+		if (mutex_unlock(&(dat->mutex_data)))
+		{
+			return (1);
+		}
 	}
 	return (0);
 }

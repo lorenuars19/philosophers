@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 12:11:41 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:10:50 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "debug_utils.h"
 
 #  define THREADS_MAX 8 // TODO set to 1024 for correction
-# define CPU_SAVER 4
+# define CPU_SAVER 8
 
 # define NOBODY_DEAD -1
 
@@ -41,6 +41,7 @@ typedef enum e_philo_state
 	STATE_SLEEPING,
 	STATE_DEAD,
 	STATE_FINISHED,
+	STATE_MAX,
 }	t_phil_state;
 
 typedef unsigned long long	t_time;
@@ -65,7 +66,6 @@ typedef struct s_data
 
 	pthread_t		threads[THREADS_MAX];
 
-	t_time			time_until_death[THREADS_MAX];
 	t_time			time_last_meal[THREADS_MAX];
 
 	t_fork			forks[THREADS_MAX];
@@ -89,13 +89,15 @@ typedef unsigned long long t_ul;
 // TODO remove debug
 void	print_data(t_data *dat);
 
-// #define NODEBUG 1
+#define NODEBUG 1
 #ifndef NODEBUG
 #define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
 #endif /* NODEBUG */
 #define PDAT(MSG, X) BM(MSG); print_data(X);
+
+
 
 /*
 ** Utils
@@ -112,12 +114,15 @@ int		mutex_unlock(pthread_mutex_t *mutex);
 
 void	msleep(t_time time_ms);
 
-int		dat_set_thread(t_data *dat, long philo_id, pthread_t value)
+int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
 int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
-
+int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 int		spawn_philos(t_data *dat);
 void	*philo_thread(void *data);
 int		manage_threads(t_data *dat);
 int		join_and_destroy(t_data *dat);
+
+// #define mutex_lock(X) (BM(X) mutex_lock(X))
+// #define mutex_unlock(X) (BM(X) mutex_unlock(X))
 
 #endif
