@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:15:06 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:23:35 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include "debug_utils.h"
 
-#  define THREADS_MAX 1024 // TODO set to 1024 for correction
+#  define THREADS_MAX 16384 // TODO set to 1024 for correction
 # define CPU_SAVER 8
 
 # define NOBODY_DEAD -1
@@ -36,7 +36,8 @@ typedef enum e_fork_state
 
 typedef enum e_philo_state
 {
-	STATE_THINKING = 0,
+	STATE_NOT_CREATED = 0,
+	STATE_THINKING,
 	STATE_EATING,
 	STATE_SLEEPING,
 	STATE_DEAD,
@@ -53,6 +54,12 @@ typedef	struct s_select_time
 	long	sel_ind;
 }	t_sel_time;
 
+typedef enum e_mutex_check
+{
+	MUTEX_FREE = 0,
+	MUTEX_LOCKED,
+	MUTEX_DEADLOCKED,
+}	t_mutex_check;
 
 typedef struct s_data
 {
@@ -67,6 +74,7 @@ typedef struct s_data
 	pthread_t		threads[THREADS_MAX];
 
 	t_time			time_last_meal[THREADS_MAX];
+	long			meals_consumed[THREADS_MAX];
 
 	t_fork			forks[THREADS_MAX];
 	t_phil_state	state[THREADS_MAX];
@@ -74,6 +82,10 @@ typedef struct s_data
 	pthread_mutex_t	mutex_fork[THREADS_MAX];
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_data;
+
+	t_mutex_check	check_data;
+	t_mutex_check	check_print;
+
 
 }	t_data;
 
@@ -91,11 +103,13 @@ void	print_data(t_data *dat);
 
 #define NODEBUG 1
 #ifndef NODEBUG
-#define return(RET)	\
+# define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
+# define PDAT(MSG, X) BM(MSG); print_data(X);
+#else
+# define PDAT(MSG, X) ;
 #endif /* NODEBUG */
-#define PDAT(MSG, X) BM(MSG); print_data(X);
 
 
 #define MU BM(MUTEX);
@@ -111,10 +125,13 @@ int		time_check_death(t_data *dat, t_time philo_time, t_phil_state *state);
 
 int		print_timed_msg(t_data *dat, int x, char *msg);
 
-int		mutex_lock(pthread_mutex_t *mutex);
-int		mutex_unlock(pthread_mutex_t *mutex);
+int		mutex_lock(pthread_mutex_t *mutex, t_mutex_check *check);
+int		mutex_unlock(pthread_mutex_t *mutex, t_mutex_check *check);
 
 void	msleep(t_time time_ms);
+
+int		fork_take(t_data *dat, long philo_id);
+int		fork_release(t_data *dat, long philo_id);
 
 int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
 int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
@@ -122,6 +139,7 @@ int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 int		spawn_philos(t_data *dat);
 void	*philo_thread(void *data);
 int		manage_threads(t_data *dat);
+int		init_data(t_data *dat, int argc, char *argv[]);
 int		join_and_destroy(t_data *dat);
 
 // #define mutex_lock(X) (BM(X) mutex_lock(X))

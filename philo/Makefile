@@ -49,8 +49,10 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
+	./src/DBG_print_data.c \
 	./src/join_and_destroy.c \
 	./src/manage_threads.c \
+	./src/init_data.c \
 	./src/philo_thread.c \
 	./src/utils/mutex_.c \
 	./src/utils/dat_/dat_set_.c \

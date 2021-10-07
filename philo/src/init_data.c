@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:24:31 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:28:06 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static int	init_mutexes(t_data *dat)
 	{
 		return (1);
 	}
+	dat->check_data = MUTEX_FREE;
 	if (pthread_mutex_init(&(dat->mutex_print), NULL))
 	{
 		return (1);
 	}
+	dat->check_print = MUTEX_FREE;
 	return (0);
 }
 
@@ -60,9 +62,10 @@ static int	parse_args(t_data *dat, int argc, char *argv[])
 		}
 		dat->max_meals = num;
 	}
+	return (0);
 }
 
-static	int	init_arrays(t_data *dat)
+static	void	init_arrays(t_data *dat)
 {
 	int	i;
 
@@ -71,16 +74,15 @@ static	int	init_arrays(t_data *dat)
 	{
 		dat->threads[i] = 0;
 		dat->time_last_meal[i] = 0;
+		dat->meals_consumed[i] = 0;
 		dat->forks[i] = FORK_AVAILABLE;
-		dat->state[i] = STATE_THINKING;
+		dat->state[i] = STATE_NOT_CREATED;
 		i++;
 	}
 }
 
 int	init_data(t_data *dat, int argc, char *argv[])
 {
-	int		i;
-
 	memset(dat, 0, sizeof(*dat));
 	if (parse_args(dat, argc, argv))
 	{
@@ -89,12 +91,10 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX
 		|| dat->time_die <= 0 || dat->time_eat <= 0 || dat->time_sleep <= 0)
 	{
+BM(PARSE INVALID INPUT)
 		return (1);
 	}
-	if (init_array(dat))
-	{
-		return (1);
-	}
+	init_arrays(dat);
 	if (init_mutexes(dat))
 	{
 		return (1);
