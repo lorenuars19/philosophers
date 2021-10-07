@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:39:18 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:47:47 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "debug_utils.h"
 
 # define THREADS_MAX 1024
-# define CPU_SAVER 2
+# define CPU_SAVER 4
 
 # define NOBODY_DEAD -1
 
@@ -102,7 +102,7 @@ typedef unsigned long long t_uns;
 // TODO remove debug
 void	print_data(t_data *dat);
 
-// #define NODEBUG 1
+#define NODEBUG 1
 #ifndef NODEBUG
 # define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\
@@ -111,14 +111,6 @@ void	print_data(t_data *dat);
 #else
 # define PDAT(MSG, X) ;
 #endif /* NODEBUG */
-
-#define DELAY 500
-
-#define ML  BM(MUTEX LOCK);
-#define MU  BM(MUTEX UNLOCK);
-
-#define TML(X)  DM(MUTEX LOCK, X);
-#define TMU(X)  DM(MUTEX UNLOCK, X);
 
 /*
 ** Utils
