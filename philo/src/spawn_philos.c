@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:35:47 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:39:25 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	spawn_philos(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		phil_dat[i] = (t_phil_dat){dat, i, 1};
+		phil_dat[i] = (t_phil_dat){dat, i};
 		if (pthread_create(&(dat->threads[i]), NULL,
 				philo_thread, (void *)&(phil_dat[i])))
 		{

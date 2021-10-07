@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:07:34 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:46:15 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_philo_death(t_data *dat)
 	}
 	while (x < dat->n_philo)
 	{
-		if (time_check_death(dat, dat->time_last_meal[x], x)))
+		if (time_check_death(dat, dat->time_last_meal[x], x))
 		{
 			break;
 		}
