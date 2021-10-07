@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:07:43 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:33:10 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ typedef enum e_fork_state
 typedef enum e_philo_state
 {
 	STATE_THINKING = 0,
+	STATE_TOOK_L_FORK,
+	STATE_TOOK_R_FORK,
 	STATE_EATING,
+	STATE_RELEASED_L_FORK,
+	STATE_RELEASED_R_FORK,
 	STATE_SLEEPING,
 	STATE_DEAD,
 	STATE_MAX,
@@ -91,7 +95,6 @@ typedef	struct s_philo
 {
 	t_data	*data;
 	int		id;
-	int		wait_for_action;
 }			t_phil_dat;
 
 typedef unsigned long long t_uns;
@@ -136,10 +139,14 @@ int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 
 int		spawn_philos(t_data *dat);
 void	*philo_thread(void *data);
+int		philo_think(t_phil_dat *pdat, t_data *dat);
+int		philo_sleep(t_phil_dat *pdat, t_data *dat);
+int		philo_eat(t_phil_dat *pdat, t_data *dat);
 
 int		manage_threads(t_data *dat);
 int 	check_philo_death(t_data *dat);
 int		let_philos_eat(t_data *dat);
+
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		join_and_destroy(t_data *dat);

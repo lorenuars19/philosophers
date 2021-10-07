@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:02:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:13:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 {
 	static char	*states[STATE_MAX] = {
-		"is thinking", "is eating", "is sleeping", "is dead"};
+		"is thinking",
+		"has taken L fork",
+		"has taken R fork",
+		"is eating",
+		"has released L fork",
+		"has released R fork",
+		"is sleeping",
+		"is dead"};
 
 	if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
 	{

@@ -4,8 +4,16 @@
 // TODO remove debug
 void	print_data(t_data *dat)
 {
-	static char	*state_strings[STATE_MAX] = {"NOT_CREATED","THINKING", "EATING", "SLEEPING", "DEAD", "FINISHED"};
 	int			i;
+	static char	*state_strings[STATE_MAX] = {
+		"THINKING",
+		"TOOK L FORK",
+		"TOOK R FORK",
+		"EATING",
+		"RELEASED L FORK",
+		"RELEASED R FORK",
+		"SLEEPING",
+		"DEAD"};
 
 	printf("=== dat <%p>\n"
 		"n_philo    %-6ld" "\n"
