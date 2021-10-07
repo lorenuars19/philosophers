@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:34:55 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:04:24 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static int	join_threads(t_data *dat)
 			return (1);
 		}
 		dat->threads[i] = (pthread_t) NULL;
-		dat->state[i] = STATE_FINISHED;
 		i++;
 	}
 	return (0);

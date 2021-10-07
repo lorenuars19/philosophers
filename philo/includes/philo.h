@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:45:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:07:43 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 #include "debug_utils.h"
 
-#  define THREADS_MAX 16384 // TODO set to 1024 for correction
-# define CPU_SAVER 8
+# define THREADS_MAX 1024
+# define CPU_SAVER 2
 
 # define NOBODY_DEAD -1
 
@@ -36,12 +36,10 @@ typedef enum e_fork_state
 
 typedef enum e_philo_state
 {
-	STATE_NOT_CREATED = 0,
-	STATE_THINKING,
+	STATE_THINKING = 0,
 	STATE_EATING,
 	STATE_SLEEPING,
 	STATE_DEAD,
-	STATE_FINISHED,
 	STATE_MAX,
 }	t_phil_state;
 
@@ -101,7 +99,7 @@ typedef unsigned long long t_uns;
 // TODO remove debug
 void	print_data(t_data *dat);
 
-#define NODEBUG 1
+// #define NODEBUG 1
 #ifndef NODEBUG
 # define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\

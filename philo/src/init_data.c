@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:29:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:04:21 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static	void	init_arrays(t_data *dat)
 		dat->time_last_meal[i] = 0;
 		dat->meals_consumed[i] = 0;
 		dat->forks[i] = FORK_AVAILABLE;
-		dat->state[i] = STATE_NOT_CREATED;
+		dat->state[i] = STATE_THINKING;
 		i++;
 	}
 }
