@@ -6,32 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:17:43 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:44:37 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int check_available_fork(t_data *dat)
-{
-	int i;
-
-	i = 0;
-	while (i < dat->n_philo)
-	{
-		if (dat->forks[i] == FORK_DEADLOCKED)
-		{
-			BM(FORK_DEADLOCKED);
-			DE(i);
-			return (1);
-		}
-		if (dat->forks[i] == FORK_AVAILABLE)
-			break;
-		i++;
-	}
-	DM(AVAILABLE_FORK, i);
-	return (0);
-}
 
 int select_philo(t_data *dat)
 {
@@ -56,35 +35,11 @@ int select_philo(t_data *dat)
 	return (0);
 }
 
-int check_philo_death(t_data *dat)
+
+
+int	check_max_meals_reached(t_data *dat)
 {
-	int x;
-
-	x = 0;
-	if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
-	{
-		return (1);
-	}
-	while (x < dat->n_philo)
-	{
-		if (time_check_death(dat, dat->time_last_meal[x], &(dat->state[x])))
-		{
-			break;
-		}
-		if (dat->state[x] == STATE_DEAD)
-		{
-			if (dat->philo_death == NOBODY_DEAD)
-			{
-				dat->philo_death = x;
-			}
-		}
-		x++;
-	}
-	if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
-	{
-		return (1);
-	}
-
+	//TODO check if every philosoher has eaten at least `dat->max_meals` times
 	return (0);
 }
 
@@ -103,6 +58,16 @@ int manage_threads(t_data *dat)
 		if (dat->philo_death != NOBODY_DEAD)
 		{
 			break;
+		}
+
+		if (let_philos_eat(dat))
+		{
+			return (1);
+		}
+
+		if (check_max_meals_reached(dat))
+		{
+			return (1);
 		}
 		msleep(CPU_SAVER);
 		i++;

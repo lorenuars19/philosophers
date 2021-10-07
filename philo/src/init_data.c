@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:28:06 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:29:52 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX
 		|| dat->time_die <= 0 || dat->time_eat <= 0 || dat->time_sleep <= 0)
 	{
-BM(PARSE INVALID INPUT)
 		return (1);
 	}
 	init_arrays(dat);
@@ -99,6 +98,5 @@ BM(PARSE INVALID INPUT)
 	{
 		return (1);
 	}
-
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:23:35 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:45:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	print_data(t_data *dat);
 
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
-int		time_check_death(t_data *dat, t_time philo_time, t_phil_state *state);
 
 int		print_timed_msg(t_data *dat, int x, char *msg);
 
@@ -136,9 +135,14 @@ int		fork_release(t_data *dat, long philo_id);
 int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
 int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
 int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
+
 int		spawn_philos(t_data *dat);
 void	*philo_thread(void *data);
+
 int		manage_threads(t_data *dat);
+int 	check_philo_death(t_data *dat);
+int		let_philos_eat(t_data *dat);
+
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		join_and_destroy(t_data *dat);
 

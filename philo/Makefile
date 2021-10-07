@@ -55,13 +55,16 @@ SRCS = \
 	./src/init_data.c \
 	./src/philo_thread.c \
 	./src/utils/mutex_.c \
+	./src/utils/time_get_now.c \
 	./src/utils/dat_/dat_set_.c \
 	./src/utils/dat_/dat_get_.c \
-	./src/utils/time_.c \
 	./src/utils/str_to_uns.c \
 	./src/utils/msleep.c \
+	./src/utils/fork_.c \
 	./src/utils/print_.c \
+	./src/let_philos_eat.c \
 	./src/main.c \
+	./src/check_philo_death.c \
 	./src/spawn_philos.c \
 
 HEADERS = \
