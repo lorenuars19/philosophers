@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 16:38:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:26:54 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:38:00 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 int	mutex_lock(pthread_mutex_t *mutex, t_mutex_check *check)
 {
-	if (check && *check == MUTEX_LOCKED)
-	{
-//TODO RM DEBUG
-dprintf(2,
-"\n\n"
-"!!!!!!!!!!!!!!!!!!!!!!!!!!!!" "\n"
-"     DEADLOCK DETECTED      " "\n"
-"!!!!!!!!!!!!!!!!!!!!!!!!!!!!" "\n"
-"\n"
-);
-	return (1);
-	}
+// 	if (check && *check == MUTEX_LOCKED)
+// 	{
+// //TODO RM DEBUG
+// dprintf(2,
+// "\n\n"
+// "!!!!!!!!!!!!!!!!!!!!!!!!!!!!" "\n"
+// "     DEADLOCK DETECTED      " "\n"
+// "!!!!!!!!!!!!!!!!!!!!!!!!!!!!" "\n"
+// "\n"
+// );
+// 	return (1);
+// 	}
 	if (pthread_mutex_lock(mutex))
 	{
 

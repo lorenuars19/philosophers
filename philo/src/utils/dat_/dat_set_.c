@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:16:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:35:49 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 		"is sleeping",
 		"is dead"};
 
-printf("\ndat_set_state CHECK_DATA %d\n",dat->check_data);
 	TML(philo_id); if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);
@@ -55,7 +54,6 @@ printf("\ndat_set_state CHECK_DATA %d\n",dat->check_data);
 			//TODO Handle Error
 		}
 	}
-BM(ABOUT TO UNLOCK MUTEX);
 	TMU(philo_id); if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 16:49:46 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:42:16 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static int	time_check_death(t_data *dat, t_time philo_time, long philo_id)
 	}
 	if ((now >= (philo_time + dat->time_die)))
 	{
-		if (dat_set_state(dat, philo_id, STATE_DEAD))
-		{
-			return (1);
-		}
+		dat->state[philo_id] = STATE_DEAD;
 	}
 	return (0);
 }

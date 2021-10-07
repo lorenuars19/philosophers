@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:28:01 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:39:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,11 +114,11 @@ void	print_data(t_data *dat);
 
 #define DELAY 500
 
-#define ML  BM(MUTEX LOCK);msleep(DELAY);
-#define MU  BM(MUTEX UNLOCK);msleep(DELAY);
+#define ML  BM(MUTEX LOCK);
+#define MU  BM(MUTEX UNLOCK);
 
-#define TML(X)  DM(MUTEX LOCK, X);msleep(DELAY);
-#define TMU(X)  DM(MUTEX UNLOCK, X);msleep(DELAY);
+#define TML(X)  DM(MUTEX LOCK, X);
+#define TMU(X)  DM(MUTEX UNLOCK, X);
 
 /*
 ** Utils
