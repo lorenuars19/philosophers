@@ -6,21 +6,15 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:49:36 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:34:34 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-
-
-
-
-
-int manage_threads(t_data *dat)
+int	manage_threads(t_data *dat)
 {
-	int i;
+	int	i;
 
 	dat->philo_death = NOBODY_DEAD;
 	i = 0;

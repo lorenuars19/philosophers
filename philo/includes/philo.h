@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:33:10 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:33:51 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void	print_data(t_data *dat);
 
 
 #define MU BM(MUTEX);
-
 
 /*
 ** Utils
