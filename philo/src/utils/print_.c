@@ -6,13 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/05 12:49:47 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:46:05 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# define NODEBUG 1
 #include "philo.h"
-
 
 int	print_timed_msg(t_data *dat, int x, char *msg)
 {

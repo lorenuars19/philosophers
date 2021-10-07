@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 19:11:21 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 11:45:19 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ void	print_data(t_data *dat)
 			i, (unsigned long)dat->threads[i], dat->time_last_meal[i], dat->forks[i], state_strings[dat->state[i]]);
 		i++;
 	}
+	printf("mutexes A %p DATA %p A %p PRINT %p\n", &(dat->mutex_data),dat->mutex_data, &(dat->mutex_print), dat->mutex_print);
+
 }
 
 static int	print_usage(char *prog)
@@ -148,12 +150,13 @@ int	main(int argc, char *argv[])
 		print_usage(argv[0]);
 		return (1);
 	}
+PDAT(main before spawn_philos, &dat)
 	if (spawn_philos(&dat))
 	{
 		return (1);
 	}
 PDAT(main before manage_threads, &dat); // TODO remove debug
-	if (0 && manage_threads(&dat))
+	if (manage_threads(&dat))
 	{
 		return (1);
 	}
