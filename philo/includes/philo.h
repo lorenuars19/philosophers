@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:47:47 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:52:25 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,6 @@ typedef struct s_data
 	pthread_mutex_t	mutex_fork[THREADS_MAX];
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_data;
-
-	t_mutex_check	check_data;
-	t_mutex_check	check_print;
-
-
 }	t_data;
 
 typedef	struct s_philo
@@ -121,8 +116,8 @@ int		time_get_now(t_time *ptr_time);
 
 int		print_timed_msg(t_data *dat, int x, char *msg);
 
-int		mutex_lock(pthread_mutex_t *mutex, t_mutex_check *check);
-int		mutex_unlock(pthread_mutex_t *mutex, t_mutex_check *check);
+int		mutex_lock(pthread_mutex_t *mutex);
+int		mutex_unlock(pthread_mutex_t *mutex);
 
 void	msleep(t_time time_ms);
 

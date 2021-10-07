@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:28:25 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:52:52 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ static int	init_mutexes(t_data *dat)
 	{
 		return (1);
 	}
-	dat->check_data = MUTEX_FREE;
 	if (pthread_mutex_init(&(dat->mutex_print), NULL))
 	{
 		return (1);
 	}
-	dat->check_print = MUTEX_FREE;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:49:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:59:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ void *philo_thread(void *data)
 	state = STATE_THINKING;
 	while (state != STATE_DEAD)
 	{
-printf("state %d\n", state);
+DE(state);
 		if (sub_philo_thread(pdat, dat))
 		{
 			return (NULL);
+		}
+		if (state == STATE_DEAD)
+		{
+			break ;
 		}
 		if (dat_get_state(dat, pdat->id, &state))
 		{
