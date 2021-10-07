@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 16:38:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 11:48:41 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:55:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ BM(mutex_lock ERROR);
 
 		return (1);
 	}
-printf(">MUTEX_LOCK< [%p] %p\n", mutex, *mutex);
+// printf(">MUTEX_LOCK< [%p] %p\n", mutex, *mutex);
 	return (0);
 }
 
@@ -34,6 +34,6 @@ BM(mutex_unlock ERROR);
 
 		return (1);
 	}
-printf(">MUTEX_UNLOCK< [%p] %p\n", mutex, *mutex);
+// printf(">MUTEX_UNLOCK< [%p] %p\n", mutex, *mutex);
 	return (0);
 }

@@ -6,22 +6,22 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 18:40:47 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:54:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_available_fork(t_data *dat)
+int check_available_fork(t_data *dat)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < dat->n_philo)
 	{
 		if (dat->forks[i] == FORK_DEADLOCKED)
 		{
-BM(FORK_DEADLOCKED);
+			BM(FORK_DEADLOCKED);
 			DE(i);
 			return (1);
 		}
@@ -29,14 +29,14 @@ BM(FORK_DEADLOCKED);
 			break;
 		i++;
 	}
-DM(AVAILABLE_FORK, i);
+	DM(AVAILABLE_FORK, i);
 	return (0);
 }
 
-int	select_philo(t_data *dat)
+int select_philo(t_data *dat)
 {
-	t_sel_time	sel;
-	int			i;
+	t_sel_time sel;
+	int i;
 
 	sel = (t_sel_time){0, 0, -1};
 	i = 0;
@@ -56,9 +56,9 @@ int	select_philo(t_data *dat)
 	return (0);
 }
 
-int	check_philo_death(t_data *dat)
+int check_philo_death(t_data *dat)
 {
-	int	x;
+	int x;
 
 	x = 0;
 	if (mutex_lock(&(dat->mutex_data)))
@@ -69,7 +69,7 @@ int	check_philo_death(t_data *dat)
 	{
 		if (time_check_death(dat, dat->time_last_meal[x], &(dat->state[x])))
 		{
-			return (1);
+			break;
 		}
 		if (dat->state[x] == STATE_DEAD)
 		{
@@ -84,12 +84,13 @@ int	check_philo_death(t_data *dat)
 	{
 		return (1);
 	}
+
 	return (0);
 }
 
 int manage_threads(t_data *dat)
 {
-	int	i;
+	int i;
 
 	dat->philo_death = NOBODY_DEAD;
 	i = 0;
@@ -101,13 +102,13 @@ int manage_threads(t_data *dat)
 		}
 		if (dat->philo_death != NOBODY_DEAD)
 		{
-				break ;
+			break;
 		}
 		msleep(CPU_SAVER);
 		i++;
 	}
 
-PDAT(manage_threads, dat);
+	PDAT(manage_threads, dat);
 	if (dat->philo_death != NOBODY_DEAD)
 	{
 		if (print_timed_msg(dat, dat->philo_death, "died"))
@@ -115,6 +116,6 @@ PDAT(manage_threads, dat);
 			return (1);
 		}
 	}
-PDAT(manage_threads END, dat);
+	PDAT(manage_threads END, dat);
 	return (0);
 }

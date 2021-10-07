@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 18:35:47 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:10:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 {
-	if (mutex_lock(&(dat->mutex_data)))
+	 if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
@@ -22,7 +22,7 @@ int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 	{
 		dat->threads[philo_id] = value;
 	}
-	if (mutex_unlock(&(dat->mutex_data)))
+	 if (mutex_unlock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
@@ -31,7 +31,7 @@ int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 
 int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 {
-	if (mutex_lock(&(dat->mutex_data)))
+	 if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
@@ -39,7 +39,7 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 	{
 		dat->state[philo_id] = state;
 	}
-	if (mutex_unlock(&(dat->mutex_data)))
+	 if (mutex_unlock(&(dat->mutex_data)))
 	{
 		return (1);
 	}

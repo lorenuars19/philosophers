@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 11:46:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:10:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	print_timed_msg(t_data *dat, int x, char *msg)
 	{
 		return (1);
 	}
-	if (mutex_lock(&(dat->mutex_print)))
+	 if (mutex_lock(&(dat->mutex_print)))
 	{
 		return (1);
 	}
 	printf("%lld %d %s\n", now, x, msg);
-	if (mutex_unlock(&(dat->mutex_print)))
+	 if (mutex_unlock(&(dat->mutex_print)))
 	{
 		return (1);
 	}

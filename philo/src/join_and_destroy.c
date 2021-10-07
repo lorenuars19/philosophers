@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/06 19:14:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 12:10:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	join_and_destroy(t_data *dat)
 
 	i = 0;
 
-	if (mutex_lock((&(dat->mutex_data))))
+	 if (mutex_lock((&(dat->mutex_data))))
 	{
 		return (1);
 	}
