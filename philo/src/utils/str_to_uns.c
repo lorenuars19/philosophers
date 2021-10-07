@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 18:00:31 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 16:08:23 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:15:20 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_wsp(char c)
 	return (0);
 }
 
-int	str_to_uns(const char *s, t_ul *num)
+int	str_to_uns(const char *s, t_uns *num)
 {
 	if (!num || !s)
 	{

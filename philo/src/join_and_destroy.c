@@ -6,24 +6,18 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 12:10:26 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:12:14 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	join_and_destroy(t_data *dat)
+static int	join_threads(t_data *dat)
 {
 	int	i;
 
 	i = 0;
-
-	 if (mutex_lock((&(dat->mutex_data))))
-	{
-		return (1);
-	}
-
-	while (i <= dat->n_philo)
+	while (i < dat->n_philo)
 	{
 		if (dat->threads[i] && pthread_join(dat->threads[i], NULL))
 		{
@@ -32,7 +26,15 @@ int	join_and_destroy(t_data *dat)
 		dat->threads[i] = (pthread_t) NULL;
 		i++;
 	}
-	if (pthread_mutex_destroy(&(dat->mutex_fork[0])))
+	return (0);
+}
+
+static int	destroy_mutexes(t_data *dat)
+{
+	int	i;
+
+	i = 0;
+	while (i < dat->n_philo)
 	{
 		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
 		{
@@ -40,10 +42,26 @@ int	join_and_destroy(t_data *dat)
 		}
 		i++;
 	}
-	if (pthread_mutex_destroy(&(dat->mutex_fork[1])))
+	if (pthread_mutex_destroy(&(dat->mutex_data)))
 	{
 		return (1);
 	}
+	if (pthread_mutex_destroy(&(dat->mutex_print)))
+	{
+		return (1);
+	}
+	return (0);
+}
 
+int	join_and_destroy(t_data *dat)
+{
+	if (join_threads(dat))
+	{
+		return (1);
+	}
+	if (destroy_mutexes(dat))
+	{
+		return (1);
+	}
 	return (0);
 }

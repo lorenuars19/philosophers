@@ -6,90 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 11:45:19 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 13:13:00 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	init_mutexes(t_data *dat)
-{
-	if (pthread_mutex_init(&(dat->mutex_fork[0]), NULL))
-	{
-		return (1);
-	}
-	if (pthread_mutex_init(&(dat->mutex_fork[1]), NULL))
-	{
-		return (1);
-	}
-	if (pthread_mutex_init(&(dat->mutex_print), NULL))
-	{
-		return (1);
-	}
-	if (pthread_mutex_init(&(dat->mutex_data), NULL))
-	{
-		return (1);
-	}
-	return (0);
-}
-
-int	init_data(t_data *dat, int argc, char *argv[])
-{
-	t_ul	tmp;
-	int		i;
-
-	memset(dat, 0, sizeof(*dat));
-	if (str_to_uns(argv[1], &tmp))
-	{
-		return (1);
-	}
-	dat->n_philo = tmp;
-	if (str_to_uns(argv[2], &tmp))
-	{
-		return (1);
-	}
-	dat->time_die = tmp;
-	if (str_to_uns(argv[3], &tmp))
-	{
-		return (1);
-	}
-	dat->time_eat = tmp;
-	if (str_to_uns(argv[4], &tmp))
-	{
-		return (1);
-	}
-	dat->time_sleep = tmp;
-	dat->max_meals = 0;
-	if (argc == 6)
-	{
-		if (str_to_uns(argv[5], &tmp))
-		{
-			return (1);
-		}
-		dat->max_meals = tmp;
-	}
-	i = 0;
-	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX || dat->time_die <= 0
-			|| dat->time_eat <= 0 || dat->time_sleep <= 0)
-	{
-		return (1);
-	}
-	while (i < dat->n_philo)
-	{
-		dat->threads[i] = 0;
-		dat->time_last_meal[i] = 0;
-		dat->forks[i] = FORK_AVAILABLE;
-		dat->state[i] = STATE_THINKING;
-		i++;
-	}
-	if (init_mutexes(dat))
-	{
-		return (1);
-	}
-
-	return (0);
-}
-
 
 
 // TODO remove debug
