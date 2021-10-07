@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:13:39 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:16:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 {
-	if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
+	TML(philo_id); if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);
 	}
@@ -22,7 +22,7 @@ int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 	{
 		dat->threads[philo_id] = value;
 	}
-	if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
+	TMU(philo_id); if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);
 	}
@@ -41,7 +41,8 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 		"is sleeping",
 		"is dead"};
 
-	if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
+printf("\ndat_set_state CHECK_DATA %d\n",dat->check_data);
+	TML(philo_id); if (mutex_lock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);
 	}
@@ -51,10 +52,11 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 		if (state >= 0 && state < STATE_MAX
 			&& print_timed_msg(dat, philo_id, states[state]))
 		{
-			return (1);
+			//TODO Handle Error
 		}
 	}
-	if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
+BM(ABOUT TO UNLOCK MUTEX);
+	TMU(philo_id); if (mutex_unlock(&(dat->mutex_data), &(dat->check_data)))
 	{
 		return (1);
 	}

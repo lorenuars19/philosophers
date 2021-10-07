@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 16:46:24 by lorenuar         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:58:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	manage_threads(t_data *dat)
 		{
 			break ;
 		}
-		if (let_philos_eat(dat))
+		if (0 && let_philos_eat(dat))
 		{
 			break ;
 		}
