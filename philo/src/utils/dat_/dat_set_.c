@@ -32,14 +32,17 @@ int	dat_set_thread(t_data *dat, long philo_id, pthread_t value)
 int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 {
 	static char	*states[STATE_MAX] = {
-		"is thinking",
-		"has taken L fork",
-		"has taken R fork",
-		"is eating",
-		"has released L fork",
-		"has released R fork",
-		"is sleeping",
-		"is dead"};
+		"THINKING",
+		"REQUEST_L_FORK",
+		"REQUEST_R_FORK",
+		"TOOK_L_FORK",
+		"TOOK_R_FORK",
+		"REQUEST_EATING",
+		"EATING",
+		"RELEASED_L_FORK",
+		"RELEASED_R_FORK",
+		"SLEEPING",
+		"DEAD"};
 
 	if (mutex_lock(&(dat->mutex_data)))
 	{

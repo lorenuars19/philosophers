@@ -36,7 +36,7 @@ int	main(int argc, char *argv[])
 		print_usage(argv[0]);
 		return (1);
 	}
-PDAT(main before spawn_philos, &dat)
+PDAT(main before spawn_philos, &dat); // TODO remove debug
 	if (spawn_philos(&dat))
 	{
 		return (1);

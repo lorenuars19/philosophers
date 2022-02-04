@@ -13,6 +13,7 @@
 /*
 **	V3.3
 */
+# define DEBUG_UTILS_H
 
 #ifndef DEBUG_UTILS_H
 # define DEBUG_UTILS_H

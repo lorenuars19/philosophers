@@ -14,7 +14,22 @@
 
 int	check_max_meals_reached(t_data *dat)
 {
-	//TODO check if every philosoher has eaten at least `dat->max_meals` times
+	int	philo_id;
+	int	check;
+
+	philo_id = 0;
+	check = 0;
+	while (philo_id < dat->n_philo)
+	{
+		if (dat->meals_consumed[philo_id] == dat->max_meals)
+		{
+			check++;
+		}
+	}
+	if (check == dat->n_philo)
+	{
+		return (1);
+	}
 	return (0);
 }
 

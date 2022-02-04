@@ -7,11 +7,14 @@ void	print_data(t_data *dat)
 	int			i;
 	static char	*state_strings[STATE_MAX] = {
 		"THINKING",
-		"TOOK L FORK",
-		"TOOK R FORK",
+		"REQUEST_L_FORK",
+		"REQUEST_R_FORK",
+		"TOOK_L_FORK",
+		"TOOK_R_FORK",
+		"REQUEST_EATING",
 		"EATING",
-		"RELEASED L FORK",
-		"RELEASED R FORK",
+		"RELEASED_L_FORK",
+		"RELEASED_R_FORK",
 		"SLEEPING",
 		"DEAD"};
 

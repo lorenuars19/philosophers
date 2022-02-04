@@ -14,7 +14,6 @@
 
 static int sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 {
-BM(sub_philo_thread);
 	if (philo_think(pdat, dat))
 	{
 		return (1);
@@ -41,7 +40,6 @@ void *philo_thread(void *data)
 	state = STATE_THINKING;
 	while (state != STATE_DEAD)
 	{
-DE(state);
 		if (sub_philo_thread(pdat, dat))
 		{
 			return (NULL);
