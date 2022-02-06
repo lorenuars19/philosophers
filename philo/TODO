@@ -1,9 +1,3 @@
-philo_thread.c :
-	- [ ] move check_philo_death() inside of philo_thread()
-
-join_and_destroy.c :
-	- [ ] FIX Potential Deadlock at end of program
-
 manage_threads.c :
 	- [ ] Implement manage_threads
 

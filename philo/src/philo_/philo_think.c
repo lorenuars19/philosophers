@@ -22,9 +22,6 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 	}
 	while (state == STATE_THINKING)
 	{
-
-	//TODO EXIT IF PHILO DEATH
-
 		if (dat_get_state(dat, pdat->id, &(state)))
 		{
 			return (1);
