@@ -12,17 +12,30 @@
 
 #include "philo.h"
 
+static void	init_phil_dat(t_phil_dat phil_dat[THREADS_MAX])
+{
+	int	i;
+
+	i = 0;
+	while (i < THREADS_MAX)
+	{
+		phil_dat[i] = (t_phil_dat){NULL, -1};
+		i++;
+	}
+}
+
 int	spawn_philos(t_data *dat)
 {
 	t_phil_dat	phil_dat[THREADS_MAX];
 	int			i;
 
+	init_phil_dat(phil_dat);
 	i = 0;
 	while (i < dat->n_philo)
 	{
 		phil_dat[i] = (t_phil_dat){dat, i};
 		if (pthread_create(&(dat->threads[i]), NULL,
-				philo_thread, (void *)&(phil_dat[i])))
+			philo_thread, (void *)&(phil_dat[i])))
 		{
 			return (1);
 		}
