@@ -55,6 +55,9 @@ static int	destroy_mutexes(t_data *dat)
 
 int	join_and_destroy(t_data *dat)
 {
+
+PDAT(join_and_destroy, dat)
+
 	if (join_threads(dat))
 	{
 		return (1);

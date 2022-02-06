@@ -1,0 +1,12 @@
+philo_thread.c :
+	- [ ] move check_philo_death() inside of philo_thread()
+
+join_and_destroy.c :
+	- [ ] FIX Potential Deadlock at end of program
+
+manage_threads.c :
+	- [ ] Implement manage_threads
+
+fork_.c :
+	- [ ] Implement fork_take() & fork_release()
+	- [ ] Remove dbg_print_fork() in fork_.c

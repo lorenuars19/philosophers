@@ -46,6 +46,7 @@ void *philo_thread(void *data)
 		}
 		if (state == STATE_DEAD)
 		{
+			pthread_exit(NULL);
 			break ;
 		}
 		if (dat_get_state(dat, pdat->id, &state))
@@ -53,6 +54,6 @@ void *philo_thread(void *data)
 			return (NULL);
 		}
 	}
-
+	pthread_exit(NULL);
 	return (NULL);
 }
