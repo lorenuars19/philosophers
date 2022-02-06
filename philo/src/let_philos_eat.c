@@ -51,14 +51,14 @@ static int select_philo(t_data *dat)
 		i++;
 	}
 	printf("give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
-	return (0);
+	return (sel.sel_ind);
 }
 
 
 int	let_philos_eat(t_data *dat)
 {
 	// Select philo that is nearest to its death
-
+	select_philo(dat);
 
 
 	return (0);

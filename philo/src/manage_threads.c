@@ -28,7 +28,7 @@ int	manage_threads(t_data *dat)
 		{
 			break ;
 		}
-		if (0 && let_philos_eat(dat))
+		if (let_philos_eat(dat))
 		{
 			break ;
 		}
