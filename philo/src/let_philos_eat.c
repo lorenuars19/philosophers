@@ -50,7 +50,7 @@ static int select_philo(t_data *dat)
 		}
 		i++;
 	}
-	printf("give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
+// printf(">=> give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
 	return (sel.sel_ind);
 }
 

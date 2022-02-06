@@ -29,8 +29,7 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 		{
 			return (1);
 		}
-	//TODO uncomment
-		// msleep(CPU_SAVER);
+		msleep(CPU_SAVER);
 	}
 	return (0);
 }

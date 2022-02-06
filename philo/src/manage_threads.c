@@ -20,6 +20,9 @@ int	manage_threads(t_data *dat)
 	i = 0;
 	while (dat->philo_death == NOBODY_DEAD)
 	{
+
+// printf(">>> MANAGE_THREADS - %d <<<\n", i);
+
 		if (check_philo_death(dat))
 		{
 			return (1);
@@ -35,7 +38,6 @@ int	manage_threads(t_data *dat)
 		msleep(CPU_SAVER);
 		i++;
 	}
-
 	PDAT(manage_threads, dat);
 	if (dat->philo_death != NOBODY_DEAD)
 	{

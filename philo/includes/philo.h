@@ -23,7 +23,7 @@
 #include "debug_utils.h"
 
 # define THREADS_MAX 1024
-# define CPU_SAVER 4
+# define CPU_SAVER 512
 
 # define NOBODY_DEAD -1
 
