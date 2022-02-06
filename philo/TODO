@@ -4,3 +4,6 @@ manage_threads.c :
 fork_.c :
 	- [ ] Implement fork_take() & fork_release()
 	- [ ] Remove dbg_print_fork() in fork_.c
+
+let_philos_eat.c :
+	- [ ] Implement let_philos_eat()

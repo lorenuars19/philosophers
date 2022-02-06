@@ -20,9 +20,6 @@ int	manage_threads(t_data *dat)
 	i = 0;
 	while (dat->philo_death == NOBODY_DEAD)
 	{
-
-// printf(">>> MANAGE_THREADS - %d <<<\n", i);
-
 		if (check_philo_death(dat))
 		{
 			return (1);

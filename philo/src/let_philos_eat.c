@@ -50,15 +50,23 @@ static int select_philo(t_data *dat)
 		}
 		i++;
 	}
-// printf(">=> give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
+printf(">=> give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
 	return (sel.sel_ind);
 }
 
 
 int	let_philos_eat(t_data *dat)
 {
+	int	id;
 	// Select philo that is nearest to its death
-	select_philo(dat);
+	id = select_philo(dat);
+
+	// TODO request L FORK
+
+	// TODO request R FORK
+
+	// TODO When BOTH forks are acquired, let philo eat
+
 
 
 	return (0);
