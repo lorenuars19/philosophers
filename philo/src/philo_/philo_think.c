@@ -31,6 +31,10 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 		}
 		msleep(CPU_SAVER);
 	}
+	if (state == STATE_DEAD)
+	{
+		pthread_exit(NULL);
+	}
 	return (0);
 }
 
@@ -40,7 +44,6 @@ int	philo_think(t_phil_dat *pdat, t_data *dat)
 	{
 		return (1);
 	}
-
 	if (philo_wait_for_action(pdat, dat))
 	{
 		return (1);
