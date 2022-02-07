@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:51:09 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:27:35 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,8 @@ int	fork_take(t_data *dat, long philo_id)
 	{
 		return (1);
 	}
-	// TODO TAKE FORK
+	dat->forks[philo_id] = FORK_HELD_BY_N + philo_id;
 
-	// set fork to HELD_BY_N + philo_id
-
-
-
-	return (0);
-}
 dbg_print_fork(dat, philo_id);
 
 	return (0);

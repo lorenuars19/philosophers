@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:10:56 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:20:57 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef enum e_philo_state
 {
 	STATE_THINKING = 0,
 	STATE_REQUEST_L_FORK,
-	STATE_REQUEST_R_FORK,
 	STATE_TOOK_L_FORK,
+	STATE_REQUEST_R_FORK,
 	STATE_TOOK_R_FORK,
 	STATE_REQUEST_EATING,
 	STATE_EATING,

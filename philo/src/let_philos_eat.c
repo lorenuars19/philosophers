@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:16:51 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:21:43 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,15 @@ int	let_philos_eat(t_data *dat)
 	id = select_philo(dat);
 
 	// TODO request L FORK
-	if (fork_take())
+	if (dat_set_state(dat, id, STATE_REQUEST_L_FORK))
+	{
+		return (1);
+	}
+	if (fork_take(dat, id))
+	{
+		return (1);
+	}
+	if (dat_set_state(dat, id, STATE_TOOK_L_FORK))
 	{
 		return (1);
 	}
