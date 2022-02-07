@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:52:25 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:10:56 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ typedef	struct s_select_time
 	long	sel_ind;
 }	t_sel_time;
 
-typedef enum e_mutex_check
+typedef	struct s_select
 {
-	MUTEX_FREE = 0,
-	MUTEX_LOCKED,
-	MUTEX_DEADLOCKED,
-}	t_mutex_check;
+	int tmp;
+	int	sel;
+	int	sel_ind;
+}	t_sel;
 
 typedef struct s_data
 {
@@ -129,6 +129,7 @@ int		fork_release(t_data *dat, long philo_id);
 
 int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
 int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
+int		dat_get_fork(t_data *dat, long philo_id, t_fork *fork);
 int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 
 int		spawn_philos(t_data *dat);

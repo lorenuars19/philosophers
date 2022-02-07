@@ -49,26 +49,28 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
-	./src/DBG_print_data.c \
-	./src/join_and_destroy.c \
+	./src/let_philos_eat.c \
+	./src/spawn_philos.c \
 	./src/manage_threads.c \
 	./src/init_data.c \
-	./src/philo_/philo_sleep.c \
 	./src/philo_/philo_thread.c \
 	./src/philo_/philo_eat.c \
 	./src/philo_/philo_think.c \
+	./src/philo_/philo_sleep.c \
+	./src/join_and_destroy.c \
 	./src/utils/mutex_.c \
-	./src/utils/time_get_now.c \
 	./src/utils/print_timed_msg.c \
-	./src/utils/dat_/dat_set_.c \
-	./src/utils/dat_/dat_get_.c \
+	./src/utils/fork_.c \
 	./src/utils/str_to_uns.c \
 	./src/utils/msleep.c \
-	./src/utils/fork_.c \
-	./src/let_philos_eat.c \
-	./src/main.c \
+	./src/utils/dat_/dat_get_state.c \
+	./src/utils/dat_/dat_set_thread.c \
+	./src/utils/dat_/dat_set_state.c \
+	./src/utils/dat_/dat_get_fork.c \
+	./src/utils/time_get_now.c \
+	./src/DBG_print_data.c \
 	./src/check_philo_death.c \
-	./src/spawn_philos.c \
+	./src/main.c \
 
 HEADERS = \
 	./includes/philo.h\

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:52:36 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:16:51 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ printf(">=> give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
 	return (sel.sel_ind);
 }
 
-
 int	let_philos_eat(t_data *dat)
 {
 	int	id;
@@ -62,11 +61,14 @@ int	let_philos_eat(t_data *dat)
 	id = select_philo(dat);
 
 	// TODO request L FORK
+	if (fork_take())
+	{
+		return (1);
+	}
 
 	// TODO request R FORK
 
 	// TODO When BOTH forks are acquired, let philo eat
-
 
 
 	return (0);
