@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 16:39:25 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:34:23 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	spawn_philos(t_data *dat)
 		}
 		if (time_get_now(&(dat->time_last_meal[i])))
 			return (1);
+		// msleep(CPU_SAVER);
 		i++;
 	}
 	return (0);

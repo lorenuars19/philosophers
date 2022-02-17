@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:13:49 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:34:10 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 
 int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 {
-	static char	*states[STATE_MAX] = {
-		"THINKING",
-		"REQUEST_L_FORK",
-		"REQUEST_R_FORK",
-		"TOOK_L_FORK",
-		"TOOK_R_FORK",
-		"REQUEST_EATING",
-		"EATING",
-		"RELEASED_L_FORK",
-		"RELEASED_R_FORK",
-		"SLEEPING",
-		"DEAD"};
-
 	if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);

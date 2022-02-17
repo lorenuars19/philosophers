@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:53:10 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:58:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	time_check_death(t_data *dat, t_time philo_time, long philo_id)
 
 int	check_philo_death(t_data *dat)
 {
+	int i;
 	int	x;
 
 	x = 0;
@@ -47,6 +48,12 @@ int	check_philo_death(t_data *dat)
 			if (dat->philo_death == NOBODY_DEAD)
 			{
 				dat->philo_death = x;
+			}
+			i = 0;
+			while (i < THREADS_MAX)
+			{
+				dat->state[i] = STATE_DEAD;
+				i++;
 			}
 		}
 		x++;

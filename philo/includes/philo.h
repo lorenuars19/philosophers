@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:20:57 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:40:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "debug_utils.h"
 
 # define THREADS_MAX 1024
-# define CPU_SAVER 512
+# define CPU_SAVER 10
 
 # define NOBODY_DEAD -1
 
@@ -110,6 +110,12 @@ void	print_data(t_data *dat);
 # define PDAT(MSG, X) ;
 #endif /* NODEBUG */
 
+// TODO remove debug
+#ifndef STATES_STRINGS
+# define STATES_STRINGS
+extern const char	*states[STATE_MAX];
+#endif
+
 /*
 ** Utils
 */
@@ -117,7 +123,7 @@ void	print_data(t_data *dat);
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
 
-int		print_timed_msg(t_data *dat, int x, char *msg);
+int		print_timed_msg(t_data *dat, int x, const char *msg);
 
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);

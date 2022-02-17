@@ -6,13 +6,13 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:53:26 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:38:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_timed_msg(t_data *dat, int x, char *msg)
+int	print_timed_msg(t_data *dat, int x, const char *msg)
 {
 	t_time	now;
 

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:56:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/09/03 11:00:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/17 10:58:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,19 @@
 
 void	msleep(t_time time_ms)
 {
-	usleep((time_ms * 1000));
+	t_time	total;
+	t_time	big_time;
+	t_time	small_times;
+	int		i;
+
+	i = 0;
+	total = time_ms * 1000;
+	big_time = total * 0.8;
+	small_times = total * 0.001;
+	usleep(big_time);
+	éwhile (i < 200)
+	{
+		usleep(small_times);
+		i++;
+	}
 }

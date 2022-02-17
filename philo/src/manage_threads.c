@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 16:58:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:20:01 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	manage_threads(t_data *dat)
 		{
 			break ;
 		}
-		msleep(CPU_SAVER);
+		// msleep(CPU_SAVER);
 		i++;
 	}
 	PDAT(manage_threads, dat);

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 16:43:24 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 14:34:05 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,25 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 		{
 			return (1);
 		}
-		msleep(CPU_SAVER);
+		if (state == STATE_DEAD)
+		{
+			pthread_exit(NULL);
+		}
 	}
-	if (state == STATE_DEAD)
-	{
-		pthread_exit(NULL);
-	}
+	// msleep(CPU_SAVER);
 	return (0);
 }
 
 int	philo_think(t_phil_dat *pdat, t_data *dat)
 {
-	if (dat_set_state(dat, pdat->id, STATE_THINKING))
+	t_phil_state	state;
+
+	if (dat_get_state(dat, pdat->id, &state))
+	{
+		return (1);
+	}
+	if (state != STATE_DEAD
+		&& dat_set_state(dat, pdat->id, STATE_THINKING))
 	{
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:27:35 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:35:55 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,9 @@
 
 void	dbg_print_fork(t_data *dat, long philo_id)
 {
-	static char	*state_strings[STATE_MAX] = {
-		"THINKING",
-		"REQUEST_L_FORK",
-		"REQUEST_R_FORK",
-		"TOOK_L_FORK",
-		"TOOK_R_FORK",
-		"REQUEST_EATING",
-		"EATING",
-		"RELEASED_L_FORK",
-		"RELEASED_R_FORK",
-		"SLEEPING",
-		"DEAD"
-		};
-
-	printf("PHI ID %ld | STATE %s\n",
+	printf(">> FORK >> PHI ID %ld | STATE %s\n",
 		philo_id,
-		state_strings[dat->state[philo_id]]);
+		states[dat->state[philo_id]]);
 }
 
 static int	select_fork(t_data *dat)
