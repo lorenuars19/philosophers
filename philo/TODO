@@ -1,6 +1,3 @@
-manage_threads.c :
-	- [ ] Implement manage_threads
-
 fork_.c :
 	- [ ] Implement fork_take() & fork_release()
 	- [ ] Remove dbg_print_fork() in fork_.c
