@@ -6,5 +6,8 @@ let_philos_eat.c :
 	- [ ] Implement let_philos_eat()
 
 
+check_philo_death.c:
+	- refactor death system
+
 FIX
 	fix main thread trying to join without setting STATE_DEAD in dat->states
