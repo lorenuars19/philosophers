@@ -6,14 +6,14 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 18:21:34 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/01 14:40:39 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:21:21 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 **	V3.3
 */
-# define DEBUG_UTILS_H
+// # define DEBUG_UTILS_H
 
 #ifndef DEBUG_UTILS_H
 # define DEBUG_UTILS_H

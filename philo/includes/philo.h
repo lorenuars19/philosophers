@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 14:40:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:20:16 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "debug_utils.h"
 
 # define THREADS_MAX 1024
-# define CPU_SAVER 10
+# define CPU_SAVER 256
 
 # define NOBODY_DEAD -1
 
@@ -100,7 +100,7 @@ typedef unsigned long long t_uns;
 // TODO remove debug
 void	print_data(t_data *dat);
 
-#define NODEBUG 1
+// #define NODEBUG 1
 #ifndef NODEBUG
 # define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\

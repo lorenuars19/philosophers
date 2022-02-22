@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 14:34:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:10:10 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 			pthread_exit(NULL);
 		}
 	}
-	// msleep(CPU_SAVER);
+	msleep(CPU_SAVER * 100);
 	return (0);
 }
 
