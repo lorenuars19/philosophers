@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 15:59:16 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 17:34:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,6 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 	if (dat_get_state(dat, pdat->id, &(state)))
 	{
 		return (1);
-	}
-	if (state == STATE_DEAD)
-	{
-		pthread_exit(NULL);
 	}
 	while (state == STATE_THINKING)
 	{
@@ -55,6 +51,5 @@ int	philo_think(t_phil_dat *pdat, t_data *dat)
 	{
 		return (1);
 	}
-	msleep(RELAX);
 	return (0);
 }
