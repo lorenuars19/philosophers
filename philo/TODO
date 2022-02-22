@@ -4,3 +4,7 @@ fork_.c :
 
 let_philos_eat.c :
 	- [ ] Implement let_philos_eat()
+
+
+FIX
+	fix main thread trying to join without setting STATE_DEAD in dat->states

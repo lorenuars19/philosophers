@@ -7,7 +7,7 @@ const char	*states[STATE_MAX] = {
 		"TOOK_L_FORK",
 		"REQUEST_R_FORK",
 		"TOOK_R_FORK",
-		"REQUEST_EATING",
+		"READY_EATING",
 		"EATING",
 		"RELEASED_L_FORK",
 		"RELEASED_R_FORK",

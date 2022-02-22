@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 12:20:16 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 13:48:14 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_philo_state
 	STATE_TOOK_L_FORK,
 	STATE_REQUEST_R_FORK,
 	STATE_TOOK_R_FORK,
-	STATE_REQUEST_EATING,
+	STATE_READY_EATING,
 	STATE_EATING,
 	STATE_RELEASED_L_FORK,
 	STATE_RELEASED_R_FORK,
@@ -100,15 +100,19 @@ typedef unsigned long long t_uns;
 // TODO remove debug
 void	print_data(t_data *dat);
 
-// #define NODEBUG 1
-#ifndef NODEBUG
+#define NODEBUGU
+#ifndef NODEBUGU
 # define return(RET)	\
 {dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
-# define PDAT(MSG, X) BM(MSG); print_data(X);
-#else
-# define PDAT(MSG, X) ;
-#endif /* NODEBUG */
+#endif
+
+# define NOPDAT
+# ifndef NOPDAT
+#  define PDAT(MSG, X) BM(MSG); print_data(X);
+# else
+#  define PDAT(MSG, X) ;
+# endif
 
 // TODO remove debug
 #ifndef STATES_STRINGS
