@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 14:22:12 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:25:47 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ PDAT(main before manage_threads, &dat); // TODO remove debug
 	{
 		return (1);
 	}
-PDAT(main before join_and_destroy, &dat); // TODO remove debug
-	if (join_and_destroy(&dat))
+PDAT(main before kill_and_destroy, &dat); // TODO remove debug
+	if (kill_and_destroy(&dat))
 	{
 		return (1);
 	}

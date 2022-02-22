@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 16:00:20 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:25:49 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	print_data(t_data *dat);
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
 #endif
 
-// # define NOPDAT
+# define NOPDAT
 # ifndef NOPDAT
 #  define PDAT(MSG, X) BM(MSG); print_data(X);
 # else
@@ -151,7 +151,7 @@ int		let_philos_eat(t_data *dat);
 
 
 int		init_data(t_data *dat, int argc, char *argv[]);
-int		join_and_destroy(t_data *dat);
+int		kill_and_destroy(t_data *dat);
 
 // #define mutex_lock(X) (BM(X) mutex_lock(X))
 // #define mutex_unlock(X) (BM(X) mutex_unlock(X))

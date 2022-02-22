@@ -57,7 +57,6 @@ SRCS = \
 	./src/philo_/philo_eat.c \
 	./src/philo_/philo_think.c \
 	./src/philo_/philo_sleep.c \
-	./src/join_and_destroy.c \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \
 	./src/utils/fork_.c \
@@ -69,6 +68,7 @@ SRCS = \
 	./src/utils/dat_/dat_get_fork.c \
 	./src/utils/time_get_now.c \
 	./src/DBG_print_data.c \
+	./src/kill_and_destroy.c \
 	./src/check_philo_death.c \
 	./src/main.c \
 

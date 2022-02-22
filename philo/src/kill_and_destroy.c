@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_and_destroy.c                                 :+:      :+:    :+:   */
+/*   kill_and_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 12:19:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:23:34 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	join_threads(t_data *dat)
+static int	kill_threads(t_data *dat)
 {
 	int	i;
 
@@ -24,7 +24,7 @@ static int	join_threads(t_data *dat)
 			return (1);
 		}
 		dat->threads[i] = (pthread_t) NULL;
-PDAT(join_threads, dat)
+PDAT(kill_threads, dat)
 		i++;
 	}
 	return (0);
@@ -54,12 +54,12 @@ static int	destroy_mutexes(t_data *dat)
 	return (0);
 }
 
-int	join_and_destroy(t_data *dat)
+int	kill_and_destroy(t_data *dat)
 {
 
-PDAT(join_and_destroy, dat)
+PDAT(kill_and_destroy, dat)
 
-	if (join_threads(dat))
+	if (kill_threads(dat))
 	{
 		return (1);
 	}
