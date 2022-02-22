@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:56:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/17 10:58:39 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 12:01:25 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	msleep(t_time time_ms)
 	big_time = total * 0.8;
 	small_times = total * 0.001;
 	usleep(big_time);
-	éwhile (i < 200)
+	while (i < 200)
 	{
 		usleep(small_times);
 		i++;
