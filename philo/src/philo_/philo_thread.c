@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 13:57:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:04:57 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ static int sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 	if (dat_get_state(dat, pdat->id, &state))
 	{
 		return (1);
+	}
+	if (state == STATE_DEAD)
+	{
+		pthread_exit(NULL);
 	}
 	if (state == STATE_READY_EATING
 		&& philo_eat(pdat, dat))
