@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 13:54:30 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/22 15:54:48 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 int	manage_threads(t_data *dat)
 {
 	int	i;
+	int	check_death;
 
-	dat->philo_death = NOBODY_DEAD;
 	i = 0;
-	while (dat->philo_death == NOBODY_DEAD)
+	check_death = 0;
+	while (check_death == 0)
 	{
-		if (check_philo_death(dat))
+		check_death = check_philo_death(dat);
+		if (check_death < 0)
 		{
 			//TODO HANDLE ERROR
+		}
+		else if (check_death == 1)
+		{
+			break ;
 		}
 		if (let_philos_eat(dat))
 		{
@@ -32,9 +38,9 @@ int	manage_threads(t_data *dat)
 		i++;
 	}
 	PDAT(manage_threads, dat);
-	if (dat->philo_death != NOBODY_DEAD)
+	if (check_death > 0)
 	{
-		if (print_timed_msg(dat, dat->philo_death, "died"))
+		if (print_timed_msg(dat, check_death - 1, "died"))
 		{
 			return (1);
 		}
