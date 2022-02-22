@@ -11,3 +11,9 @@ check_philo_death.c:
 
 FIX
 	- fix main thread trying to join without setting STATE_DEAD in dat->states
+	- fix data race with
+		Write of size 1 at 0x7ffd96740d60 by main thread:
+    #0 pthread_mutex_destroy ../../../../src/libsanitizer/tsan/tsan_interceptors_posix.cpp:1237 (libtsan.so.0+0x35c5a)
+    #1 destroy_mutexes src/kill_and_destroy.c:46 (philo+0x315d)
+    #2 kill_and_destroy src/kill_and_destroy.c:66 (philo+0x31d3)
+    #3 main src/main.c:50 (philo+0x3554)
