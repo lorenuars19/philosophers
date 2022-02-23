@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 16:52:18 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:37:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,14 @@ typedef struct s_data
 	t_fork			forks[THREADS_MAX];
 	t_phil_state	state[THREADS_MAX];
 
-	pthread_mutex_t	mutex_fork[THREADS_MAX];
-	pthread_mutex_t	mutex_print;
-	pthread_mutex_t	mutex_data;
+	pthread_mutex_t	mu_fork[THREADS_MAX];
+
+	pthread_mutex_t *p_mu_print;
+	pthread_mutex_t *p_mu_data;
+
+	pthread_mutex_t	mu_print;
+	pthread_mutex_t	mu_data;
+
 }	t_data;
 
 typedef	struct s_philo

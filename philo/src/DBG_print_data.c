@@ -43,6 +43,6 @@ void	print_data(t_data *dat)
 		i++;
 	}
 	// printf("mutexes A %p DATA %p A %p PRINT %p\n",
-	// 	&(dat->mutex_data), dat->mutex_data,
-	// 	&(dat->mutex_print), dat->mutex_print);
+	// 	&(dat->mu_data), dat->mu_data,
+	// 	&(dat->mu_print), dat->mu_print);
 }

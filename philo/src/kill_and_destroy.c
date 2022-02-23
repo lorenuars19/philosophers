@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 17:26:00 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:28:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ static int	destroy_mutexes(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (pthread_mutex_destroy(&(dat->mutex_fork[i])))
+		if (pthread_mutex_destroy(&(dat->mu_fork[i])))
 		{
 			return (1);
 		}
 		i++;
 	}
-	if (pthread_mutex_destroy(&(dat->mutex_data)))
+	if (pthread_mutex_destroy(&(dat->mu_data)))
 	{
 		return (1);
 	}
-	if (pthread_mutex_destroy(&(dat->mutex_print)))
+	if (pthread_mutex_destroy(&(dat->mu_print)))
 	{
 		return (1);
 	}

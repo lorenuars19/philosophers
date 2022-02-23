@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:59:50 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:09:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:28:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	dat_get_state(t_data *dat, long philo_id, t_phil_state *state)
 {
-	if (mutex_lock(&(dat->mutex_data)))
+	if (mutex_lock(&(dat->mu_data)))
 	{
 		return (1);
 	}
@@ -22,7 +22,7 @@ int	dat_get_state(t_data *dat, long philo_id, t_phil_state *state)
 	{
 		*state = dat->state[philo_id];
 	}
-	if (mutex_unlock(&(dat->mutex_data)))
+	if (mutex_unlock(&(dat->mu_data)))
 	{
 		return (1);
 	}

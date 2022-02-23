@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:52:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:28:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static int	init_mutexes(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (pthread_mutex_init(&(dat->mutex_fork[i]), NULL))
+		if (pthread_mutex_init(&(dat->mu_fork[i]), NULL))
 		{
 			return (1);
 		}
 		i++;
 	}
-	if (pthread_mutex_init(&(dat->mutex_data), NULL))
+	if (pthread_mutex_init(&(dat->mu_data), NULL))
 	{
 		return (1);
 	}
-	if (pthread_mutex_init(&(dat->mutex_print), NULL))
+	if (pthread_mutex_init(&(dat->mu_print), NULL))
 	{
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 15:52:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:28:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_philo_death(t_data *dat)
 
 	x = 0;
 	ret = 0;
-	if (mutex_lock(&(dat->mutex_data)))
+	if (mutex_lock(&(dat->mu_data)))
 	{
 		return (-1);
 	}
@@ -61,7 +61,7 @@ int	check_philo_death(t_data *dat)
 		}
 		x++;
 	}
-	if (mutex_unlock(&(dat->mutex_data)))
+	if (mutex_unlock(&(dat->mu_data)))
 	{
 		return (-1);
 	}
