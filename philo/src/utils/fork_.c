@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/07 13:35:55 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:21:47 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,18 @@ int	fork_take(t_data *dat, long philo_id)
 	}
 	dat->forks[philo_id] = FORK_HELD_BY_N + philo_id;
 
-dbg_print_fork(dat, philo_id);
+	if (mutex_lock(&(dat->mu_fork[fork_id])))
+	{
+		return (1);
+	}
+
+// dbg_print_fork(dat, philo_id);
 
 	return (0);
 }
 
 int	fork_release(t_data *dat, long philo_id)
 {
-dbg_print_fork(dat, philo_id);
+// dbg_print_fork(dat, philo_id);
 	return (0);
 }

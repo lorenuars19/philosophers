@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/23 14:28:53 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 14:48:34 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ static int	init_mutexes(t_data *dat)
 	{
 		return (1);
 	}
+	dat->p_mu_data = &(dat->mu_data);
 	if (pthread_mutex_init(&(dat->mu_print), NULL))
 	{
 		return (1);
 	}
+	dat->p_mu_print = &(dat->mu_print);
 	return (0);
 }
 

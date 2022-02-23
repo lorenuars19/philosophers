@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 12:35:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/23 15:39:08 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,38 +60,7 @@ int	let_philos_eat(t_data *dat)
 	// Select philo that is nearest to its death
 	id = select_philo(dat);
 
-	// TODO request L FORK
-	if (dat_set_state(dat, id, STATE_REQUEST_L_FORK))
-	{
-		return (1);
-	}
-	if (fork_take(dat, id))
-	{
-		return (1);
-	}
-	if (dat_set_state(dat, id, STATE_TOOK_L_FORK))
-	{
-		return (1);
-	}
 
-	// TODO request R FORK
-	if (dat_set_state(dat, id, STATE_REQUEST_R_FORK))
-	{
-		return (1);
-	}
-	if (fork_take(dat, id))
-	{
-		return (1);
-	}
-	if (dat_set_state(dat, id, STATE_TOOK_R_FORK))
-	{
-		return (1);
-	}
-	// TODO When BOTH forks are acquired, let philo eat
 
-	if (dat_set_state(dat, id, STATE_READY_EATING))
-	{
-		return (1);
-	}
 	return (0);
 }
