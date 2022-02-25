@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 16:52:18 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:06:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 typedef enum e_fork_state
 {
-	FORK_DEADLOCKED = -2,
 	FORK_AVAILABLE = -1,
 	FORK_HELD_BY_N = 0,
 }	t_fork;
@@ -35,14 +34,8 @@ typedef enum e_fork_state
 typedef enum e_philo_state
 {
 	STATE_THINKING = 0,
-	STATE_REQUEST_L_FORK,
-	STATE_TOOK_L_FORK,
-	STATE_REQUEST_R_FORK,
-	STATE_TOOK_R_FORK,
 	STATE_READY_EATING,
 	STATE_EATING,
-	STATE_RELEASED_L_FORK,
-	STATE_RELEASED_R_FORK,
 	STATE_SLEEPING,
 	STATE_DEAD,
 	STATE_MAX,

@@ -1,18 +1,7 @@
 
 #include "philo.h"
 
-const char	*states[STATE_MAX] = {
-		"THINKING",
-		"REQUEST_L_FORK",
-		"TOOK_L_FORK",
-		"REQUEST_R_FORK",
-		"TOOK_R_FORK",
-		"READY_EATING",
-		"EATING",
-		"RELEASED_L_FORK",
-		"RELEASED_R_FORK",
-		"SLEEPING",
-		"DEAD"};
+
 
 // TODO remove debug
 void	print_data(t_data *dat)

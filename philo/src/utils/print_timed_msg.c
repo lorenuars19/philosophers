@@ -6,11 +6,18 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/23 15:52:27 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:08:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+const char	*states[STATE_MAX] = {
+		"THINKING",
+		"READY_EATING",
+		"EATING",
+		"SLEEPING",
+		"DEAD"};
 
 int	print_timed_msg(t_data *dat, int x, const char *msg)
 {

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 12:35:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:07:06 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,46 +50,56 @@ static int select_philo(t_data *dat)
 		}
 		i++;
 	}
-// printf(">=> give_fork : sel_time : %llu | ind : %ld\n", sel.sel, sel.sel_ind);
 	return (sel.sel_ind);
+}
+
+int	check_philo_can_eat(t_data *dat, int id)
+{
+	int	can_eat;
+
+	can_eat = 0;
+	if (mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+	if (dat->forks[id] == FORK_AVAILABLE
+		&& dat->forks[id + 1] == FORK_AVAILABLE)
+	{
+		can_eat = 1;
+	}
+	if (mutex_unlock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+	return (can_eat);
+}
+
+int	make_philo_eat(t_data *dat, int id)
+{
+	if (mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+	dat->state[id] = STATE_READY_EATING;
+	if (mutex_unlock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
 }
 
 int	let_philos_eat(t_data *dat)
 {
 	int	id;
+	int	can_eat;
 	// Select philo that is nearest to its death
 	id = select_philo(dat);
 
-	// TODO request L FORK
-	if (dat_set_state(dat, id, STATE_REQUEST_L_FORK))
+	can_eat = check_philo_can_eat(dat, id);
+	if (can_eat < 0)
 	{
 		return (1);
 	}
-	if (fork_take(dat, id))
-	{
-		return (1);
-	}
-	if (dat_set_state(dat, id, STATE_TOOK_L_FORK))
-	{
-		return (1);
-	}
-
-	// TODO request R FORK
-	if (dat_set_state(dat, id, STATE_REQUEST_R_FORK))
-	{
-		return (1);
-	}
-	if (fork_take(dat, id))
-	{
-		return (1);
-	}
-	if (dat_set_state(dat, id, STATE_TOOK_R_FORK))
-	{
-		return (1);
-	}
-	// TODO When BOTH forks are acquired, let philo eat
-
-	if (dat_set_state(dat, id, STATE_READY_EATING))
+	if (can_eat == 1 && make_philo_eat(dat, id))
 	{
 		return (1);
 	}

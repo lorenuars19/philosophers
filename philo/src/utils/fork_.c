@@ -6,75 +6,78 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 12:34:57 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:05:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	dbg_print_fork(t_data *dat, long philo_id)
-// {
-// 	printf(">> FORK >> PHI ID %ld | STATE %s\n",
-// 		philo_id,
-// 		states[dat->state[philo_id]]);
-// }
-
-// static int	select_fork(t_data *dat)
-// {
-// 	t_sel	sel;
-// 	int		i;
-
-// 	i = 0;
-// 	sel = (t_sel){0, 0, -1};
-// 	while (i < dat->n_philo)
-// 	{
-// 		sel.tmp = dat->forks[i];
-// 		if (sel.tmp == FORK_AVAILABLE)
-// 		{
-// 			sel.sel = sel.tmp;
-// 			sel.sel_ind = i;
-// 		}
-// 		i++;
-// 	}
-// 	if (sel.sel_ind == -1)
-// 	{
-// 		return (-1);
-// 	}
-// 	return (sel.sel_ind);
-// }
-
-int	fork_take(t_data *dat, long philo_id)
-{
 /*
-	TODO
-
 	philos should take N and N + 1 fork
 
 	>>
-		lock mutex of
-		dat->forks[N]
+		lock mutex and set state of
+		lock(dat->mutex_forks[N]) + dat->forks[N] = FORK_HELD_BY_N
 		AND
-		dat->forks[N + 1]
+		lock(dat->mutex_forks[N + 1]) + dat->forks[N + 1] = FORK_HELD_BY_N
 
 	*/
+int	fork_take(t_data *dat, long philo_id)
+{
+
+	if (mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+	if (mutex_lock(&(dat->mutex_fork[philo_id])))
+	{
+		return (1);
+	}
+	dat->forks[philo_id] = FORK_HELD_BY_N + philo_id;
+	if (mutex_lock(&(dat->mutex_fork[philo_id + 1])))
+	{
+		return (1);
+	}
+	dat->forks[philo_id + 1] = FORK_HELD_BY_N + philo_id + 1;
+	if (mutex_unlock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
 
 	return (0);
 }
-
-int	fork_release(t_data *dat, long philo_id)
-{
 /*
-	TODO
-
 	philos should release N and N + 1 fork
 
 	>>
-		unlock mutex of
-		dat->forks[N]
+		unlock mutex and set state of
+		lock(dat->mutex_forks[N]) + dat->forks[N] = FORK_HELD_BY_N
 		AND
-		dat->forks[N + 1]
+		lock(dat->mutex_forks[N + 1]) + dat->forks[N + 1] = FORK_HELD_BY_N
 
-	*/
+*/
+int	fork_release(t_data *dat, long philo_id)
+{
+
+
+	if (mutex_lock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
+	if (mutex_unlock(&(dat->mutex_fork[philo_id])))
+	{
+		return (1);
+	}
+	dat->forks[philo_id] = FORK_AVAILABLE;
+	if (mutex_unlock(&(dat->mutex_fork[philo_id + 1])))
+	{
+		return (1);
+	}
+	dat->forks[philo_id + 1] = FORK_AVAILABLE;
+	if (mutex_unlock(&(dat->mutex_data)))
+	{
+		return (1);
+	}
 
 	return(0);
 }
