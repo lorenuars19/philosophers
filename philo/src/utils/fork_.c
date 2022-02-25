@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:05:07 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:19:51 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,11 @@ int	fork_take(t_data *dat, long philo_id)
 */
 int	fork_release(t_data *dat, long philo_id)
 {
-
-
 	if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
+	dat->meals_consumed[philo_id]++;
 	if (mutex_unlock(&(dat->mutex_fork[philo_id])))
 	{
 		return (1);
@@ -78,6 +77,5 @@ int	fork_release(t_data *dat, long philo_id)
 	{
 		return (1);
 	}
-
 	return(0);
 }

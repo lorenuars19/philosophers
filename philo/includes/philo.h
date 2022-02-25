@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:06:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 13:36:44 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef enum e_fork_state
 typedef enum e_philo_state
 {
 	STATE_THINKING = 0,
+	STATE_TOOK_L_FORK,
+	STATE_TOOK_R_FORK,
 	STATE_READY_EATING,
 	STATE_EATING,
 	STATE_SLEEPING,
@@ -137,7 +139,7 @@ int		philo_think(t_phil_dat *pdat, t_data *dat);
 int		philo_sleep(t_phil_dat *pdat, t_data *dat);
 int		philo_eat(t_phil_dat *pdat, t_data *dat);
 
-int		manage_threads(t_data *dat);
+int		manage_threads(t_data *dat, long max_meals);
 int 	check_philo_death(t_data *dat);
 int		let_philos_eat(t_data *dat);
 
