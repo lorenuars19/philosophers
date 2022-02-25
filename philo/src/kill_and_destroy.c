@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 17:26:00 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:15:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ static int	destroy_mutexes(t_data *dat)
 
 int	kill_and_destroy(t_data *dat)
 {
-
-PDAT(kill_and_destroy, dat)
-
 	if (kill_threads(dat))
 	{
 		return (1);

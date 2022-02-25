@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:36:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:14:49 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	print_data(t_data *dat);
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
 #endif
 
-# define NOPDAT
+// # define NOPDAT
 # ifndef NOPDAT
 #  define PDAT(MSG, X) BM(MSG); print_data(X);
 # else

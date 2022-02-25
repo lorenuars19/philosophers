@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:26:49 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:15:27 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,17 @@ int	main(int argc, char *argv[])
 		print_usage(argv[0]);
 		return (1);
 	}
-PDAT(main before spawn_philos, &dat); // TODO remove debug
 	if (spawn_philos(&dat))
 	{
 		return (1);
 	}
-PDAT(main before manage_threads, &dat); // TODO remove debug
 	if (manage_threads(&dat, dat.max_meals))
 	{
 		return (1);
 	}
-PDAT(main before kill_and_destroy, &dat); // TODO remove debug
 	if (kill_and_destroy(&dat))
 	{
 		return (1);
 	}
-PDAT(main END, &dat); // TODO remove debug
 	return (0);
 }

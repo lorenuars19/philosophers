@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:34:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:04:44 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ const char	*states[STATE_MAX] = {
 		"has taken L fork",
 		"has taken R fork",
 		"is eating",
-		"SLEEPING",
-		"DEAD"};
+		"is sleeping",
+		"is dead"};
 
 int	print_timed_msg(t_data *dat, int x, const char *msg)
 {

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 16:04:57 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:14:02 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 	{
 		return (1);
 	}
+BM(BEFORE SLEEP)
 	if (philo_sleep(pdat, dat))
 	{
 		return (1);

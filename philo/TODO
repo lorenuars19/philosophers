@@ -1,1 +1,2 @@
-use dat_set_state in fork_take
+FIX
+ figure out why philo sleep without eating
