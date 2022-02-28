@@ -25,7 +25,7 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 	{
 		dat->state[philo_id] = state;
 		if (state >= 0 && state < STATE_MAX
-			&& print_timed_msg(dat, philo_id, states[state]))
+			&& print_timed_msg(dat, philo_id, state))
 		{
 			ret = 1;
 		}

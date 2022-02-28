@@ -71,7 +71,7 @@ int	manage_threads(t_data *dat, long max_meals)
 	}
 	if (check_death > 0)
 	{
-		if (print_timed_msg(dat, check_death - 1, states[STATE_DEAD]))
+		if (print_timed_msg(dat, check_death - 1, STATE_DEAD))
 		{
 			return (1);
 		}

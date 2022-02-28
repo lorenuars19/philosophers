@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 16:14:49 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:34:29 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,15 @@ void	print_data(t_data *dat);
 (((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
 #endif
 
+#undef BM
+#define BM(x) _print("Thread ID %p > ", (void *)pthread_self()); _BR_MSG(x); _BR(1);
+
 // # define NOPDAT
 # ifndef NOPDAT
 #  define PDAT(MSG, X) BM(MSG); print_data(X);
 # else
 #  define PDAT(MSG, X) ;
 # endif
-
-// TODO remove debug
-#ifndef STATES_STRINGS
-# define STATES_STRINGS
-extern const char	*states[STATE_MAX];
-#endif
 
 /*
 ** Utils
@@ -118,7 +115,7 @@ extern const char	*states[STATE_MAX];
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
 
-int		print_timed_msg(t_data *dat, int x, const char *msg);
+int		print_timed_msg(t_data *dat, int x, t_phil_state state);
 
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);
@@ -138,6 +135,7 @@ void	*philo_thread(void *data);
 int		philo_think(t_phil_dat *pdat, t_data *dat);
 int		philo_sleep(t_phil_dat *pdat, t_data *dat);
 int		philo_eat(t_phil_dat *pdat, t_data *dat);
+void	philo_death(t_phil_dat *pdat, t_data *dat);
 
 int		manage_threads(t_data *dat, long max_meals);
 int 	check_philo_death(t_data *dat);

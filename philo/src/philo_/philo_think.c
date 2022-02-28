@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 11:42:35 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:36:19 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,21 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 int	philo_think(t_phil_dat *pdat, t_data *dat)
 {
 	t_phil_state	state;
-BM(philo_think)
+
 	if (dat_get_state(dat, pdat->id, &state))
 	{
-		BR;
 		return (1);
 	}
-BM(philo_think)
 	if (state != STATE_DEAD
 		&& dat_set_state(dat, pdat->id, STATE_THINKING))
 	{
-BM(philo_think RETURN)
 		return (1);
 	}
-BM(philo_think)
+	philo_death(pdat, dat);
 	if (philo_wait_for_action(pdat, dat))
 	{
-BM(philo_think RETURN)
 		return (1);
 	}
-BM(philo_think)
+	philo_death(pdat, dat);
 	return (0);
 }

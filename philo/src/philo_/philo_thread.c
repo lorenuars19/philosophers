@@ -6,50 +6,32 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 11:51:36 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:33:02 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_thread.h"
 
-static int sub_philo_thread(t_phil_dat *pdat, t_data *dat)
+static int	sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 {
 	t_phil_state	state;
 
 	if (philo_think(pdat, dat))
 	{
-BM(sub_philo_thread)
 		return (1);
 	}
-BM(sub_philo_thread)
+	if (philo_eat(pdat, dat))
+	{
+		return (1);
+	}
 	if (dat_get_state(dat, pdat->id, &state))
 	{
-BM(sub_philo_thread)
 		return (1);
 	}
-BM(sub_philo_thread)
-	if (state == STATE_DEAD)
-	{
-BM(sub_philo_thread)
-		pthread_exit(NULL);
-	}
-BM(sub_philo_thread)
-	if (state == STATE_READY_EATING
-		&& philo_eat(pdat, dat))
-	{
-BM(sub_philo_thread)
-		return (1);
-	}
-BM(sub_philo_thread)
-
 	if (philo_sleep(pdat, dat))
 	{
-BM(sub_philo_thread)
-
 		return (1);
 	}
-BM(sub_philo_thread)
-
 	return (0);
 }
 
