@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 17:33:02 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:27:46 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 static int	sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 {
-	t_phil_state	state;
-
 	if (philo_think(pdat, dat))
 	{
 		return (1);
 	}
 	if (philo_eat(pdat, dat))
-	{
-		return (1);
-	}
-	if (dat_get_state(dat, pdat->id, &state))
 	{
 		return (1);
 	}
@@ -35,7 +29,7 @@ static int	sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 	return (0);
 }
 
-void *philo_thread(void *data)
+void	*philo_thread(void *data)
 {
 	t_phil_state	state;
 	t_phil_dat		*pdat;
@@ -52,14 +46,13 @@ void *philo_thread(void *data)
 		}
 		if (sub_philo_thread(pdat, dat))
 		{
+BM(philo DECEASED)
 			return (NULL);
 		}
 		if (state == STATE_DEAD)
 		{
-			pthread_exit(NULL);
-			break ;
+			return (NULL);
 		}
 	}
-	pthread_exit(NULL);
 	return (NULL);
 }

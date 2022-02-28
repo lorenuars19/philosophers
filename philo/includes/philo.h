@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 17:34:29 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:24:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ int		fork_release(t_data *dat, long philo_id);
 int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
 int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
 int		dat_get_fork(t_data *dat, long philo_id, t_fork *fork);
+
+int		dat_set_fork(t_data *dat, long philo_id, t_fork);
 int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 
 int		spawn_philos(t_data *dat);

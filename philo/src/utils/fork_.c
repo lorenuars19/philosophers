@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 11:28:31 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 18:27:42 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,12 @@ int	fork_take(t_data *dat, long philo_id)
 	int	ret;
 
 	ret = 0;
-	if (mutex_lock(&(dat->mutex_data)))
-	{
-		ret = 1;
-	}
+
 	if (mutex_lock(&(dat->mutex_fork[philo_id])))
 	{
 		ret = 1;
 	}
-	dat->forks[philo_id] = FORK_HELD_BY_N + philo_id;
-	if (mutex_unlock(&(dat->mutex_data)))
+	if (dat_set_fork(dat, philo_id, philo_id))
 	{
 		ret = 1;
 	}
@@ -44,16 +40,11 @@ int	fork_take(t_data *dat, long philo_id)
 	{
 		ret = 1;
 	}
-	if (mutex_lock(&(dat->mutex_data)))
-	{
-		ret = 1;
-	}
 	if (mutex_lock(&(dat->mutex_fork[philo_id + 1])))
 	{
 		ret = 1;
 	}
-	dat->forks[philo_id + 1] = FORK_HELD_BY_N + philo_id + 1;
-	if (mutex_unlock(&(dat->mutex_data)))
+	if (dat_set_fork(dat, philo_id + 1, philo_id + 1))
 	{
 		ret = 1;
 	}

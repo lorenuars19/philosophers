@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 17:32:09 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 17:57:50 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	spawn_philos(t_data *dat)
 	{
 		phil_dat[i] = (t_phil_dat){dat, i};
 		if (pthread_create(&(dat->threads[i]), NULL,
-			philo_thread, (void *)&(phil_dat[i])))
+				philo_thread, (void *)&(phil_dat[i])))
 		{
 			return (1);
 		}
@@ -43,7 +43,7 @@ int	spawn_philos(t_data *dat)
 		{
 			return (1);
 		}
-		usleep(50);
+		usleep(10000);
 		i++;
 	}
 	return (0);

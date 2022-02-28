@@ -63,6 +63,7 @@ SRCS = \
 	./src/spawn_philos.c \
 	./src/utils/dat_/dat_get_fork.c \
 	./src/utils/dat_/dat_get_state.c \
+	./src/utils/dat_/dat_set_fork.c \
 	./src/utils/dat_/dat_set_state.c \
 	./src/utils/dat_/dat_set_thread.c \
 	./src/utils/fork_.c \
