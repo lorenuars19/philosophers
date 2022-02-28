@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 16:04:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 11:55:48 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ const char	*states[STATE_MAX] = {
 		"is thinking",
 		"has taken L fork",
 		"has taken R fork",
+		"is ready to eat"
 		"is eating",
 		"is sleeping",
 		"is dead"};

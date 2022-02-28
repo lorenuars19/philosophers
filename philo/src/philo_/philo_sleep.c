@@ -6,11 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:30:54 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 11:31:02 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_thread.h"
 
 int	philo_sleep(t_phil_dat *pdat, t_data *dat)
 {

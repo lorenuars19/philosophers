@@ -6,11 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 13:04:23 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/02/28 11:31:04 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_thread.h"
 
 int	philo_eat(t_phil_dat *pdat, t_data *dat)
 {
@@ -23,6 +23,7 @@ int	philo_eat(t_phil_dat *pdat, t_data *dat)
 		return (1);
 	}
 	msleep(dat->time_eat);
+BM(philo_eat FORK RELEASE)
 	if (fork_release(dat, pdat->id))
 	{
 		return (1);
