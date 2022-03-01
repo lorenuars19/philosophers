@@ -78,7 +78,6 @@ SRCS = \
 HEADERS = \
 	./includes/debug_utils.h\
 	./includes/philo.h\
-	./includes/philo_thread.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
 

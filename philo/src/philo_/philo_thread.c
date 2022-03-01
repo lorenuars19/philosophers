@@ -6,11 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 12:24:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:20:55 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_thread.h"
+#include "philo.h"
 
 static int	sub_philo_thread(t_phil_dat *pdat, t_data *dat)
 {

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 18:05:22 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:22:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	print_timed_msg(t_data *dat, int x, t_phil_state state)
 		"has taken R fork",
 		"is ready to eat",
 		"is eating",
-		"is sleping",
+		"is sleeping",
 		"is dead",
 	};
 

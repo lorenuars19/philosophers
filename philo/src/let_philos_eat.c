@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:00:36 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:20:28 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,17 @@ static int	select_philo(t_data *dat)
 	sel = (t_sel_time){0, 0, -1};
 	i = 0;
 	time_get_now(&now);
-BM(select_philo)
 	while (i < dat->n_philo)
 	{
 		sel.tmp = now - dat->time_last_meal[i];
-DE(sel.tmp)
 		if (sel.tmp > sel.sel)
 		{
 			sel.sel = sel.tmp;
 			sel.ind = i;
-DE(sel.sel)
-DE(sel.ind)
-BM(selected)
+
 		}
 		i++;
 	}
-BM(select_philo ID)
-DE(sel.ind)
 	return (sel.ind);
 }
 
@@ -69,6 +63,8 @@ int	let_philos_eat(t_data *dat)
 	}
 	id = select_philo(dat);
 	can_eat = check_philo_can_eat(dat, id);
+// DE(id)
+// DE(can_eat)
 	if (can_eat < 0)
 	{
 		ret = 1;

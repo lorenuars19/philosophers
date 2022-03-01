@@ -6,11 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:08:14 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:21:08 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_thread.h"
+#include "philo.h"
 
 int	philo_eat(t_phil_dat *pdat, t_data *dat)
 {

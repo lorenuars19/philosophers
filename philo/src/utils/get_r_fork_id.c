@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 12:47:02 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:19:38 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ int	get_r_fork_id(t_data *dat, long philo_id)
 	{
 		return (0);
 	}
-	return ((int)philo_id);
+	return ((int)philo_id + 1);
 }
