@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:20:20 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:26:24 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int	dat_set_state(t_data *dat, long philo_id, t_phil_state state)
 	int	ret;
 
 	ret = 0;
+	if (philo_id < 0 || philo_id >= dat->n_philo - 1)
+	{
+		return (1);
+	}
 	if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);

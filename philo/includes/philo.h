@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:00:41 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:55:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 
 #include "debug_utils.h"
 
-# define THREADS_MAX 512
-# define CPU_SAVER 256
+# define THREADS_MAX 256
 
 typedef enum e_fork_state
 {

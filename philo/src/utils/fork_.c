@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:06:20 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:18:41 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	fork_take(t_data *dat, long philo_id)
 	int	ret;
 
 	ret = 0;
+	if (philo_id < 0 || philo_id >= dat->n_philo - 1)
+	{
+		return (1);
+	}
 	r_fork_id = get_r_fork_id(dat, philo_id);
 	if (mutex_lock(&(dat->mutex_fork[philo_id])))
 	{
@@ -76,6 +80,10 @@ int	fork_release(t_data *dat, long philo_id)
 	int	ret;
 
 	ret = 0;
+	if (philo_id < 0 || philo_id >= dat->n_philo - 1)
+	{
+		return (1);
+	}
 	r_fork_id = get_r_fork_id(dat, philo_id);
 	if (mutex_unlock(&(dat->mutex_fork[philo_id])))
 	{

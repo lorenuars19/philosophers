@@ -6,17 +6,17 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:20:58 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 18:25:06 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
+static int	philo_wait_for_action(t_data *dat, long id)
 {
 	t_phil_state	state;
 
-	if (dat_get_state(dat, pdat->id, &(state)))
+	if (dat_get_state(dat, id, &(state)))
 	{
 		return (1);
 	}
@@ -26,7 +26,7 @@ static int	philo_wait_for_action(t_phil_dat *pdat, t_data *dat)
 		{
 			pthread_exit(NULL);
 		}
-		if (dat_get_state(dat, pdat->id, &(state)))
+		if (dat_get_state(dat, id, &(state)))
 		{
 			return (1);
 		}
@@ -48,7 +48,7 @@ int	philo_think(t_phil_dat *pdat, t_data *dat)
 		return (1);
 	}
 	philo_death(pdat, dat);
-	if (philo_wait_for_action(pdat, dat))
+	if (philo_wait_for_action(dat, pdat->id))
 	{
 		return (1);
 	}

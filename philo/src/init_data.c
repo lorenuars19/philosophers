@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 12:15:07 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:53:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	{
 		return (1);
 	}
-	if (dat->n_philo <= 0 || dat->n_philo >= THREADS_MAX
+	if (dat->n_philo <= 0 || dat->n_philo > THREADS_MAX
 		|| dat->time_die <= 0 || dat->time_eat <= 0 || dat->time_sleep <= 0)
 	{
 		return (1);

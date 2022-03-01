@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:40:04 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:52:52 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	sub_philo_death(t_data *dat, int x)
 	{
 		return (-1);
 	}
-	usleep(50 * 1000);
 	if (dat_set_state(dat, x, STATE_DEAD))
 	{
 		return (-1);
