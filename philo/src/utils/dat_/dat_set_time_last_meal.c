@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eat.c                                        :+:      :+:    :+:   */
+/*   dat_set_time_last_meal.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:08:14 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/10/06 11:01:19 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/01 13:05:51 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_thread.h"
+#include "philo.h"
 
-int	philo_eat(t_phil_dat *pdat, t_data *dat)
+int	dat_set_time_last_meal(t_data *dat, long philo_id, t_time now)
 {
-	t_time	now;
+	int		ret;
 
-	philo_death(pdat, dat);
-	if (fork_take(dat, pdat->id))
+	ret = 0;
+	if (mutex_lock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
-	if (dat_set_state(dat, pdat->id, STATE_EATING))
+	if (philo_id >= 0 && philo_id < THREADS_MAX)
+	{
+		dat->time_last_meal[philo_id] = now;
+	}
+	if (mutex_unlock(&(dat->mutex_data)))
 	{
 		return (1);
 	}
-	if (time_get_now(&now))
-	{
-		return (1);
-	}
-	if (dat_set_time_last_meal(dat, pdat->id, now))
-	{
-		return (1);
-	}
-	msleep(dat->time_eat);
-	if (fork_release(dat, pdat->id))
-	{
-		return (1);
-	}
-	return (0);
+	return (ret);
 }

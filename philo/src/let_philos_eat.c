@@ -6,40 +6,50 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 17:47:28 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:00:36 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int select_philo(t_data *dat)
+static int	select_philo(t_data *dat)
 {
-	t_sel_time sel;
-	int i;
+	t_time		now;
+	t_sel_time	sel;
+	int			i;
 
 	sel = (t_sel_time){0, 0, -1};
 	i = 0;
+	time_get_now(&now);
+BM(select_philo)
 	while (i < dat->n_philo)
 	{
-		sel.tmp = dat->time_last_meal[i];
-		if (sel.sel < sel.tmp)
+		sel.tmp = now - dat->time_last_meal[i];
+DE(sel.tmp)
+		if (sel.tmp > sel.sel)
 		{
 			sel.sel = sel.tmp;
-			sel.sel_ind = i;
+			sel.ind = i;
+DE(sel.sel)
+DE(sel.ind)
+BM(selected)
 		}
 		i++;
 	}
-	return (sel.sel_ind);
+BM(select_philo ID)
+DE(sel.ind)
+	return (sel.ind);
 }
 
 int	check_philo_can_eat(t_data *dat, int id)
 {
+	int	r_fork_id;
 	int	can_eat;
 
 	can_eat = 0;
-
+	r_fork_id = get_r_fork_id(dat, id);
 	if (dat->forks[id] == FORK_AVAILABLE
-		&& dat->forks[id + 1] == FORK_AVAILABLE)
+		&& dat->forks[r_fork_id] == FORK_AVAILABLE)
 	{
 		can_eat = 1;
 	}

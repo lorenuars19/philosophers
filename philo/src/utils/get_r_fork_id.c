@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_death.c                                      :+:      :+:    :+:   */
+/*   get_r_fork_id.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 12:36:15 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/01 12:47:02 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_death(t_phil_dat *pdat, t_data *dat)
+int	get_r_fork_id(t_data *dat, long philo_id)
 {
-	t_phil_state	state;
-
-	dat_get_state(dat, pdat->id, &state);
-	if (state == STATE_DEAD)
+	if (philo_id == dat->n_philo - 1)
 	{
-		dat_set_state(dat, pdat->id, STATE_DEAD);
-		usleep(5 * 10000);
-		pthread_exit(NULL);
+		return (0);
 	}
+	return ((int)philo_id);
 }

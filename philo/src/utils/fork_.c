@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:49:27 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 18:27:42 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 12:47:53 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@
 		lock(dat->mutex_forks[N + 1]) + dat->forks[N + 1] = FORK_HELD_BY_N
 
 	*/
+
 int	fork_take(t_data *dat, long philo_id)
 {
+	int	r_fork_id;
 	int	ret;
 
 	ret = 0;
-
+	r_fork_id = get_r_fork_id(dat, philo_id);
 	if (mutex_lock(&(dat->mutex_fork[philo_id])))
 	{
 		ret = 1;
@@ -40,20 +42,24 @@ int	fork_take(t_data *dat, long philo_id)
 	{
 		ret = 1;
 	}
-	if (mutex_lock(&(dat->mutex_fork[philo_id + 1])))
+	if (r_fork_id < dat->n_philo)
 	{
-		ret = 1;
-	}
-	if (dat_set_fork(dat, philo_id + 1, philo_id + 1))
-	{
-		ret = 1;
-	}
-	if (dat_set_state(dat, philo_id, STATE_TOOK_R_FORK))
-	{
-		ret = 1;
+		if (mutex_lock(&(dat->mutex_fork[r_fork_id])))
+		{
+			ret = 1;
+		}
+		if (dat_set_fork(dat, r_fork_id, r_fork_id))
+		{
+			ret = 1;
+		}
+		if (dat_set_state(dat, philo_id, STATE_TOOK_R_FORK))
+		{
+			ret = 1;
+		}
 	}
 	return (ret);
 }
+
 /*
 	philos should release N and N + 1 fork
 
@@ -66,27 +72,30 @@ int	fork_take(t_data *dat, long philo_id)
 */
 int	fork_release(t_data *dat, long philo_id)
 {
+	int	r_fork_id;
 	int	ret;
 
 	ret = 0;
-	if (mutex_lock(&(dat->mutex_data)))
-	{
-		ret = 1;
-	}
+	r_fork_id = get_r_fork_id(dat, philo_id);
 	dat->meals_consumed[philo_id]++;
 	if (mutex_unlock(&(dat->mutex_fork[philo_id])))
 	{
 		ret = 1;
 	}
-	dat->forks[philo_id] = FORK_AVAILABLE;
-	if (mutex_unlock(&(dat->mutex_fork[philo_id + 1])))
+	if (dat_set_fork(dat, philo_id, FORK_AVAILABLE))
 	{
 		ret = 1;
 	}
-	dat->forks[philo_id + 1] = FORK_AVAILABLE;
-	if (mutex_unlock(&(dat->mutex_data)))
+	if (r_fork_id < dat->n_philo)
 	{
-		ret = 1;
+		if (mutex_unlock(&(dat->mutex_fork[r_fork_id])))
+		{
+			ret = 1;
+		}
+		if (dat_set_fork(dat, r_fork_id, FORK_AVAILABLE))
+		{
+			ret = 1;
+		}
 	}
-	return(ret);
+	return (ret);
 }

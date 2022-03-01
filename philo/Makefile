@@ -66,7 +66,9 @@ SRCS = \
 	./src/utils/dat_/dat_set_fork.c \
 	./src/utils/dat_/dat_set_state.c \
 	./src/utils/dat_/dat_set_thread.c \
+	./src/utils/dat_/dat_set_time_last_meal.c \
 	./src/utils/fork_.c \
+	./src/utils/get_r_fork_id.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \
