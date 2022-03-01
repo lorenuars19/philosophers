@@ -1,40 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_eat.c                                        :+:      :+:    :+:   */
+/*   time_check_death.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 15:29:33 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:11:45 by lorenuar         ###   ########.fr       */
+/*   Created: 2021/09/01 22:28:18 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/01 13:59:43 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	philo_eat(t_phil_dat *pdat, t_data *dat)
+int	time_check_death(t_data *dat, t_time philo_time)
 {
 	t_time	now;
 
-	philo_death(pdat, dat);
-	if (fork_take(dat, pdat->id))
-	{
-		return (1);
-	}
-	if (dat_set_state(dat, pdat->id, STATE_EATING))
-	{
-		return (1);
-	}
-	msleep(dat->time_eat);
-	if (time_get_now(&now))
-	{
-		return (1);
-	}
-	if (dat_set_time_last_meal(dat, pdat->id, now))
-	{
-		return (1);
-	}
-	if (fork_release(dat, pdat->id))
+	time_get_now(&now);
+	if ((now >= (philo_time + dat->time_die)))
 	{
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/25 16:15:18 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:13:59 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	kill_threads(t_data *dat)
 	int	i;
 
 	i = 0;
-	usleep(((dat->time_sleep) * 1.1) * 1000);
+	usleep(dat->time_die * 1000);
 	while (i < dat->n_philo)
 	{
 		if (dat->threads[i] && pthread_detach(dat->threads[i]))
@@ -25,6 +25,7 @@ static int	kill_threads(t_data *dat)
 			return (1);
 		}
 		dat->threads[i] = (pthread_t) NULL;
+		// usleep(dat->time_die * 1000);
 		i++;
 	}
 	return (0);

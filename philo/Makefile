@@ -6,7 +6,7 @@
 #    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2021/10/07 15:17:17 by lorenuar         ###   ########.fr        #
+#    Updated: 2022/03/01 13:31:15 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ CFLAGS	+= -g3 -fsanitize=thread
 endif
 ifeq ($(DEBUG),3)
 CFLAGS	+= -g3 -fsanitize=address -fsanitize=leak
+endif
+ifeq ($(DEBUG),4)
+CFLAGS	+= -g3 -fsanitize=address
 endif
 
 # Folder name
@@ -73,6 +76,7 @@ SRCS = \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \
 	./src/utils/str_to_uns.c \
+	./src/utils/time_check_death.c \
 	./src/utils/time_get_now.c \
 
 HEADERS = \

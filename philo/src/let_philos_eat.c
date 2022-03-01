@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:20:28 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:37:22 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	let_philos_eat(t_data *dat)
 	}
 	id = select_philo(dat);
 	can_eat = check_philo_can_eat(dat, id);
-// DE(id)
-// DE(can_eat)
 	if (can_eat < 0)
 	{
 		ret = 1;

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/03 10:58:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:16:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 13:36:56 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	check_max_meals_reached(t_data *dat)
 {
+	int	i;
 	int	philo_id;
 	int	check;
 	int	ret;
@@ -27,7 +28,7 @@ int	check_max_meals_reached(t_data *dat)
 	}
 	while (philo_id < dat->n_philo)
 	{
-		if (dat->meals_consumed[philo_id] == dat->max_meals)
+		if (dat->meals_consumed[philo_id] >= dat->max_meals)
 		{
 			check++;
 		}
@@ -35,6 +36,12 @@ int	check_max_meals_reached(t_data *dat)
 	}
 	if (check == dat->n_philo)
 	{
+		i = 0;
+		while (i < THREADS_MAX)
+		{
+			dat->state[i] = STATE_DEAD;
+			i++;
+		}
 		ret = 1;
 	}
 	if (mutex_unlock(&(dat->mutex_data)))
@@ -51,8 +58,7 @@ int	manage_threads(t_data *dat, long max_meals)
 
 	i = 0;
 	check_death = 0;
-	while (check_death == 0
-		|| (max_meals > 0 && !check_max_meals_reached(dat)))
+	while (check_death == 0)
 	{
 		check_death = check_philo_death(dat);
 		if (check_death < 0)
@@ -67,14 +73,11 @@ int	manage_threads(t_data *dat, long max_meals)
 		{
 			break;
 		}
-		i++;
-	}
-	if (check_death > 0)
-	{
-		if (print_timed_msg(dat, check_death - 1, STATE_DEAD))
+		if ((max_meals > 0 && check_max_meals_reached(dat)))
 		{
-			return (1);
+			break ;
 		}
+		i++;
 	}
 	return (0);
 }

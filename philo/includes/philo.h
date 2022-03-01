@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:06:14 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:00:41 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	print_data(t_data *dat);
 
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
+int		time_check_death(t_data *dat, t_time philo_time);
 
 int		print_timed_msg(t_data *dat, int x, t_phil_state state);
 

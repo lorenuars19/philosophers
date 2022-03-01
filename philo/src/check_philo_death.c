@@ -6,30 +6,39 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:42:51 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/22 15:52:44 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:08:39 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	time_check_death(t_data *dat, t_time philo_time)
+static int	sub_philo_death(t_data *dat, int x)
 {
-	t_time	now;
+	int	i;
 
-	if (time_get_now(&now))
+	if (mutex_unlock(&(dat->mutex_data)))
 	{
-		//TODO handle error
+		return (-1);
 	}
-	if ((now >= (philo_time + dat->time_die)))
+	if (dat_set_state(dat, x, STATE_DEAD))
 	{
-		return (1);
+		return (-1);
+	}
+	if (mutex_lock(&(dat->mutex_data)))
+	{
+		return (-1);
+	}
+	i = 0;
+	while (i < THREADS_MAX)
+	{
+		dat->state[i] = STATE_DEAD;
+		i++;
 	}
 	return (0);
 }
 
 int	check_philo_death(t_data *dat)
 {
-	int i;
 	int	x;
 	int	check_death;
 	int	ret;
@@ -50,12 +59,9 @@ int	check_philo_death(t_data *dat)
 		if (check_death == 1)
 		{
 			ret = x + 1;
-			dat->state[x] = STATE_DEAD;
-			i = 0;
-			while (i < THREADS_MAX)
+			if (sub_philo_death(dat, x))
 			{
-				dat->state[i] = STATE_DEAD;
-				i++;
+				return (-1);
 			}
 			break ;
 		}
