@@ -6,34 +6,11 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:44:48 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 13:37:22 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:24:03 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int	select_philo(t_data *dat)
-{
-	t_time		now;
-	t_sel_time	sel;
-	int			i;
-
-	sel = (t_sel_time){0, 0, -1};
-	i = 0;
-	time_get_now(&now);
-	while (i < dat->n_philo)
-	{
-		sel.tmp = now - dat->time_last_meal[i];
-		if (sel.tmp > sel.sel)
-		{
-			sel.sel = sel.tmp;
-			sel.ind = i;
-
-		}
-		i++;
-	}
-	return (sel.ind);
-}
 
 int	check_philo_can_eat(t_data *dat, int id)
 {
@@ -61,13 +38,16 @@ int	let_philos_eat(t_data *dat)
 	{
 		return (1);
 	}
-	id = select_philo(dat);
-	can_eat = check_philo_can_eat(dat, id);
-	if (can_eat < 0)
+	id = 0;
+	while (id < dat->n_philo)
 	{
-		ret = 1;
+		can_eat = check_philo_can_eat(dat, id);
+		if (can_eat)
+		{
+			dat->state[id] = STATE_READY_EATING;
+		}
+		id++;
 	}
-	dat->state[id] = STATE_READY_EATING;
 	if (mutex_unlock(&(dat->mutex_data)))
 	{
 		return (1);
