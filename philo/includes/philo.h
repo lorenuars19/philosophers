@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 11:12:24 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:53:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,24 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-#include "debug_utils.h"
 
 
 typedef unsigned long long	t_time;
+typedef unsigned long long	t_uns;
+
+typedef	struct s_philo
+{
+	pthread_t		thread;
+	pthread_mutex_t	r_fork;
+	pthread_mutex_t	*l_fork;
+	t_time			time_die;
+	t_time			time_eat;
+	t_time			time_sleep;
+	t_time			time;
+	long			max_meals;
+	long			n_philo;
+	int				id;
+}			t_phil_dat;
 
 typedef struct s_data
 {
@@ -35,19 +49,13 @@ typedef struct s_data
 
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_max_meals;
+
+	t_phil_dat		*phi_arr;
 }	t_data;
 
-typedef	struct s_philo
-{
-	t_data			data;
-	pthread_mutex_t	fork;
-	int		id;
-}			t_phil_dat;
-
-typedef unsigned long long t_uns;
 
 // TODO remove debug
-void	print_data(t_data *dat);
+#include "debug_utils.h"
 
 #define NODEBUGU
 #ifndef NODEBUGU
@@ -66,10 +74,6 @@ void	print_data(t_data *dat);
 #  define PDAT(MSG, X) ;
 # endif
 
-/*
-** Utils
-*/
-
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
 int		time_check_death(t_data *dat, t_time philo_time);
@@ -86,7 +90,6 @@ void	*philo_thread(void *data);
 int		philo_think(t_phil_dat *pdat, t_data *dat);
 int		philo_sleep(t_phil_dat *pdat, t_data *dat);
 int		philo_eat(t_phil_dat *pdat, t_data *dat);
-void	philo_death(t_phil_dat *pdat, t_data *dat);
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		kill_and_destroy(t_data *dat);

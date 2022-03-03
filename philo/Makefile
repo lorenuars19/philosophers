@@ -52,14 +52,9 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
-	./src/check_philo_death.c \
 	./src/init_data.c \
 	./src/kill_and_destroy.c \
 	./src/main.c \
-	./src/philo_/philo_death.c \
-	./src/philo_/philo_eat.c \
-	./src/philo_/philo_sleep.c \
-	./src/philo_/philo_think.c \
 	./src/philo_/philo_thread.c \
 	./src/spawn_philos.c \
 	./src/utils/msleep.c \

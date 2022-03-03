@@ -6,44 +6,53 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 17:57:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:54:16 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	init_phil_dat(t_phil_dat phil_dat[THREADS_MAX])
+static int	init_philo_data(t_data *dat, int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < THREADS_MAX)
+	dat->phi_arr[i].thread = NULL;
+	if (pthread_mutex_init(&(dat->phi_arr[i].r_fork), NULL))
 	{
-		phil_dat[i] = (t_phil_dat){NULL, -1};
-		i++;
+		return (1);
 	}
+	if (i > 0)
+	{
+		dat->phi_arr[i].l_fork = &(dat->phi_arr[i - 1].r_fork);
+	}
+	else if (i == 0)
+	{
+		dat->phi_arr[i].l_fork = &(dat->phi_arr[dat->n_philo - 1].r_fork);
+	}
+	dat->phi_arr[i].time_die = dat->time_die;
+	dat->phi_arr[i].time_eat = dat->time_eat;
+	dat->phi_arr[i].time_sleep = dat->time_sleep;
+	dat->phi_arr[i].max_meals = dat->max_meals;
+	dat->phi_arr[i].n_philo = dat->n_philo;
+	dat->phi_arr[i].id = i;
+	if (time_get_now(&(dat->phi_arr[i].time)))
+	{
+		return (1);
+	}
+	return (0);
 }
 
 int	spawn_philos(t_data *dat)
 {
-	t_phil_dat	phil_dat[THREADS_MAX];
 	int			i;
 
-	init_phil_dat(phil_dat);
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		phil_dat[i] = (t_phil_dat){dat, i};
-		if (pthread_create(&(dat->threads[i]), NULL,
-				philo_thread, (void *)&(phil_dat[i])))
+		init_philo_data(dat, i);
+		if (pthread_create(&(dat->phi_arr[i].thread), NULL,
+				philo_thread, (void*) &(dat->phi_arr[i])))
 		{
 			return (1);
 		}
-		if (time_get_now(&(dat->time_last_meal[i])))
-		{
-			return (1);
-		}
-		usleep(10000);
 		i++;
 	}
 	return (0);

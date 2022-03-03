@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:53:39 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:51:50 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,6 @@
 
 static int	init_mutexes(t_data *dat)
 {
-	int	i;
-
-	i = 0;
-	while (i < dat->n_philo)
-	{
-		if (pthread_mutex_init(&(dat->mutex_fork[i]), NULL))
-		{
-			return (1);
-		}
-		i++;
-	}
-	if (pthread_mutex_init(&(dat->mutex_data), NULL))
-	{
-		return (1);
-	}
 	if (pthread_mutex_init(&(dat->mutex_print), NULL))
 	{
 		return (1);
@@ -63,20 +48,15 @@ static int	parse_args(t_data *dat, int argc, char *argv[])
 	return (0);
 }
 
-static	void	init_arrays(t_data *dat)
+static int	init_arrays(t_data *dat)
 {
-	int	i;
-
-	i = 0;
-	while (i < dat->n_philo)
+	dat->phi_arr = malloc((sizeof (t_phil_dat)) * dat->n_philo);
+	if (!dat->phi_arr)
 	{
-		dat->threads[i] = 0;
-		dat->time_last_meal[i] = 0;
-		dat->meals_consumed[i] = 0;
-		dat->forks[i] = FORK_AVAILABLE;
-		dat->state[i] = STATE_THINKING;
-		i++;
+		free(dat->phi_arr);
+		return (1);
 	}
+	return (0);
 }
 
 int	init_data(t_data *dat, int argc, char *argv[])
@@ -86,7 +66,7 @@ int	init_data(t_data *dat, int argc, char *argv[])
 	{
 		return (1);
 	}
-	if (dat->n_philo <= 0 || dat->n_philo > THREADS_MAX
+	if (dat->n_philo <= 0
 		|| dat->time_die <= 0 || dat->time_eat <= 0 || dat->time_sleep <= 0)
 	{
 		return (1);
