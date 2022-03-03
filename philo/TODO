@@ -1,0 +1,8 @@
+refactor phase 3
+	philo lock mutex of l_fork and r_fork
+	philo wait when id % 2 == 0
+	philo unlock mutex of l_fork and r_fork
+
+refactor phase 4
+	check_death in a separate thread
+	check_death lock the print mutex on death and max_meals_reached
