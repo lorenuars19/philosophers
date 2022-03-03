@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 18:00:31 by lorenuar          #+#    #+#             */
-/*   Updated: 2021/10/07 13:15:20 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:42:54 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int	str_to_uns(const char *s, t_uns *num)
 		*num = 0;
 		return (0);
 	}
-
 	return (0);
 }

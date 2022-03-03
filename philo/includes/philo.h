@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 15:02:23 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:41:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-
-
 typedef unsigned long long	t_time;
 typedef unsigned long long	t_uns;
 
-typedef	struct s_philo
+typedef struct s_philo
 {
 	pthread_t		thread;
 	pthread_mutex_t	fork;
@@ -58,27 +56,6 @@ typedef struct s_data
 
 	t_phil_dat		*phi_arr;
 }	t_data;
-
-
-// TODO remove debug
-#include "debug_utils.h"
-
-#define NODEBUGU
-#ifndef NODEBUGU
-# define return(RET)	\
-{dprintf(2, "\033[33;1m%s:%d in %s \033[0m \033[60G|%s R %#-8lx : %-8ld : " #RET "\033[0m\n" , __FILE__, __LINE__, __FUNCTION__,\
-(((long)RET) == 0) ? ("\033[32;1m") : ((((long)RET) == 1) ? ("\033[31;1m") : ("\033[0;1m")), ((long)RET), ((long)RET)); return(RET);}
-#endif
-
-#undef BM
-#define BM(x) _print("Thread ID %p > ", (void *)pthread_self()); _BR_MSG(x); _BR(1);
-
-// # define NOPDAT
-# ifndef NOPDAT
-#  define PDAT(MSG, X) BM(MSG); print_data(X);
-# else
-#  define PDAT(MSG, X) ;
-# endif
 
 int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);

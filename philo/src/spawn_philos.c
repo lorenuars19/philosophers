@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 15:03:11 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 16:41:49 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,12 @@ static int	init_philo_data(t_data *dat, int i)
 {
 	dat->phi_arr[i].thread = NULL;
 	if (pthread_mutex_init(&(dat->phi_arr[i].fork), NULL))
-	{
 		return (1);
-	}
 	dat->phi_arr[i].r_fork = &(dat->phi_arr[i].fork);
 	if (i > 0)
-	{
 		dat->phi_arr[i].l_fork = dat->phi_arr[i - 1].r_fork;
-	}
 	else if (i == 0)
-	{
 		dat->phi_arr[i].l_fork = dat->phi_arr[dat->n_philo - 1].r_fork;
-	}
 	dat->phi_arr[i].time_die = dat->time_die;
 	dat->phi_arr[i].time_eat = dat->time_eat;
 	dat->phi_arr[i].time_sleep = dat->time_sleep;
@@ -36,9 +30,7 @@ static int	init_philo_data(t_data *dat, int i)
 	dat->phi_arr[i].n_philo = dat->n_philo;
 	dat->phi_arr[i].id = i;
 	if (time_get_now(&(dat->phi_arr[i].last_meal)))
-	{
 		return (1);
-	}
 	return (0);
 }
 
