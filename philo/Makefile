@@ -65,7 +65,6 @@ SRCS = \
 	./src/utils/time_get_now.c \
 
 HEADERS = \
-	./includes/debug_utils.h\
 	./includes/philo.h\
 
 ###▲▲▲<src-updater-do-not-edit-or-remove>▲▲▲
