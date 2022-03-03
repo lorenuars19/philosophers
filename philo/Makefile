@@ -55,23 +55,13 @@ SRCS = \
 	./src/check_philo_death.c \
 	./src/init_data.c \
 	./src/kill_and_destroy.c \
-	./src/let_philos_eat.c \
 	./src/main.c \
-	./src/manage_threads.c \
 	./src/philo_/philo_death.c \
 	./src/philo_/philo_eat.c \
 	./src/philo_/philo_sleep.c \
 	./src/philo_/philo_think.c \
 	./src/philo_/philo_thread.c \
 	./src/spawn_philos.c \
-	./src/utils/dat_/dat_get_fork.c \
-	./src/utils/dat_/dat_get_state.c \
-	./src/utils/dat_/dat_set_fork.c \
-	./src/utils/dat_/dat_set_state.c \
-	./src/utils/dat_/dat_set_thread.c \
-	./src/utils/dat_/dat_set_time_last_meal.c \
-	./src/utils/fork_.c \
-	./src/utils/get_r_fork_id.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/01 14:55:40 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:12:24 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,41 +22,8 @@
 
 #include "debug_utils.h"
 
-# define THREADS_MAX 256
-
-typedef enum e_fork_state
-{
-	FORK_AVAILABLE = -1,
-	FORK_HELD_BY_N = 0,
-}	t_fork;
-
-typedef enum e_philo_state
-{
-	STATE_THINKING = 0,
-	STATE_TOOK_L_FORK,
-	STATE_TOOK_R_FORK,
-	STATE_READY_EATING,
-	STATE_EATING,
-	STATE_SLEEPING,
-	STATE_DEAD,
-	STATE_MAX,
-}	t_phil_state;
 
 typedef unsigned long long	t_time;
-
-typedef	struct s_select_time
-{
-	t_time	tmp;
-	t_time	sel;
-	long	ind;
-}	t_sel_time;
-
-typedef	struct s_select
-{
-	int tmp;
-	int	sel;
-	int	ind;
-}	t_sel;
 
 typedef struct s_data
 {
@@ -66,22 +33,14 @@ typedef struct s_data
 	t_time			time_sleep;
 	long			max_meals;
 
-	pthread_t		threads[THREADS_MAX];
-
-	t_time			time_last_meal[THREADS_MAX];
-	long			meals_consumed[THREADS_MAX];
-
-	t_fork			forks[THREADS_MAX];
-	t_phil_state	state[THREADS_MAX];
-
-	pthread_mutex_t	mutex_fork[THREADS_MAX];
 	pthread_mutex_t	mutex_print;
-	pthread_mutex_t	mutex_data;
+	pthread_mutex_t	mutex_max_meals;
 }	t_data;
 
 typedef	struct s_philo
 {
-	t_data	*data;
+	t_data			data;
+	pthread_mutex_t	fork;
 	int		id;
 }			t_phil_dat;
 
@@ -115,25 +74,12 @@ int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
 int		time_check_death(t_data *dat, t_time philo_time);
 
-int		print_timed_msg(t_data *dat, int x, t_phil_state state);
+int		print_timed_msg(t_data *dat, int x, char *msg);
 
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);
 
 void	msleep(t_time time_ms);
-
-int		fork_take(t_data *dat, long philo_id);
-int		get_r_fork_id(t_data *dat, long philo_id);
-
-int		fork_release(t_data *dat, long philo_id);
-
-int		dat_set_thread(t_data *dat, long philo_id, pthread_t value);
-int		dat_get_state(t_data *dat, long philo_id, t_phil_state *state);
-int		dat_get_fork(t_data *dat, long philo_id, t_fork *fork);
-
-int		dat_set_fork(t_data *dat, long philo_id, t_fork);
-int		dat_set_time_last_meal(t_data *dat, long philo_id, t_time now);
-int		dat_set_state(t_data *dat, long philo_id, t_phil_state state);
 
 int		spawn_philos(t_data *dat);
 void	*philo_thread(void *data);
@@ -141,11 +87,6 @@ int		philo_think(t_phil_dat *pdat, t_data *dat);
 int		philo_sleep(t_phil_dat *pdat, t_data *dat);
 int		philo_eat(t_phil_dat *pdat, t_data *dat);
 void	philo_death(t_phil_dat *pdat, t_data *dat);
-
-int		manage_threads(t_data *dat, long max_meals);
-int 	check_philo_death(t_data *dat);
-int		let_philos_eat(t_data *dat);
-
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		kill_and_destroy(t_data *dat);

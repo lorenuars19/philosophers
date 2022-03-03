@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/02/28 11:26:13 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 11:11:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	if (spawn_philos(&dat))
-	{
-		return (1);
-	}
-	if (manage_threads(&dat, dat.max_meals))
 	{
 		return (1);
 	}
