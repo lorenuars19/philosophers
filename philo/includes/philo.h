@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 11:53:26 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:02:23 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,19 @@ typedef unsigned long long	t_uns;
 typedef	struct s_philo
 {
 	pthread_t		thread;
-	pthread_mutex_t	r_fork;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*mutex_print;
+	pthread_mutex_t	*mutex_death;
+
 	t_time			time_die;
 	t_time			time_eat;
 	t_time			time_sleep;
-	t_time			time;
+	t_time			last_meal;
+
 	long			max_meals;
+	long			meals;
 	long			n_philo;
 	int				id;
 }			t_phil_dat;
@@ -48,7 +54,7 @@ typedef struct s_data
 	long			max_meals;
 
 	pthread_mutex_t	mutex_print;
-	pthread_mutex_t	mutex_max_meals;
+	pthread_mutex_t	mutex_death;
 
 	t_phil_dat		*phi_arr;
 }	t_data;
@@ -78,7 +84,7 @@ int		str_to_uns(const char *s, t_uns *num);
 int		time_get_now(t_time *ptr_time);
 int		time_check_death(t_data *dat, t_time philo_time);
 
-int		print_timed_msg(t_data *dat, int x, char *msg);
+int		print_timed_msg(t_phil_dat *pda, char *msg);
 
 int		mutex_lock(pthread_mutex_t *mutex);
 int		mutex_unlock(pthread_mutex_t *mutex);

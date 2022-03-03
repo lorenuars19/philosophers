@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 11:51:20 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/03 15:00:57 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	destroy_mutexes(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (pthread_mutex_destroy(&(dat->phi_arr[i].r_fork)))
+		if (pthread_mutex_destroy(dat->phi_arr[i].r_fork))
 		{
 			return (1);
 		}
