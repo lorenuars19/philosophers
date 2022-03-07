@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 11:38:04 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:13:43 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ typedef struct s_philo
 	long			meals;
 	long			n_philo;
 	int				id;
+	void			*data;
 }			t_phil_dat;
 
 typedef struct s_data
 {
+	t_time			start;
 	long			n_philo;
 	t_time			time_die;
 	t_time			time_eat;

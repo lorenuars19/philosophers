@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 11:44:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:17:03 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	init_philo_data(t_data *dat, int i)
 	dat->phi_arr[i].n_philo = dat->n_philo;
 	dat->phi_arr[i].meals = 0;
 	dat->phi_arr[i].id = i;
+	dat->phi_arr[i].data = dat;
 	return (0);
 }
 
@@ -43,6 +44,7 @@ int	spawn_threads(t_data *dat)
 		i++;
 	}
 	dat->phi_arr[0].l_fork = dat->phi_arr[dat->n_philo - 1].r_fork;
+	dat->start = get_time_ms();
 	i = 0;
 	while (i < dat->n_philo)
 	{
