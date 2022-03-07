@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 16:41:07 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 09:30:42 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,10 @@ int		mutex_unlock(pthread_mutex_t *mutex);
 
 void	msleep(t_time time_ms);
 
-int		spawn_philos(t_data *dat);
+int		spawn_threads(t_data *dat);
 void	*philo_thread(void *data);
-int		philo_think(t_phil_dat *pdat, t_data *dat);
-int		philo_sleep(t_phil_dat *pdat, t_data *dat);
-int		philo_eat(t_phil_dat *pdat, t_data *dat);
+
+void	check_death(t_data *dat);
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		kill_and_destroy(t_data *dat);

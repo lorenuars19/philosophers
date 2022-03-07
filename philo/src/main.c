@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 15:27:00 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 09:11:27 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,7 @@ static int	print_usage(char *msg, char *prog)
 	return (1);
 }
 
-static void	check_death(t_data *dat)
-{
-	int	i;
-	int	dead;
 
-	dead = 0;
-	while (!dead)
-	{
-		i = 0;
-		while (i < dat->n_philo)
-		{
-			dead = time_check_death(dat, dat->phi_arr[i].last_meal);
-			if (dead)
-			{
-				if (dat->max_meals == 0)
-				{
-					print_timed_msg(&(dat->phi_arr[i]), "is dead");
-				}
-				mutex_lock(&(dat->mutex_print));
-				return ;
-			}
-		}
-	}
-}
 
 int	main(int argc, char *argv[])
 {
@@ -62,11 +39,10 @@ int	main(int argc, char *argv[])
 		print_usage("Error from init_data()", argv[0]);
 		return (1);
 	}
-	if (spawn_philos(&dat))
+	if (spawn_threads(&dat))
 	{
 		return (1);
 	}
-	check_death(&dat);
 	if (kill_and_destroy(&dat))
 	{
 		return (1);

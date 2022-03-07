@@ -52,11 +52,12 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
+	./src/check_death.c \
 	./src/init_data.c \
 	./src/kill_and_destroy.c \
 	./src/main.c \
 	./src/philo_/philo_thread.c \
-	./src/spawn_philos.c \
+	./src/spawn_threads.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \

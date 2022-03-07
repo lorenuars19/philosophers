@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_timed_msg.c                                  :+:      :+:    :+:   */
+/*   check_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 09:37:13 by lorenuar         ###   ########.fr       */
+/*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/07 09:42:11 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_timed_msg(t_phil_dat *pda, char *msg)
+void	check_death(t_data *dat)
 {
-	t_time		now;
+	int		i;
+	int		dead;
 
-	if (time_get_now(&now))
+	dead = 0;
+	while (!dead)
 	{
-		return (1);
+		i = 0;
+		while (i < dat->n_philo)
+		{
+			dead = time_check_death(dat, dat->phi_arr[i].last_meal);
+			if (dead)
+			{
+				if (dat->max_meals == 0)
+				{
+					print_timed_msg(&(dat->phi_arr[i]), "is dead");
+				}
+				return ;
+			}
+		}
 	}
-	// if (mutex_lock(pda->mutex_print))
-	// {
-	// 	return (1);
-	// }
-	// if (mutex_lock(pda->mutex_death))
-	// {
-	// 	return (1);
-	// }
-	printf("%lld %02d %s\n", now, pda->id + 1, msg);
-	// if (mutex_unlock(pda->mutex_print))
-	// {
-	// 	return (1);
-	// }
-	// if (mutex_unlock(pda->mutex_death))
-	// {
-	// 	return (1);
-	// }
-	return (0);
+	return ;
 }

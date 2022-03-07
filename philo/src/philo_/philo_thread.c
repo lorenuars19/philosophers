@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 15:45:28 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 10:04:06 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	sub_philo_eat(t_phil_dat *pda)
 {
-	if (mutex_lock(pda->r_fork))
+	if (pthread_mutex_unlock(pda->r_fork))
 	{
 		return (1);
 	}
@@ -31,7 +31,7 @@ static int	sub_philo_eat(t_phil_dat *pda)
 	{
 		return (1);
 	}
-	if (mutex_unlock(pda->l_fork))
+	if (pthread_mutex_unlock(pda->l_fork))
 	{
 		return (1);
 	}
@@ -44,8 +44,10 @@ void	*philo_thread(void *data)
 	t_phil_dat	*pda;
 
 	pda = (t_phil_dat *)data;
-	if (pda->id % 2 == 0)
-		msleep(pda->time_eat * 0.4);
+	msleep(pda->time_sleep + pda->time_eat * 1.2);
+	if (pda->id % 2 != 0)
+		msleep(pda->time_sleep + pda->time_eat * 1.2);
+	time_get_now(&(pda->last_meal));
 	while (pda->max_meals == 0 || pda->meals < pda->max_meals)
 	{
 		if (sub_philo_eat(pda))
