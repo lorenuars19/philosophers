@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 13:12:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/03 11:51:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:04:48 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,24 @@ static int	parse_args(t_data *dat, int argc, char *argv[])
 
 static int	init_arrays(t_data *dat)
 {
+	int	i;
+
 	dat->phi_arr = malloc((sizeof (t_phil_dat)) * dat->n_philo);
 	if (!dat->phi_arr)
 	{
 		free(dat->phi_arr);
 		return (1);
 	}
+	i = 0;
+	while (i < dat->n_philo)
+	{
+		if (pthread_mutex_init(&(dat->phi_arr[i].fork), NULL))
+		{
+			return (1);
+		}
+		i++;
+	}
+
 	return (0);
 }
 

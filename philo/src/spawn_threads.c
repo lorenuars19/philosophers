@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 13:32:24 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:00:26 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,18 @@ static int	init_philo_data(t_data *dat, t_phil_dat *pda, int i)
 	pda->max_meals = dat->max_meals;
 	pda->n_philo = dat->n_philo;
 	pda->meals = 0;
+	pda->last_meal = 0;
 	pda->id = i;
 	pda->data = dat;
-	if (pthread_mutex_init(&(pda->fork), NULL))
-	{
-		return (1);
-	}
+	pda->mutex_print = &(dat->mutex_print);
 	pda->l_fork = &(pda->fork);
 	if (i > 0)
 	{
 		pda->r_fork = dat->phi_arr[i - 1].l_fork;
+	}
+	else if (i == 0)
+	{
+
 	}
 	return (0);
 }
@@ -45,7 +47,7 @@ int	spawn_threads(t_data *dat)
 		init_philo_data(dat, &(dat->phi_arr[i]), i);
 		i++;
 	}
-	dat->phi_arr[0].l_fork = dat->phi_arr[dat->n_philo - 1].r_fork;
+	dat->phi_arr[0].r_fork = dat->phi_arr[dat->n_philo - 1].l_fork;
 	dat->start = get_time_ms();
 	i = 0;
 	while (i < dat->n_philo)
