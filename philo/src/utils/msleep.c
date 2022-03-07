@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 22:56:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:24:50 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:26:22 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ void	msleep(t_time time_ms)
 	now = get_time_ms();
 	while (get_time_ms() < now + time_ms)
 	{
-		usleep(100);
+		usleep(500);
 	}
 }
