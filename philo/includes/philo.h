@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 09:30:42 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 11:38:04 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 }	t_data;
 
 int		str_to_uns(const char *s, t_uns *num);
-int		time_get_now(t_time *ptr_time);
+t_time	get_time_ms(void);
 int		time_check_death(t_data *dat, t_time philo_time);
 
 int		print_timed_msg(t_phil_dat *pda, char *msg);

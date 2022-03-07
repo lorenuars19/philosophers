@@ -58,12 +58,11 @@ SRCS = \
 	./src/main.c \
 	./src/philo_/philo_thread.c \
 	./src/spawn_threads.c \
+	./src/utils/get_time_ms.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \
 	./src/utils/str_to_uns.c \
-	./src/utils/time_check_death.c \
-	./src/utils/time_get_now.c \
 
 HEADERS = \
 	./includes/philo.h\

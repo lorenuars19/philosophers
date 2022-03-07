@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 09:42:11 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 11:46:15 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_death(t_data *dat)
 {
-	int		i;
 	int		dead;
+	int		i;
 
 	dead = 0;
 	while (!dead)
@@ -23,16 +23,19 @@ void	check_death(t_data *dat)
 		i = 0;
 		while (i < dat->n_philo)
 		{
-			dead = time_check_death(dat, dat->phi_arr[i].last_meal);
+			if (dat->phi_arr[i].last_meal != 0 && (get_time_ms() >=
+				(dat->phi_arr[i].last_meal + dat->time_die)))
+			{
+				dead = 1;
+			}
 			if (dead)
 			{
 				if (dat->max_meals == 0)
 				{
 					print_timed_msg(&(dat->phi_arr[i]), "is dead");
 				}
-				return ;
 			}
+			i++;
 		}
 	}
-	return ;
 }

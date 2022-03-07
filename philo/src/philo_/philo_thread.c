@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 10:04:06 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 11:49:15 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	sub_philo_eat(t_phil_dat *pda)
 		return (1);
 	}
 	print_timed_msg(pda, "has taken L fork");
-	time_get_now(&(pda->last_meal));
+	pda->last_meal = get_time_ms();
 	print_timed_msg(pda, "is eating");
 	msleep(pda->time_eat);
 	if (mutex_unlock(pda->r_fork))
@@ -44,11 +44,12 @@ void	*philo_thread(void *data)
 	t_phil_dat	*pda;
 
 	pda = (t_phil_dat *)data;
-	msleep(pda->time_sleep + pda->time_eat * 1.2);
-	if (pda->id % 2 != 0)
-		msleep(pda->time_sleep + pda->time_eat * 1.2);
-	time_get_now(&(pda->last_meal));
-	while (pda->max_meals == 0 || pda->meals < pda->max_meals)
+	if (pda->id == 1)
+		msleep(pda->time_eat * 0.9);
+	pda->last_meal = get_time_ms();
+	while ((pda->last_meal != 0 && (get_time_ms() <=
+			(pda->last_meal + pda->time_die) &&
+			(pda->max_meals == 0 || pda->meals < pda->max_meals))))
 	{
 		if (sub_philo_eat(pda))
 		{
@@ -58,5 +59,8 @@ void	*philo_thread(void *data)
 		msleep(pda->time_sleep);
 		print_timed_msg(pda, "is thinking");
 	}
+	pthread_mutex_lock(pda->mutex_print);
+	pthread_mutex_lock(pda->mutex_print);
+	print_timed_msg(pda, "is dead");
 	return (NULL);
 }
