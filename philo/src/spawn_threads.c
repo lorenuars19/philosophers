@@ -6,30 +6,32 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 13:17:03 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:32:24 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	init_philo_data(t_data *dat, int i)
+static int	init_philo_data(t_data *dat, t_phil_dat *pda, int i)
 {
-	dat->phi_arr[i].thread = NULL;
-	if (pthread_mutex_init(&(dat->phi_arr[i].fork), NULL))
+	pda->thread = NULL;
+	pda->time_die = dat->time_die;
+	pda->time_eat = dat->time_eat;
+	pda->time_sleep = dat->time_sleep;
+	pda->max_meals = dat->max_meals;
+	pda->n_philo = dat->n_philo;
+	pda->meals = 0;
+	pda->id = i;
+	pda->data = dat;
+	if (pthread_mutex_init(&(pda->fork), NULL))
+	{
 		return (1);
-	dat->phi_arr[i].r_fork = &(dat->phi_arr[i].fork);
+	}
+	pda->l_fork = &(pda->fork);
 	if (i > 0)
-		dat->phi_arr[i].l_fork = dat->phi_arr[i - 1].r_fork;
-	else if (i == 0)
-		dat->phi_arr[i].l_fork = dat->phi_arr[dat->n_philo - 1].r_fork;
-	dat->phi_arr[i].time_die = dat->time_die;
-	dat->phi_arr[i].time_eat = dat->time_eat;
-	dat->phi_arr[i].time_sleep = dat->time_sleep;
-	dat->phi_arr[i].max_meals = dat->max_meals;
-	dat->phi_arr[i].n_philo = dat->n_philo;
-	dat->phi_arr[i].meals = 0;
-	dat->phi_arr[i].id = i;
-	dat->phi_arr[i].data = dat;
+	{
+		pda->r_fork = dat->phi_arr[i - 1].l_fork;
+	}
 	return (0);
 }
 
@@ -40,7 +42,7 @@ int	spawn_threads(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		init_philo_data(dat, i);
+		init_philo_data(dat, &(dat->phi_arr[i]), i);
 		i++;
 	}
 	dat->phi_arr[0].l_fork = dat->phi_arr[dat->n_philo - 1].r_fork;
@@ -48,8 +50,7 @@ int	spawn_threads(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (pthread_create(&(dat->phi_arr[i].thread), NULL,
-				philo_thread, (void*) &(dat->phi_arr[i])))
+		if (pthread_create(&(dat->phi_arr[i].thread), NULL, philo_thread, (void*) &(dat->phi_arr[i])))
 		{
 			return (1);
 		}
