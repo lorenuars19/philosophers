@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:39:54 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/07 14:58:58 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ static int	init_philo_data(t_data *dat, t_phil_dat *pda, int i)
 	{
 		pda->r_fork = dat->phi_arr[i - 1].l_fork;
 	}
-	else if (i == 0)
-	{
-
-	}
 	return (0);
 }
 
@@ -52,7 +48,8 @@ int	spawn_threads(t_data *dat)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (pthread_create(&(dat->phi_arr[i].thread), NULL, philo_thread, (void*) &(dat->phi_arr[i])))
+		if (pthread_create(&(dat->phi_arr[i].thread),
+				NULL, philo_thread, (void*) &(dat->phi_arr[i])))
 		{
 			return (1);
 		}

@@ -1,5 +1,4 @@
 **/bin
 **/**.o
-**/.*
-philo/philo
-philo/__lib_utils/
+.*
+philo
