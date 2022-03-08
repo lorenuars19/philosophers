@@ -1,0 +1,40 @@
+0 01 has taken a fork
+0 01 has taken a fork
+0 01 is eating
+0 03 has taken a fork
+0 03 has taken a fork
+0 03 is eating
+200 03 is sleeping
+200 01 is sleeping
+200 04 has taken a fork
+200 04 has taken a fork
+200 04 is eating
+200 02 has taken a fork
+200 02 has taken a fork
+200 02 is eating
+300 01 is thinking
+300 03 is thinking
+400 04 is sleeping
+400 02 is sleeping
+400 01 has taken a fork
+400 01 has taken a fork
+400 01 is eating
+400 03 has taken a fork
+400 03 has taken a fork
+400 03 is eating
+500 04 is thinking
+500 02 is thinking
+600 02 has taken a fork
+600 02 has taken a fork
+600 02 is eating
+600 04 has taken a fork
+600 04 has taken a fork
+600 03 is sleeping
+600 01 is sleeping
+600 04 is eating
+700 01 is thinking
+700 03 is thinking
+700 03 has eaten enough
+700 01 has eaten enough
+800 02 is sleeping
+800 04 is sleeping

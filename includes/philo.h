@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 14:04:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:46:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*mutex;
 
+	t_time			start;
 	t_time			time_die;
 	t_time			time_eat;
 	t_time			time_sleep;
@@ -65,15 +66,18 @@ int		time_check_death(t_data *dat, t_time philo_time);
 
 int		print_timed_msg(t_phil_dat *pda, char *msg);
 
-int		mutex_lock(pthread_mutex_t *mutex);
-int		mutex_unlock(pthread_mutex_t *mutex);
-
 void	msleep(t_time time_ms);
 
 int		spawn_threads(t_data *dat);
 void	*philo_thread(void *data);
+void	*set_last_meal(void *data);
+void	*increment_meal(void *data);
 
-void	check_death(t_data *dat);
+
+void	check_threads(t_data *dat);
+void	*check_death(void *data);
+void	*check_meals(void *data);
+
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		kill_and_destroy(t_data *dat);

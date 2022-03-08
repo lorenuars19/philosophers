@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_death.c                                      :+:      :+:    :+:   */
+/*   check_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 13:55:27 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:35:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	sub_check_death(t_data *dat)
+void	*check_death(void *data)
 {
-	int	i;
+	int		i;
+	t_data	*dat;
 
+	dat = (t_data *)data;
 	i = 0;
 	while (i < dat->n_philo)
 	{
@@ -25,52 +27,52 @@ static int	sub_check_death(t_data *dat)
 			if (dat->max_meals == 0)
 			{
 				print_timed_msg(&(dat->phi_arr[i]), "is dead");
-				pthread_mutex_lock(&(dat->mutex));
-				return (1);
+				return ((void *)1);
 			}
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
-static int	sub_check_meals(t_data *dat)
+void	*check_meals(void *data)
 {
-	int	everyone_has_eaten;
-	int	i;
+	t_data	*dat;
+	int		everyone_has_eaten;
+	int		i;
 
 	i = 0;
+	dat = (t_data *)data;
 	everyone_has_eaten = dat->n_philo;
-	while (i < dat->n_philo)
+	while (i < dat->n_philo && dat->max_meals > 0)
 	{
 		if (dat->phi_arr[i].meals >= dat->max_meals)
 		{
-			// print_timed_msg(&(dat->phi_arr[i]), " has eaten enough");
 			everyone_has_eaten--;
 		}
 		i++;
 	}
 	if (everyone_has_eaten == 0)
 	{
-printf("sssss\n");
-		return (1);
+		return ((void *)1);
 	}
-	return (0);
+	return (NULL);
 }
 
-void	check_death(t_data *dat)
+void	check_threads(t_data *dat)
 {
 	while (1)
 	{
-		mutex_lock(&(dat->mutex));
-		if (sub_check_death(dat))
+		if (exec_mutex_safe(dat, dat, check_death))
 		{
+			pthread_mutex_lock(&(dat->mutex));
 			return ;
 		}
-		if (sub_check_meals(dat))
+		if (exec_mutex_safe(dat, dat, check_meals))
 		{
+			pthread_mutex_lock(&(dat->mutex));
 			return ;
 		}
-		mutex_unlock(&(dat->mutex));
 	}
+	return ;
 }

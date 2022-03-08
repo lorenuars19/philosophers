@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 13:54:49 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:47:18 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	init_philo_data(t_data *dat, t_phil_dat *pda, int i)
 {
 	pda->thread = NULL;
+	pda->start = dat->start;
 	pda->time_die = dat->time_die;
 	pda->time_eat = dat->time_eat;
 	pda->time_sleep = dat->time_sleep;
@@ -38,13 +39,13 @@ int	spawn_threads(t_data *dat)
 	int			i;
 
 	i = 0;
+	dat->start = get_time_ms();
 	while (i < dat->n_philo)
 	{
 		init_philo_data(dat, &(dat->phi_arr[i]), i);
 		i++;
 	}
 	dat->phi_arr[0].r_fork = dat->phi_arr[dat->n_philo - 1].l_fork;
-	dat->start = get_time_ms();
 	i = 0;
 	while (i < dat->n_philo)
 	{
@@ -56,6 +57,6 @@ int	spawn_threads(t_data *dat)
 		pthread_detach(dat->phi_arr[i].thread);
 		i++;
 	}
-	check_death(dat);
+	check_threads(dat);
 	return (0);
 }

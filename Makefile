@@ -52,7 +52,7 @@ LDFLAGS = -lpthread
 # **************************************************************************** #
 
 SRCS = \
-	./src/check_death.c \
+	./src/check_threads.c \
 	./src/init_data.c \
 	./src/kill_and_destroy.c \
 	./src/main.c \
@@ -61,7 +61,6 @@ SRCS = \
 	./src/utils/exec_mutex_safe.c \
 	./src/utils/get_time_ms.c \
 	./src/utils/msleep.c \
-	./src/utils/mutex_.c \
 	./src/utils/print_timed_msg.c \
 	./src/utils/str_to_uns.c \
 
