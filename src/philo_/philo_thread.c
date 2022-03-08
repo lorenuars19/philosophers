@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:45:19 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 11:12:42 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	*philo_thread(void *data)
 		msleep(pda->time_sleep);
 		print_timed_msg(pda, "is thinking");
 	}
+	pda->last_meal = 1;
 	print_timed_msg(pda, "has eaten enough");
-	pthread_mutex_lock(pda->mutex_print);
+	msleep(pda->time_die);
 	return (NULL);
 }

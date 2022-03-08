@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:56:41 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 11:15:40 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_death(t_data *dat)
 {
-	int		dead;
-	int		i;
+	int	dead;
+	int	i;
 
 	dead = 0;
 	while (!dead)
@@ -27,13 +27,11 @@ void	check_death(t_data *dat)
 					>= (dat->phi_arr[i].last_meal + dat->time_die)))
 			{
 				dead = 1;
-			}
-			if (dead)
-			{
 				if (dat->max_meals == 0)
 				{
 					print_timed_msg(&(dat->phi_arr[i]), "is dead");
 					pthread_mutex_lock(&(dat->mutex_print));
+					return ;
 				}
 			}
 			i++;
