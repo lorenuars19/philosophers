@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kill_and_destroy.c                                 :+:      :+:    :+:   */
+/*   exec_mutex_safe.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 12:11:05 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 13:54:49 by lorenuar         ###   ########.fr       */
+/*   Created: 2022/03/08 13:56:27 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/08 14:04:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	destroy_mutexes(t_data *dat)
+void	*exec_mutex_safe(t_data *dat, void *arg, void *(*func)(void *))
 {
-	int	i;
+	void	*ret;
 
-	i = 0;
-	while (i < dat->n_philo)
+	if (pthread_mutex_lock(&(dat->mutex)))
 	{
-		if (pthread_mutex_destroy(dat->phi_arr[i].r_fork))
-		{
-			return (1);
-		}
+		return (NULL);
 	}
-	if (pthread_mutex_destroy(&(dat->mutex)))
+	ret = func(arg);
+	if (pthread_mutex_unlock(&(dat->mutex)))
 	{
-		return (1);
+		return (NULL);
 	}
-	return (0);
-}
-
-int	kill_and_destroy(t_data *dat)
-{
-	if (destroy_mutexes(dat))
-	{
-		return (1);
-	}
-	free(dat->phi_arr);
-	return (0);
+	return (ret);
 }

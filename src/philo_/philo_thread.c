@@ -6,11 +6,16 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 11:12:42 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:56:00 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	set_last_meal(t_phil_dat *pda)
+{
+	mutex_lock(pda->mut)
+}
 
 void	*philo_thread(void *data)
 {

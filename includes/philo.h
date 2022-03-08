@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 13:53:05 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:04:05 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_philo
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*mutex_print;
+	pthread_mutex_t	*mutex;
 
 	t_time			time_die;
 	t_time			time_eat;
@@ -52,10 +52,12 @@ typedef struct s_data
 	t_time			time_sleep;
 	long			max_meals;
 
-	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	mutex;
 
 	t_phil_dat		*phi_arr;
 }	t_data;
+
+void	*exec_mutex_safe(t_data *dat, void *arg, void *(*func)(void *));
 
 int		str_to_uns(const char *s, t_uns *num);
 t_time	get_time_ms(void);

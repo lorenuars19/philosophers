@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 21:51:29 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:58:58 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:54:49 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	init_philo_data(t_data *dat, t_phil_dat *pda, int i)
 	pda->last_meal = 0;
 	pda->id = i;
 	pda->data = dat;
-	pda->mutex_print = &(dat->mutex_print);
+	pda->mutex = &(dat->mutex);
 	pda->l_fork = &(pda->fork);
 	if (i > 0)
 	{
@@ -53,6 +53,7 @@ int	spawn_threads(t_data *dat)
 		{
 			return (1);
 		}
+		pthread_detach(dat->phi_arr[i].thread);
 		i++;
 	}
 	check_death(dat);

@@ -58,6 +58,7 @@ SRCS = \
 	./src/main.c \
 	./src/philo_/philo_thread.c \
 	./src/spawn_threads.c \
+	./src/utils/exec_mutex_safe.c \
 	./src/utils/get_time_ms.c \
 	./src/utils/msleep.c \
 	./src/utils/mutex_.c \
