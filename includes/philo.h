@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 14:46:32 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:52:12 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 # include <string.h>
 # include <sys/time.h>
 # include <pthread.h>
+
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 typedef unsigned long long	t_time;
 typedef unsigned long long	t_uns;
@@ -41,6 +45,8 @@ typedef struct s_philo
 	long			meals;
 	long			n_philo;
 	int				id;
+
+	int				is_dead;
 	void			*data;
 }			t_phil_dat;
 
@@ -67,6 +73,10 @@ int		time_check_death(t_data *dat, t_time philo_time);
 int		print_timed_msg(t_phil_dat *pda, char *msg);
 
 void	msleep(t_time time_ms);
+
+void	philo_dead_set(t_phil_dat *pda, int val);
+int		philo_dead_get(t_phil_dat *pda);
+
 
 int		spawn_threads(t_data *dat);
 void	*philo_thread(void *data);

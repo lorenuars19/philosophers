@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_timed_msg.c                                  :+:      :+:    :+:   */
+/*   philo_dead_.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 10:33:44 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 18:40:27 by lorenuar         ###   ########.fr       */
+/*   Created: 2022/03/08 18:04:50 by lorenuar          #+#    #+#             */
+/*   Updated: 2022/03/08 18:40:45 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_timed_msg(t_phil_dat *pda, char *msg)
+void	philo_dead_set(t_phil_dat *pda, int val)
 {
-	if (pda->mutex == NULL)
+	if (pda->mutex)
 	{
-		return (0);
+		pthread_mutex_lock(pda->mutex);
+		pda->is_dead = val;
+		pthread_mutex_unlock(pda->mutex);
 	}
-	if (pthread_mutex_lock(pda->mutex))
+}
+
+int	philo_dead_get(t_phil_dat *pda)
+{
+	int	is_dead;
+
+	is_dead = 0;
+	if (pda->mutex)
 	{
-		return (1);
+		pthread_mutex_lock(pda->mutex);
+		is_dead = pda->is_dead;
+		pthread_mutex_unlock(pda->mutex);
 	}
-	if (!pda->is_dead)
-	{
-		printf("%lld %d %s\n", get_time_ms() - pda->start, pda->id + 1, msg);
-	}
-	if (pthread_mutex_unlock(pda->mutex))
-	{
-		return (1);
-	}
-	return (0);
+	return (is_dead);
 }

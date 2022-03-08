@@ -6,7 +6,7 @@
 #    By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 13:37:24 by lorenuar          #+#    #+#              #
-#    Updated: 2022/03/01 13:31:15 by lorenuar         ###   ########.fr        #
+#    Updated: 2022/03/08 18:52:32 by lorenuar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ endif
 
 # Debug, use with`make DEBUG=1`
 ifeq ($(DEBUG),1)
-CFLAGS	+= -g3
+CFLAGS	+= -g3 -D DEBUG=1
 endif
 ifeq ($(DEBUG),2)
 CFLAGS	+= -g3 -fsanitize=thread
@@ -61,6 +61,7 @@ SRCS = \
 	./src/utils/exec_mutex_safe.c \
 	./src/utils/get_time_ms.c \
 	./src/utils/msleep.c \
+	./src/utils/philo_dead_.c \
 	./src/utils/print_timed_msg.c \
 	./src/utils/str_to_uns.c \
 

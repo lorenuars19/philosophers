@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 14:35:45 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:47:32 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ void	*check_death(void *data)
 	i = 0;
 	while (i < dat->n_philo)
 	{
-		if (dat->phi_arr[i].last_meal != 0 && (get_time_ms()
-				>= (dat->phi_arr[i].last_meal + dat->time_die)))
+		if (get_time_ms() >= (dat->phi_arr[i].last_meal + dat->time_die))
 		{
-			if (dat->max_meals == 0)
+			if (dat->phi_arr[i].last_meal != 0)
 			{
-				print_timed_msg(&(dat->phi_arr[i]), "is dead");
-				return ((void *)1);
+				return (&(dat->phi_arr[i]));
 			}
 		}
 		i++;
 	}
 	return (NULL);
 }
+
+#define Z(msg) printf(#msg " EAT %d | ID %d meals %ld max %ld\n", everyone_has_eaten, i, dat->phi_arr[i].meals, dat->max_meals);
 
 void	*check_meals(void *data)
 {
@@ -46,33 +46,51 @@ void	*check_meals(void *data)
 	everyone_has_eaten = dat->n_philo;
 	while (i < dat->n_philo && dat->max_meals > 0)
 	{
+// Z(WHILE);
 		if (dat->phi_arr[i].meals >= dat->max_meals)
 		{
 			everyone_has_eaten--;
 		}
 		i++;
 	}
+// Z(=============== END LOOP =============== );
 	if (everyone_has_eaten == 0)
 	{
-		return ((void *)1);
+		return (&(dat->phi_arr[i]));
 	}
 	return (NULL);
 }
 
 void	check_threads(t_data *dat)
 {
+	int			is_death;
+	t_phil_dat	*pda_philo_death;
+
 	while (1)
 	{
-		if (exec_mutex_safe(dat, dat, check_death))
+		is_death = 1;
+		pda_philo_death = exec_mutex_safe(dat, dat, check_death);
+		if (pda_philo_death)
 		{
-			pthread_mutex_lock(&(dat->mutex));
-			return ;
+			break ;
 		}
-		if (exec_mutex_safe(dat, dat, check_meals))
+		is_death = 0;
+		pda_philo_death = exec_mutex_safe(dat, dat, check_meals);
+		if (pda_philo_death)
 		{
-			pthread_mutex_lock(&(dat->mutex));
-			return ;
+			break ;
 		}
 	}
+	if (pda_philo_death)
+	{
+		pda_philo_death->mutex = &(dat->mutex);
+		pda_philo_death->start = dat->start;
+		if (is_death == 1)
+			print_timed_msg(pda_philo_death, "is dead");
+		else if (is_death == 0)
+			print_timed_msg(pda_philo_death, "has eaten enough");
+		philo_dead_set(pda_philo_death, 1);
+	}
+	pthread_mutex_lock(&(dat->mutex));
 	return ;
 }

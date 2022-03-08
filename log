@@ -1,40 +1,91 @@
-0 01 has taken a fork
-0 01 has taken a fork
-0 01 is eating
-0 03 has taken a fork
-0 03 has taken a fork
-0 03 is eating
-200 03 is sleeping
-200 01 is sleeping
-200 04 has taken a fork
-200 04 has taken a fork
-200 04 is eating
-200 02 has taken a fork
-200 02 has taken a fork
-200 02 is eating
-300 01 is thinking
-300 03 is thinking
-400 04 is sleeping
-400 02 is sleeping
-400 01 has taken a fork
-400 01 has taken a fork
-400 01 is eating
-400 03 has taken a fork
-400 03 has taken a fork
-400 03 is eating
-500 04 is thinking
-500 02 is thinking
-600 02 has taken a fork
-600 02 has taken a fork
-600 02 is eating
-600 04 has taken a fork
-600 04 has taken a fork
-600 03 is sleeping
-600 01 is sleeping
-600 04 is eating
-700 01 is thinking
-700 03 is thinking
-700 03 has eaten enough
-700 01 has eaten enough
-800 02 is sleeping
-800 04 is sleeping
+0 1 has taken a fork
+0 1 has taken a fork
+0 1 is eating
+0 3 has taken a fork
+0 3 has taken a fork
+0 3 is eating
+0 5 has taken a fork
+0 5 has taken a fork
+0 5 is eating
+0 7 has taken a fork
+0 7 has taken a fork
+0 7 is eating
+0 9 has taken a fork
+0 9 has taken a fork
+0 9 is eating
+10 10 has taken a fork
+10 5 is sleeping
+10 4 has taken a fork
+10 4 has taken a fork
+10 9 is sleeping
+10 4 is eating
+10 3 is sleeping
+10 2 has taken a fork
+10 2 has taken a fork
+10 2 is eating
+10 7 is sleeping
+10 8 has taken a fork
+10 1 is sleeping
+10 8 has taken a fork
+10 10 has taken a fork
+10 10 is eating
+10 6 has taken a fork
+10 6 has taken a fork
+10 6 is eating
+10 8 is eating
+20 1 is thinking
+20 7 is thinking
+20 3 is thinking
+20 8 is sleeping
+20 9 is thinking
+20 9 has taken a fork
+20 2 is sleeping
+20 10 is sleeping
+20 1 has taken a fork
+20 1 has taken a fork
+20 1 is eating
+20 9 has taken a fork
+20 9 is eating
+20 3 has taken a fork
+20 6 is sleeping
+20 4 is sleeping
+20 3 has taken a fork
+20 3 is eating
+20 7 has taken a fork
+20 5 is thinking
+20 5 has taken a fork
+20 7 has taken a fork
+20 7 is eating
+20 5 has taken a fork
+20 5 is eating
+30 2 is thinking
+30 10 is thinking
+30 1 is sleeping
+30 5 is sleeping
+30 9 is sleeping
+30 3 is sleeping
+30 8 is thinking
+30 8 has taken a fork
+30 10 has taken a fork
+30 10 has taken a fork
+30 10 is eating
+30 8 has taken a fork
+30 8 is eating
+30 2 has taken a fork
+30 2 has taken a fork
+30 4 is thinking
+30 4 has taken a fork
+30 4 has taken a fork
+30 4 is eating
+30 6 is thinking
+30 6 has taken a fork
+30 6 has taken a fork
+30 6 is eating
+30 2 is eating
+30 7 is sleeping
+40 4 is sleeping
+40 6 is sleeping
+40 10 is sleeping
+40 8 is sleeping
+40 2 is sleeping
+40 1 has eaten enough

@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/07 14:59:34 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/08 18:55:59 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ static int	print_usage(char *msg, char *prog)
 		" [maximum_number_of_meals (optional)] \n=============\n",
 		msg, prog);
 	return (1);
+}
+
+static void print_stats(t_data *dat)
+{
+	int	i;
+
+	i = 0;
+	printf("=== PHILO STATS ===\n");
+	while (i < dat->n_philo)
+	{
+		printf("philo [i %d] meals %ld last_meal %llu\n", i,
+			dat->phi_arr[i].meals, dat->phi_arr[i].last_meal);
+		i++;
+	}
 }
 
 int	main(int argc, char *argv[])
@@ -39,6 +53,10 @@ int	main(int argc, char *argv[])
 	if (spawn_threads(&dat))
 	{
 		return (1);
+	}
+	if (DEBUG == 1)
+	{
+		print_stats(&dat);
 	}
 	if (kill_and_destroy(&dat))
 	{
