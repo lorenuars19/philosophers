@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/01 17:32:08 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 18:55:59 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:00:52 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ static int	print_usage(char *msg, char *prog)
 		" %s [number_of_philo] [time_to_die(ms)]"
 		" [time_to_eat(ms)] [time_to_sleep(ms)]"
 		" [maximum_number_of_meals (optional)] \n=============\n",
-		msg, prog);
+		msg,
+		prog);
 	return (1);
 }
 
-static void print_stats(t_data *dat)
+static void	print_stats(t_data *dat)
 {
 	int	i;
 

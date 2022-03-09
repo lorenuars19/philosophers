@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 16:26:02 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 18:52:12 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:00:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,14 @@ void	msleep(t_time time_ms);
 void	philo_dead_set(t_phil_dat *pda, int val);
 int		philo_dead_get(t_phil_dat *pda);
 
-
 int		spawn_threads(t_data *dat);
 void	*philo_thread(void *data);
 void	*set_last_meal(void *data);
 void	*increment_meal(void *data);
 
-
 void	check_threads(t_data *dat);
 void	*check_death(void *data);
 void	*check_meals(void *data);
-
 
 int		init_data(t_data *dat, int argc, char *argv[]);
 int		kill_and_destroy(t_data *dat);

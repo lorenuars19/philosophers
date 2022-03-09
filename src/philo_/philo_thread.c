@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 18:48:52 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:44:11 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	*increment_meal(void *data)
 	pda->meals++;
 	return (NULL);
 }
+
+static int
 
 void	*philo_thread(void *data)
 {

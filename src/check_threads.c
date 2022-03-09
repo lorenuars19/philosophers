@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/08 18:47:32 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:39:46 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ void	*check_meals(void *data)
 	everyone_has_eaten = dat->n_philo;
 	while (i < dat->n_philo && dat->max_meals > 0)
 	{
-// Z(WHILE);
 		if (dat->phi_arr[i].meals >= dat->max_meals)
 		{
 			everyone_has_eaten--;
 		}
 		i++;
 	}
-// Z(=============== END LOOP =============== );
 	if (everyone_has_eaten == 0)
 	{
 		return (&(dat->phi_arr[i]));
