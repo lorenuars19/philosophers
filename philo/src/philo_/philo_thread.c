@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/09 10:46:22 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 11:16:48 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*increment_meal(void *data)
 	return (NULL);
 }
 
-static int	sub_philo_eat(t_phil_dat *pda)
+static void	sub_philo_eat(t_phil_dat *pda)
 {
 	pthread_mutex_lock(pda->r_fork);
 	print_timed_msg(pda, "has taken a fork");
