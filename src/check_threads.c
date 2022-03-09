@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/09 10:39:46 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/09 10:47:17 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	*check_death(void *data)
 	}
 	return (NULL);
 }
-
-#define Z(msg) printf(#msg " EAT %d | ID %d meals %ld max %ld\n", everyone_has_eaten, i, dat->phi_arr[i].meals, dat->max_meals);
 
 void	*check_meals(void *data)
 {
@@ -69,15 +67,11 @@ void	check_threads(t_data *dat)
 		is_death = 1;
 		pda_philo_death = exec_mutex_safe(dat, dat, check_death);
 		if (pda_philo_death)
-		{
 			break ;
-		}
 		is_death = 0;
 		pda_philo_death = exec_mutex_safe(dat, dat, check_meals);
 		if (pda_philo_death)
-		{
 			break ;
-		}
 	}
 	if (pda_philo_death)
 	{
@@ -90,5 +84,4 @@ void	check_threads(t_data *dat)
 		philo_dead_set(pda_philo_death, 1);
 	}
 	pthread_mutex_lock(&(dat->mutex));
-	return ;
 }
