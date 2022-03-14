@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:08:43 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/09 10:47:17 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:26:36 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	check_threads(t_data *dat)
 		pda_philo_death->mutex = &(dat->mutex);
 		pda_philo_death->start = dat->start;
 		if (is_death == 1)
-			print_timed_msg(pda_philo_death, "is dead");
+			print_timed_msg(pda_philo_death, "\033[37;41;1mis dead\033[0m");
 		else if (is_death == 0)
-			print_timed_msg(pda_philo_death, "has eaten enough");
+			print_timed_msg(pda_philo_death, "\033[37;46;1mhas eaten enough\033[0m");
 		philo_dead_set(pda_philo_death, 1);
 	}
 	pthread_mutex_lock(&(dat->mutex));

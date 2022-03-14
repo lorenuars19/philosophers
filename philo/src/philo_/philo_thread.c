@@ -6,7 +6,7 @@
 /*   By: lorenuar <lorenuar@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:19:49 by lorenuar          #+#    #+#             */
-/*   Updated: 2022/03/09 11:16:48 by lorenuar         ###   ########.fr       */
+/*   Updated: 2022/03/14 11:22:07 by lorenuar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void	*increment_meal(void *data)
 static void	sub_philo_eat(t_phil_dat *pda)
 {
 	pthread_mutex_lock(pda->r_fork);
-	print_timed_msg(pda, "has taken a fork");
+	print_timed_msg(pda, "\033[33;1mhas taken a fork\033[0m");
 	pthread_mutex_lock(pda->l_fork);
-	print_timed_msg(pda, "has taken a fork");
+	print_timed_msg(pda, "\033[33;1mhas taken a fork\033[0m");
 	exec_mutex_safe(pda->data, (void *)pda, set_last_meal);
-	print_timed_msg(pda, "is eating");
+	print_timed_msg(pda, "\033[32;1mis eating\033[0m");
 }
 
 void	*philo_thread(void *data)
@@ -56,11 +56,11 @@ void	*philo_thread(void *data)
 		pthread_mutex_unlock(pda->r_fork);
 		pthread_mutex_unlock(pda->l_fork);
 		exec_mutex_safe(pda->data, (void *)pda, increment_meal);
-		print_timed_msg(pda, "is sleeping");
+		print_timed_msg(pda, "\033[34;1mis sleeping\033[0m");
 		msleep(pda->time_sleep);
 		if (pda->max_meals > 0 && pda->meals >= pda->max_meals)
 			return (NULL);
-		print_timed_msg(pda, "is thinking");
+		print_timed_msg(pda, "\033[35;1mis thinking\033[0m");
 	}
 	return (NULL);
 }
